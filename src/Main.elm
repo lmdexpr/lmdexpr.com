@@ -153,10 +153,7 @@ view model = div [ style "margin" "auto", style "padding" "60px", style "width" 
   ]
 
 configs : List (Card.Option Msg)
-configs =
-  [ Card.outlineDark
-  , Card.textColor Text.dark
-  ]
+configs = [ Card.attrs [ style "min-width" "800px" ] ]
 
 viewMain : Model -> Html Msg
 viewMain model =

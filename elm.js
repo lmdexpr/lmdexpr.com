@@ -10883,29 +10883,19 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$block = F3(
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$config = function (options) {
 	return {eG: _List_Nil, c$: $elm$core$Maybe$Nothing, eR: $elm$core$Maybe$Nothing, c1: $elm$core$Maybe$Nothing, c2: $elm$core$Maybe$Nothing, e6: options};
 };
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Role$Dark = 7;
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Text$Role = function (a) {
-	return {$: 0, a: a};
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$Attrs = function (a) {
+	return {$: 3, a: a};
 };
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Text$dark = $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Text$Role(7);
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$Coloring = function (a) {
-	return {$: 1, a: a};
-};
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$Outlined = function (a) {
-	return {$: 1, a: a};
-};
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$outlineDark = $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$Coloring(
-	$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$Outlined(7));
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$TextColoring = function (a) {
-	return {$: 2, a: a};
-};
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$textColor = function (color) {
-	return $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$TextColoring(color);
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$attrs = function (attrs_) {
+	return $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$Attrs(attrs_);
 };
 var $author$project$Main$configs = _List_fromArray(
 	[
-		$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$outlineDark,
-		$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$textColor($EdutainmentLIVE$elm_bootstrap$Bootstrap$Text$dark)
+		$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$attrs(
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'min-width', '800px')
+			]))
 	]);
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$BlockItem = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Block$custom = function (element) {
