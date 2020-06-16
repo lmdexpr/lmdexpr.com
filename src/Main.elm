@@ -73,7 +73,7 @@ defaultContent = { title = "", date = "", url = "", body = [], loaded = False }
 initialLoadQueue : List Content
 initialLoadQueue =
   [ { defaultContent | title = "おすすめラノベ五選", date = "2017-12-19", url = "2017-12-19-adc.md" }
-  , { defaultContent | title = "Chatworkのサマーインターンに参加した話", date = "2019-10-01", url = "2019-10-01-intern.md" }
+  , { defaultContent | title = "Chatworkサマーインターン", date = "2019-10-01", url = "2019-10-01-intern.md" }
   , { defaultContent | title = "『CATS』考察未満感想記事", date = "2020-01-30", url = "2020-01-30-cats.md" }
   ]
 

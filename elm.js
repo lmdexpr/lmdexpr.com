@@ -5485,7 +5485,7 @@ var $author$project$Main$initialLoadQueue = _List_fromArray(
 		{T: '2017-12-19', O: 'おすすめラノベ五選', P: '2017-12-19-adc.md'}),
 		_Utils_update(
 		$author$project$Main$defaultContent,
-		{T: '2019-10-01', O: 'Chatworkのサマーインターンに参加した話', P: '2019-10-01-intern.md'}),
+		{T: '2019-10-01', O: 'Chatworkサマーインターン', P: '2019-10-01-intern.md'}),
 		_Utils_update(
 		$author$project$Main$defaultContent,
 		{T: '2020-01-30', O: '『CATS』考察未満感想記事', P: '2020-01-30-cats.md'})
