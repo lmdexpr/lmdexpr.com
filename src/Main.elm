@@ -20,7 +20,6 @@ import Bootstrap.Card.Block as Block
 
 import Markdown
 
-
 -- MAIN
 
 main = Browser.element
@@ -30,71 +29,74 @@ main = Browser.element
   , subscriptions = subscriptions
   }
 
-
 -- MODEL
 
-type alias BlogContent =
+type alias Content =
   { title : String
   , date : String
   , url : String
-  , content : List (Html Msg)
+  , body : List (Html Msg)
+  , loaded : Bool
   }
 
 type alias Model =
-  { contents   : Array BlogContent
-  , loading    : Maybe Int
+  { contents : List Content
+  , loadQueue : Maybe (List Content)
   , accordionState : Accordion.State
   }
 
-blogContents : Array BlogContent
-blogContents = Array.fromList
-  [ {title = "About me", date = "none", url = "dammy", content = aboutme}
-  , {title = "おすすめラノベ五選", date = "2017-12-19", url = "Posts/2017-12-19-adc.md", content = []}
-  , {title = "Chatworkのサマーインターンに参加した話", date = "2019-10-01", url = "Posts/2019-10-01-intern.md", content = []}
-  , {title = "『CATS』考察未満感想記事", date = "2020-01-30", url = "Posts/2020-01-30-cats.md", content = []}
+initialModel : Model
+initialModel =
+  { contents  = [ aboutme ]
+  , loadQueue = Nothing
+  , accordionState = Accordion.initialState
+  }
+
+defaultContent : Content
+defaultContent = { title = "", date = "", url = "", body = [], loaded = False }
+
+initialLoadQueue : List Content
+initialLoadQueue =
+  [ { defaultContent | title = "おすすめラノベ五選", date = "2017-12-19", url = "Posts/2017-12-19-adc.md" }
+  , { defaultContent | title = "Chatworkのサマーインターンに参加した話", date = "2019-10-01", url = "Posts/2019-10-01-intern.md" }
+  , { defaultContent | title = "『CATS』考察未満感想記事", date = "2020-01-30", url = "Posts/2020-01-30-cats.md" }
   ]
 
+load : Maybe Content -> Cmd Msg
+load maybeContent =
+  case maybeContent of
+    Just content -> Http.get
+      { url = "https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/" ++ content.url
+      , expect = Http.expectString <| Loaded content
+      }
+    Nothing -> Cmd.none
+
 init : () -> (Model, Cmd Msg)
-init _ = ( { contents = blogContents, loading = Nothing, accordionState = Accordion.initialState } , Cmd.none )
+init _ = ( { initialModel | loadQueue = List.tail initialLoadQueue } , load <| List.head initialLoadQueue )
 
 
 -- ACTION, UPDATE
 
 type Msg
-  = RequestContent Int String
-  | Loaded (Result Http.Error String)
+  = Loaded Content (Result Http.Error String)
   | AccordionMsg Accordion.State
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    RequestContent idx url -> ({ model | loading = if idx /= 0 then Just idx else Nothing }, getContent url)
-    Loaded response ->
-      case model.loading of
-        Nothing  -> (model, Cmd.none)
-        Just idx ->
-          ({ model
-           | loading = Nothing
-           , contents = Array.set idx (loadContent response <| Array.get idx model.contents) model.contents
-           }
-          , Cmd.none)
+    Loaded content response ->
+      ({ model
+       | contents = model.contents ++ [ setContent response content ]
+       , loadQueue = Maybe.andThen List.tail model.loadQueue
+       }
+      , load <| Maybe.andThen List.head model.loadQueue)
     AccordionMsg state -> ( { model | accordionState = state }, Cmd.none )
 
-getContent : String -> Cmd Msg
-getContent url =
-  Http.get
-    { url = "https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/" ++ url
-    , expect = Http.expectString Loaded
-    }
-
-loadContent : Result Http.Error String -> Maybe BlogContent -> BlogContent
-loadContent response maybeContent =
-  case maybeContent of
-    Just blogContent ->
-      case response of
-        Err err -> { title = "HTTP request ERROR", date = "", url = "", content = [ text <| errorToString err ] }
-        Ok  raw -> { blogContent | content = Markdown.toHtml Nothing raw }
-    Nothing -> { title = "Index out of range", date = "", url = "", content = [] }
+setContent : Result Http.Error String -> Content -> Content
+setContent response content =
+  case response of
+    Err err -> { title = "HTTP request ERROR", date = "", url = "", body = [ text <| errorToString err ], loaded = True }
+    Ok  raw -> { content | body = Markdown.toHtml Nothing raw, loaded = True }
 
 errorToString : Http.Error -> String
 errorToString error =
@@ -125,25 +127,31 @@ view model = Grid.container []
       [ Accordion.config AccordionMsg
         |> Accordion.withAnimation
         |> Accordion.cards
-          ( Array.toList
-            ( Array.indexedMap
-              (\idx content ->
+            ( List.map
+              (\content ->
                 Accordion.card
-                  { id = String.fromInt idx
+                  { id = content.title
                   , options = []
-                  , header = Accordion.header [ onClick <| RequestContent idx content.url ] <| Accordion.toggle [] [ span [ class "fa fa-car" ] [], text content.title ]
-                  , blocks = [ Accordion.block [] [ Block.custom <| div [] <| Maybe.withDefault [ text "loading..." ] <| Maybe.map .content <| Array.get idx model.contents ] ]
+                  , header = Accordion.header []
+                    <| Accordion.toggle [] [ text ("[" ++ content.date ++ "] " ++ content.title) ]
+                  , blocks = [ Accordion.block [] [ Block.custom <| div [] content.body ] ]
                   }
               ) model.contents
             )
-          )
+            -- TODO: この実装だと未ロードの記事が表示されない。それもアリだとは思うが……。
         |> Accordion.view model.accordionState
       ]
     ]
   , Grid.row [ Row.bottomXs ] [ Grid.col [ Col.middleLg ] [ text "(c) 2020 ", a [href "http://lmdexpr.com"] [text "Yuki Tajiri(lmdexpr)"] ] ]
   ]
 
-aboutme : List (Html Msg)
+aboutme : Content
 aboutme =
-  [ -- TODO: write down about me
-  ]
+  { title = "About me"
+  , date = "λ"
+  , url = "dammy"
+  , body =
+    [ text "TODO"
+    ]
+  , loaded = True
+  }
