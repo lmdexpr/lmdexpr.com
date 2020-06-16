@@ -7,7 +7,7 @@ import Task
 
 import Http exposing (Error)
 
-import Html exposing ( Html, Attribute, main_, span, a, p, img ,br, text, strong, option, i, div, h1, h2 )
+import Html exposing ( Html, Attribute, main_, span, a, p, img ,br, text, strong, option, i, div, h1, h3 )
 import Html.Attributes exposing ( rel, href, class, style, width )
 import Html.Events exposing ( onClick )
 
@@ -55,14 +55,34 @@ aboutme =
   , date = "λ"
   , url = "dammy"
   , body =
-    [ text "TODO"
+    [ h3 [] [ text "LMDEXPR a.k.a. Yuki Tajiri" ]
+    , p [] [ text "I work as server-side engineer @", a [ href "https://corp.chatwork.com/ja/" ] [ text "Chatwork Inc." ], text " (2020/06/01 ~)" ]
+    , p [] [ text "Droped out Master of Mathematics @", a [ href "https://www.kobe-u.ac.jp/" ] [ text "Kobe University" ], text " (2019/04 ~ 2020/10)" ]
+    , p [] [ text "Graduated Bachelor of Mathematics @", a [ href "https://www.kobe-u.ac.jp/" ] [ text "Kobe University" ], text " (2017/04 ~ 2019/03)" ]
+    , p [] [ text "Graduated Associate Degree of Engineering @", a [ href "https://kumamoto-nct.ac.jp/" ] [ text "NIT, Kumamoto College" ], text " (2017/04 ~ 2019/03)" ]
+    ]
+  , loaded = True
+  }
+
+contact : Content
+contact =
+  { title = "Contact"
+  , date = "λ"
+  , url = "dammy"
+  , body =
+    [ p [] [ i [ class "far fa-envelope" ] [], text " tajiri@chatwork.com" ]
+    , p [] [ a [ href "https://twitter.com/lmdexpr" ] [ i [ class "fab fa-twitter" ] [], text " Twitter" ] ]
+    , p [] [ a [ href "https://github.com/lmdexpr" ] [ i [ class "fab fa-github" ] [], text " Github" ] ]
+    , p [] [ a [ href "https://note.com/lmdexpr" ] [ i [ class "far fa-sticky-note" ] [], text " Note" ] ]
+    , p [] [ a [ href "https://www.amazon.jp/hz/wishlist/ls/2Z7ZETUODB09J?ref_=wl_share" ] [ i [ class "fab fa-amazon" ] [], text " Amazon" ] ]
+    , p [] [ a [ href "https://lmdexpr.github.io" ] [ i [ class "fas fa-angle-double-left" ] [], text " Ruin" ] ]
     ]
   , loaded = True
   }
 
 initialModel : Model
 initialModel =
-  { contents  = [ aboutme ]
+  { contents  = [ aboutme, contact ]
   , loadQueue = Nothing
   , accordionState = Accordion.initialState
   }
@@ -181,7 +201,8 @@ viewLoaded model = Accordion.config AccordionMsg
 
 viewLoading : Html Msg
 viewLoading =
-  div [ style "text-align" "center", font "Noto Sans JP, sans-serif", textcolor "#ccccaa" ] [ text "Loading ..." ]
+  div [ style "text-align" "center", font "Noto Sans JP, sans-serif", textcolor "#ccccaa" ]
+    [ i [ class "fa fa-spinner fa-spin" ] [], text " Loading ..." ]
 
 font = style "font-family"
 background = style "background-color"
