@@ -133,7 +133,7 @@ subscriptions model = Accordion.subscriptions model.accordionState AccordionMsg
 -- VIEW
 
 view : Model -> Html Msg
-view model = div [ style "margin" "auto", style "padding" "60px", style "width" "80%", style "opacity" "0.9" ]
+view model = div [ class "responsive", style "margin" "auto", style "padding" "60px", style "width" "80%", style "opacity" "0.9" ]
   [ CDN.stylesheet
   , Html.node "link" [href "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"] []
   , Html.node "link" [href "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&family=Roboto+Condensed:wght@700&display=swap", rel "stylesheet"] []

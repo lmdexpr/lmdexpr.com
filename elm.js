@@ -11619,6 +11619,7 @@ var $author$project$Main$view = function (model) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
+				$elm$html$Html$Attributes$class('responsive'),
 				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
 				A2($elm$html$Html$Attributes$style, 'padding', '60px'),
 				A2($elm$html$Html$Attributes$style, 'width', '80%'),
