@@ -210,8 +210,15 @@ viewLoaded model = Accordion.config AccordionMsg
           { id = content.title
           , options = []
           , header = Accordion.header [ style "background-color" "#444444" ]
-            <| Accordion.toggle [] [ Button.button [ Button.attrs [ style "background-color" "#444444", style "color" "#eeeeee" ] ]
-              [ text ("[" ++ content.date ++ "] " ++ content.title) ] ]
+            <| Accordion.toggle [ style "width" "100%", style "text-align" "left", style "padding" "0" ]
+              [ div [ style "background-color" "#444444"
+                    , style "color" "#eeeeee"
+                    , style "overflow" "hidden"
+                    , style "white-space" "nowrap"
+                    , style "width" "auto"
+                    , style "text-overflow" "ellipsis" ]
+                [ text ("[" ++ content.date ++ "] " ++ content.title) ]
+              ]
           , blocks = [ Accordion.block [] [ Block.custom <| div [] content.body ] ]
           }
       ) model.contents

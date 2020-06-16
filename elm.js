@@ -11780,154 +11780,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$view = function (_v0) {
 							conf.c2)
 						])))));
 };
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$Attrs = function (a) {
-	return {$: 4, a: a};
-};
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Button$attrs = function (attrs_) {
-	return $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$Attrs(attrs_);
-};
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$block = $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$block;
-var $elm$html$Html$button = _VirtualDom_node('button');
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$applyModifier = F2(
-	function (modifier, options) {
-		switch (modifier.$) {
-			case 0:
-				var size = modifier.a;
-				return _Utils_update(
-					options,
-					{
-						cE: $elm$core$Maybe$Just(size)
-					});
-			case 1:
-				var coloring = modifier.a;
-				return _Utils_update(
-					options,
-					{
-						T: $elm$core$Maybe$Just(coloring)
-					});
-			case 2:
-				return _Utils_update(
-					options,
-					{bF: true});
-			case 3:
-				var val = modifier.a;
-				return _Utils_update(
-					options,
-					{bR: val});
-			default:
-				var attrs = modifier.a;
-				return _Utils_update(
-					options,
-					{
-						bD: _Utils_ap(options.bD, attrs)
-					});
-		}
-	});
-var $elm$core$Tuple$second = function (_v0) {
-	var y = _v0.b;
-	return y;
-};
-var $elm$html$Html$Attributes$classList = function (classes) {
-	return $elm$html$Html$Attributes$class(
-		A2(
-			$elm$core$String$join,
-			' ',
-			A2(
-				$elm$core$List$map,
-				$elm$core$Tuple$first,
-				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
-};
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$defaultOptions = {bD: _List_Nil, bF: false, T: $elm$core$Maybe$Nothing, bR: false, cE: $elm$core$Maybe$Nothing};
-var $elm$json$Json$Encode$bool = _Json_wrap;
-var $elm$html$Html$Attributes$boolProperty = F2(
-	function (key, bool) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$bool(bool));
-	});
-var $elm$html$Html$Attributes$disabled = $elm$html$Html$Attributes$boolProperty('disabled');
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$roleClass = function (role) {
-	switch (role) {
-		case 0:
-			return 'primary';
-		case 1:
-			return 'secondary';
-		case 2:
-			return 'success';
-		case 3:
-			return 'info';
-		case 4:
-			return 'warning';
-		case 5:
-			return 'danger';
-		case 6:
-			return 'dark';
-		case 7:
-			return 'light';
-		default:
-			return 'link';
-	}
-};
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$buttonAttributes = function (modifiers) {
-	var options = A3($elm$core$List$foldl, $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$applyModifier, $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$defaultOptions, modifiers);
-	return _Utils_ap(
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$classList(
-				_List_fromArray(
-					[
-						_Utils_Tuple2('btn', true),
-						_Utils_Tuple2('btn-block', options.bF),
-						_Utils_Tuple2('disabled', options.bR)
-					])),
-				$elm$html$Html$Attributes$disabled(options.bR)
-			]),
-		_Utils_ap(
-			function () {
-				var _v0 = A2($elm$core$Maybe$andThen, $EdutainmentLIVE$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption, options.cE);
-				if (!_v0.$) {
-					var s = _v0.a;
-					return _List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('btn-' + s)
-						]);
-				} else {
-					return _List_Nil;
-				}
-			}(),
-			_Utils_ap(
-				function () {
-					var _v1 = options.T;
-					if (!_v1.$) {
-						if (!_v1.a.$) {
-							var role = _v1.a.a;
-							return _List_fromArray(
-								[
-									$elm$html$Html$Attributes$class(
-									'btn-' + $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$roleClass(role))
-								]);
-						} else {
-							var role = _v1.a.a;
-							return _List_fromArray(
-								[
-									$elm$html$Html$Attributes$class(
-									'btn-outline-' + $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$roleClass(role))
-								]);
-						}
-					} else {
-						return _List_Nil;
-					}
-				}(),
-				options.bD)));
-};
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Button$button = F2(
-	function (options, children) {
-		return A2(
-			$elm$html$Html$button,
-			$EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$buttonAttributes(options),
-			children);
-	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Card = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$card = function (rec) {
 	return {eH: rec.eH, eS: rec.eS, eX: rec.eX, e7: rec.e7};
@@ -12038,6 +11891,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderCardBlock = F3(
 					$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$renderBlocks(blocks))
 				]));
 	});
+var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$json$Json$Decode$andThen = _Json_andThen;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$visibilityTransition = F2(
 	function (withAnimation_, visibility) {
@@ -12253,19 +12107,24 @@ var $author$project$Main$viewLoaded = function (model) {
 									]),
 								A2(
 									$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$toggle,
-									_List_Nil,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'width', '100%'),
+											A2($elm$html$Html$Attributes$style, 'text-align', 'left'),
+											A2($elm$html$Html$Attributes$style, 'padding', '0')
+										]),
 									_List_fromArray(
 										[
 											A2(
-											$EdutainmentLIVE$elm_bootstrap$Bootstrap$Button$button,
+											$elm$html$Html$div,
 											_List_fromArray(
 												[
-													$EdutainmentLIVE$elm_bootstrap$Bootstrap$Button$attrs(
-													_List_fromArray(
-														[
-															A2($elm$html$Html$Attributes$style, 'background-color', '#444444'),
-															A2($elm$html$Html$Attributes$style, 'color', '#eeeeee')
-														]))
+													A2($elm$html$Html$Attributes$style, 'background-color', '#444444'),
+													A2($elm$html$Html$Attributes$style, 'color', '#eeeeee'),
+													A2($elm$html$Html$Attributes$style, 'overflow', 'hidden'),
+													A2($elm$html$Html$Attributes$style, 'white-space', 'nowrap'),
+													A2($elm$html$Html$Attributes$style, 'width', 'auto'),
+													A2($elm$html$Html$Attributes$style, 'text-overflow', 'ellipsis')
 												]),
 											_List_fromArray(
 												[
