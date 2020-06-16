@@ -129,7 +129,7 @@ view model = Grid.container []
             ( Array.indexedMap
               (\idx content ->
                 Accordion.card
-                  { id = Debug.toString idx
+                  { id = String.fromInt idx
                   , options = []
                   , header = Accordion.header [ onClick <| RequestContent idx content.url ] <| Accordion.toggle [] [ span [ class "fa fa-car" ] [], text content.title ]
                   , blocks = [ Accordion.block [] [ Block.custom <| div [] <| Maybe.withDefault [ text "loading..." ] <| Maybe.map .content <| Array.get idx model.contents ] ]
