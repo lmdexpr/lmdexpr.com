@@ -9,7 +9,7 @@ import Http exposing (Error)
 
 import Html exposing ( Html, Attribute, main_, span, a, p, img ,br, text, strong, option, i, div, h1, h3 )
 import Html.Attributes exposing ( rel, href, class, style, width )
-import Html.Events exposing ( onClick )
+import Html.Events exposing ( onClick, onMouseOver )
 
 import Bootstrap.CDN as CDN
 import Bootstrap.Grid as Grid
@@ -23,6 +23,8 @@ import Bootstrap.Card.Block as Block
 import Bootstrap.Utilities.Spacing exposing (mb0)
 
 import Markdown
+
+import Hex
 
 -- MAIN
 
@@ -47,6 +49,7 @@ type alias Model =
   { contents : List Content
   , loadQueue : Maybe (List Content)
   , accordionState : Accordion.State
+  , lmdexpr : Array String
   }
 
 aboutme : Content
@@ -85,6 +88,7 @@ initialModel =
   { contents  = [ aboutme, contact ]
   , loadQueue = Nothing
   , accordionState = Accordion.initialState
+  , lmdexpr = Array.fromList [ "0x6c", "0x6d", "0x64", "0x65", "0x78", "0x70", "0x72" ]
   }
 
 defaultContent : Content
@@ -115,6 +119,7 @@ init _ = ( { initialModel | loadQueue = List.tail initialLoadQueue } , load <| L
 type Msg
   = Loaded Content (Result Http.Error String)
   | AccordionMsg Accordion.State
+  | Convert String Int
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -126,6 +131,18 @@ update msg model =
        }
       , load <| Maybe.andThen List.head model.loadQueue)
     AccordionMsg state -> ( { model | accordionState = state }, Cmd.none )
+    Convert s idx -> ( { model | lmdexpr = Array.set idx (convert s) model.lmdexpr }, Cmd.none )
+
+convert : String -> String
+convert target =
+  if String.startsWith "0x" target then
+    case String.slice 2 4 target |> Hex.fromString of
+      Ok n -> Char.fromCode n |> String.fromChar
+      _    -> "ERROR : hex to char"
+  else
+    case String.uncons target of
+      Just (c, _) -> Char.toCode c |> Hex.toString |> (\s -> "0x" ++ s)
+      _           -> "ERROR : char to hex"
 
 setContent : Result Http.Error String -> Content -> Content
 setContent response content =
@@ -157,9 +174,8 @@ view model = div [ class "responsive" ]
   [ CDN.stylesheet
   , Html.node "link" [href "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"] []
   , Html.node "link" [href "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&family=Roboto+Condensed:wght@700&display=swap", rel "stylesheet"] []
-  , Card.config configs
-    |> Card.headerH1 [ background "#222233", textcolor "#eeeeaa", font "Roboto Condensed, sans-serif" ]
-      [ text "λx. {0x6c, 0x6d, 0x64, 0x65, 0x78, 0x70, 0x72}" ]
+  , Card.config []
+    |> Card.headerH1 [ background "#222233", textcolor "#eeeeaa", font "Roboto Condensed, sans-serif" ] (makeTitle model.lmdexpr)
     |> Card.footer [ background "#222233", textcolor "#ccccaa", font "Noto Sans JP, sans-serif", style "text-align" "right" ]
       [ text "(c) 2020 "
       , a [href "http://lmdexpr.com"] [text "Yuki Tajiri(lmdexpr)"]
@@ -172,8 +188,11 @@ view model = div [ class "responsive" ]
     |> Card.view
   ]
 
-configs : List (Card.Option Msg)
-configs = []
+makeTitle : Array String -> List (Html Msg)
+makeTitle lmdexpr =
+  [ text "λx. { " ]
+  ++ Array.toList (Array.indexedMap (\ idx s -> span [ onMouseOver (Convert s idx) ] [ text <| s ++ " " ]) lmdexpr)
+  ++ [ text "}" ]
 
 viewMain : Model -> Html Msg
 viewMain model =

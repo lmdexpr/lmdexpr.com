@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.dh.dX === region.dD.dX)
+	if (region.di.dY === region.dE.dY)
 	{
-		return 'on line ' + region.dh.dX;
+		return 'on line ' + region.di.dY;
 	}
-	return 'on lines ' + region.dh.dX + ' through ' + region.dD.dX;
+	return 'on lines ' + region.di.dY + ' through ' + region.dE.dY;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.eZ,
-		impl.fj,
-		impl.fh,
+		impl.e_,
+		impl.fk,
+		impl.fi,
 		function() { return function() {} }
 	);
 });
@@ -2704,9 +2704,9 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		e0: func(record.e0),
-		fg: record.fg,
-		e7: record.e7
+		e1: func(record.e1),
+		fh: record.fh,
+		e8: record.e8
 	}
 });
 
@@ -2974,11 +2974,11 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.e0;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.fg;
+		var message = !tag ? value : tag < 3 ? value.a : value.e1;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.fh;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.e7) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.e8) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3928,11 +3928,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.eZ,
-		impl.fj,
-		impl.fh,
+		impl.e_,
+		impl.fk,
+		impl.fi,
 		function(sendToApp, initialModel) {
-			var view = impl.fk;
+			var view = impl.fl;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3964,12 +3964,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.eZ,
-		impl.fj,
-		impl.fh,
+		impl.e_,
+		impl.fk,
+		impl.fi,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.dg && impl.dg(sendToApp)
-			var view = impl.fk;
+			var divertHrefToApp = impl.dh && impl.dh(sendToApp)
+			var view = impl.fl;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -4038,12 +4038,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.e3;
-	var onUrlRequest = impl.e4;
+	var onUrlChange = impl.e4;
+	var onUrlRequest = impl.e5;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		dg: function(sendToApp)
+		dh: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4059,9 +4059,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.d8 === next.d8
-							&& curr.dI === next.dI
-							&& curr.d3.a === next.d3.a
+							&& curr.d9 === next.d9
+							&& curr.dJ === next.dJ
+							&& curr.d4.a === next.d4.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4069,13 +4069,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		eZ: function(flags)
+		e_: function(flags)
 		{
-			return A3(impl.eZ, flags, _Browser_getUrl(), key);
+			return A3(impl.e_, flags, _Browser_getUrl(), key);
 		},
+		fl: impl.fl,
 		fk: impl.fk,
-		fj: impl.fj,
-		fh: impl.fh
+		fi: impl.fi
 	});
 }
 
@@ -4141,17 +4141,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { eU: 'hidden', eH: 'visibilitychange' }
+		? { eV: 'hidden', eI: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { eU: 'mozHidden', eH: 'mozvisibilitychange' }
+		? { eV: 'mozHidden', eI: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { eU: 'msHidden', eH: 'msvisibilitychange' }
+		? { eV: 'msHidden', eI: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { eU: 'webkitHidden', eH: 'webkitvisibilitychange' }
-		: { eU: 'hidden', eH: 'visibilitychange' };
+		? { eV: 'webkitHidden', eI: 'webkitvisibilitychange' }
+		: { eV: 'hidden', eI: 'visibilitychange' };
 }
 
 
@@ -4232,11 +4232,11 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		ei: _Browser_getScene(),
-		fl: {
-			eA: _Browser_window.pageXOffset,
-			eB: _Browser_window.pageYOffset,
-			cT: _Browser_doc.documentElement.clientWidth,
+		ej: _Browser_getScene(),
+		fm: {
+			eB: _Browser_window.pageXOffset,
+			eC: _Browser_window.pageYOffset,
+			cU: _Browser_doc.documentElement.clientWidth,
 			at: _Browser_doc.documentElement.clientHeight
 		}
 	};
@@ -4247,7 +4247,7 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		cT: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		cU: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
 		at: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
@@ -4271,14 +4271,14 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			ei: {
-				cT: node.scrollWidth,
+			ej: {
+				cU: node.scrollWidth,
 				at: node.scrollHeight
 			},
-			fl: {
-				eA: node.scrollLeft,
-				eB: node.scrollTop,
-				cT: node.clientWidth,
+			fm: {
+				eB: node.scrollLeft,
+				eC: node.scrollTop,
+				cU: node.clientWidth,
 				at: node.clientHeight
 			}
 		};
@@ -4309,17 +4309,17 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			ei: _Browser_getScene(),
-			fl: {
-				eA: x,
-				eB: y,
-				cT: _Browser_doc.documentElement.clientWidth,
+			ej: _Browser_getScene(),
+			fm: {
+				eB: x,
+				eC: y,
+				cU: _Browser_doc.documentElement.clientWidth,
 				at: _Browser_doc.documentElement.clientHeight
 			},
-			eN: {
-				eA: x + rect.left,
-				eB: y + rect.top,
-				cT: rect.width,
+			eO: {
+				eB: x + rect.left,
+				eC: y + rect.top,
+				cU: rect.width,
 				at: rect.height
 			}
 		};
@@ -4365,17 +4365,17 @@ var _Http_toTask = F3(function(router, toTask, request)
 	return _Scheduler_binding(function(callback)
 	{
 		function done(response) {
-			callback(toTask(request.eO.a(response)));
+			callback(toTask(request.eP.a(response)));
 		}
 
 		var xhr = new XMLHttpRequest();
 		xhr.addEventListener('error', function() { done($elm$http$Http$NetworkError_); });
 		xhr.addEventListener('timeout', function() { done($elm$http$Http$Timeout_); });
-		xhr.addEventListener('load', function() { done(_Http_toResponse(request.eO.b, xhr)); });
-		$elm$core$Maybe$isJust(request.ex) && _Http_track(router, xhr, request.ex.a);
+		xhr.addEventListener('load', function() { done(_Http_toResponse(request.eP.b, xhr)); });
+		$elm$core$Maybe$isJust(request.ey) && _Http_track(router, xhr, request.ey.a);
 
 		try {
-			xhr.open(request.e1, request.O, true);
+			xhr.open(request.e2, request.O, true);
 		} catch (e) {
 			return done($elm$http$Http$BadUrl_(request.O));
 		}
@@ -4394,13 +4394,13 @@ var _Http_toTask = F3(function(router, toTask, request)
 
 function _Http_configureRequest(xhr, request)
 {
-	for (var headers = request.eS; headers.b; headers = headers.b) // WHILE_CONS
+	for (var headers = request.eT; headers.b; headers = headers.b) // WHILE_CONS
 	{
 		xhr.setRequestHeader(headers.a.a, headers.a.b);
 	}
-	xhr.timeout = request.fi.a || 0;
-	xhr.responseType = request.eO.d;
-	xhr.withCredentials = request.eE;
+	xhr.timeout = request.fj.a || 0;
+	xhr.responseType = request.eP.d;
+	xhr.withCredentials = request.eF;
 }
 
 
@@ -4422,9 +4422,9 @@ function _Http_toMetadata(xhr)
 {
 	return {
 		O: xhr.responseURL,
-		fe: xhr.status,
-		ff: xhr.statusText,
-		eS: _Http_parseHeaders(xhr.getAllResponseHeaders())
+		ff: xhr.status,
+		fg: xhr.statusText,
+		eT: _Http_parseHeaders(xhr.getAllResponseHeaders())
 	};
 }
 
@@ -4519,18 +4519,55 @@ function _Http_track(router, xhr, tracker)
 	xhr.upload.addEventListener('progress', function(event) {
 		if (xhr.c) { return; }
 		_Scheduler_rawSpawn(A2($elm$core$Platform$sendToSelf, router, _Utils_Tuple2(tracker, $elm$http$Http$Sending({
-			fc: event.loaded,
-			cD: event.total
+			fd: event.loaded,
+			cE: event.total
 		}))));
 	});
 	xhr.addEventListener('progress', function(event) {
 		if (xhr.c) { return; }
 		_Scheduler_rawSpawn(A2($elm$core$Platform$sendToSelf, router, _Utils_Tuple2(tracker, $elm$http$Http$Receiving({
-			e8: event.loaded,
-			cD: event.lengthComputable ? $elm$core$Maybe$Just(event.total) : $elm$core$Maybe$Nothing
+			e9: event.loaded,
+			cE: event.lengthComputable ? $elm$core$Maybe$Just(event.total) : $elm$core$Maybe$Nothing
 		}))));
 	});
 }
+
+
+var _Bitwise_and = F2(function(a, b)
+{
+	return a & b;
+});
+
+var _Bitwise_or = F2(function(a, b)
+{
+	return a | b;
+});
+
+var _Bitwise_xor = F2(function(a, b)
+{
+	return a ^ b;
+});
+
+function _Bitwise_complement(a)
+{
+	return ~a;
+};
+
+var _Bitwise_shiftLeftBy = F2(function(offset, a)
+{
+	return a << offset;
+});
+
+var _Bitwise_shiftRightBy = F2(function(offset, a)
+{
+	return a >> offset;
+});
+
+var _Bitwise_shiftRightZfBy = F2(function(offset, a)
+{
+	return a >>> offset;
+});
+
 
 // CREATE
 
@@ -4539,8 +4576,8 @@ var _Regex_never = /.^/;
 var _Regex_fromStringWith = F2(function(options, string)
 {
 	var flags = 'g';
-	if (options.dZ) { flags += 'm'; }
-	if (options.dt) { flags += 'i'; }
+	if (options.d_) { flags += 'm'; }
+	if (options.du) { flags += 'i'; }
 
 	try
 	{
@@ -4631,43 +4668,6 @@ var _Regex_splitAtMost = F3(function(n, re, str)
 });
 
 var _Regex_infinity = Infinity;
-
-
-
-var _Bitwise_and = F2(function(a, b)
-{
-	return a & b;
-});
-
-var _Bitwise_or = F2(function(a, b)
-{
-	return a | b;
-});
-
-var _Bitwise_xor = F2(function(a, b)
-{
-	return a ^ b;
-});
-
-function _Bitwise_complement(a)
-{
-	return ~a;
-};
-
-var _Bitwise_shiftLeftBy = F2(function(offset, a)
-{
-	return a << offset;
-});
-
-var _Bitwise_shiftRightBy = F2(function(offset, a)
-{
-	return a >> offset;
-});
-
-var _Bitwise_shiftRightZfBy = F2(function(offset, a)
-{
-	return a >>> offset;
-});
 
 
 function _Url_percentEncode(string)
@@ -5189,7 +5189,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {dH: fragment, dI: host, d1: path, d3: port_, d8: protocol, d9: query};
+		return {dI: fragment, dJ: host, d2: path, d4: port_, d9: protocol, ea: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5737,6 +5737,41 @@ var $author$project$Main$contact = {
 	N: 'Contact',
 	O: 'dammy'
 };
+var $elm$core$Array$fromListHelp = F3(
+	function (list, nodeList, nodeListSize) {
+		fromListHelp:
+		while (true) {
+			var _v0 = A2($elm$core$Elm$JsArray$initializeFromList, $elm$core$Array$branchFactor, list);
+			var jsArray = _v0.a;
+			var remainingItems = _v0.b;
+			if (_Utils_cmp(
+				$elm$core$Elm$JsArray$length(jsArray),
+				$elm$core$Array$branchFactor) < 0) {
+				return A2(
+					$elm$core$Array$builderToArray,
+					true,
+					{r: nodeList, m: nodeListSize, n: jsArray});
+			} else {
+				var $temp$list = remainingItems,
+					$temp$nodeList = A2(
+					$elm$core$List$cons,
+					$elm$core$Array$Leaf(jsArray),
+					nodeList),
+					$temp$nodeListSize = nodeListSize + 1;
+				list = $temp$list;
+				nodeList = $temp$nodeList;
+				nodeListSize = $temp$nodeListSize;
+				continue fromListHelp;
+			}
+		}
+	});
+var $elm$core$Array$fromList = function (list) {
+	if (!list.b) {
+		return $elm$core$Array$empty;
+	} else {
+		return A3($elm$core$Array$fromListHelp, list, _List_Nil, 0);
+	}
+};
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$State = $elm$core$Basics$identity;
 var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
 var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
@@ -5745,6 +5780,9 @@ var $author$project$Main$initialModel = {
 	aL: $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialState,
 	aT: _List_fromArray(
 		[$author$project$Main$aboutme, $author$project$Main$contact]),
+	a2: $elm$core$Array$fromList(
+		_List_fromArray(
+			['0x6c', '0x6d', '0x64', '0x65', '0x78', '0x70', '0x72'])),
 	W: $elm$core$Maybe$Nothing
 };
 var $author$project$Main$Loaded = F2(
@@ -6340,7 +6378,7 @@ var $elm$http$Http$resolve = F2(
 			case 3:
 				var metadata = response.a;
 				return $elm$core$Result$Err(
-					$elm$http$Http$BadStatus(metadata.fe));
+					$elm$http$Http$BadStatus(metadata.ff));
 			default:
 				var body = response.b;
 				return A2(
@@ -6361,7 +6399,7 @@ var $elm$http$Http$Request = function (a) {
 };
 var $elm$http$Http$State = F2(
 	function (reqs, subs) {
-		return {ec: reqs, ep: subs};
+		return {ed: reqs, eq: subs};
 	});
 var $elm$http$Http$init = $elm$core$Task$succeed(
 	A2($elm$http$Http$State, $elm$core$Dict$empty, _List_Nil));
@@ -6405,7 +6443,7 @@ var $elm$http$Http$updateReqs = F3(
 					return A2(
 						$elm$core$Task$andThen,
 						function (pid) {
-							var _v4 = req.ex;
+							var _v4 = req.ey;
 							if (_v4.$ === 1) {
 								return A3($elm$http$Http$updateReqs, router, otherCmds, reqs);
 							} else {
@@ -6435,7 +6473,7 @@ var $elm$http$Http$onEffects = F4(
 				return $elm$core$Task$succeed(
 					A2($elm$http$Http$State, reqs, subs));
 			},
-			A3($elm$http$Http$updateReqs, router, cmds, state.ec));
+			A3($elm$http$Http$updateReqs, router, cmds, state.ed));
 	});
 var $elm$core$List$maybeCons = F3(
 	function (f, mx, xs) {
@@ -6478,7 +6516,7 @@ var $elm$http$Http$onSelfMsg = F3(
 				A2(
 					$elm$core$List$filterMap,
 					A3($elm$http$Http$maybeSend, router, tracker, progress),
-					state.ep)));
+					state.eq)));
 	});
 var $elm$http$Http$Cancel = function (a) {
 	return {$: 0, a: a};
@@ -6492,13 +6530,13 @@ var $elm$http$Http$cmdMap = F2(
 			var r = cmd.a;
 			return $elm$http$Http$Request(
 				{
-					eE: r.eE,
+					eF: r.eF,
 					ab: r.ab,
-					eO: A2(_Http_mapExpect, func, r.eO),
-					eS: r.eS,
-					e1: r.e1,
-					fi: r.fi,
-					ex: r.ex,
+					eP: A2(_Http_mapExpect, func, r.eP),
+					eT: r.eT,
+					e2: r.e2,
+					fj: r.fj,
+					ey: r.ey,
 					O: r.O
 				});
 		}
@@ -6522,11 +6560,11 @@ var $elm$http$Http$subscription = _Platform_leaf('Http');
 var $elm$http$Http$request = function (r) {
 	return $elm$http$Http$command(
 		$elm$http$Http$Request(
-			{eE: false, ab: r.ab, eO: r.eO, eS: r.eS, e1: r.e1, fi: r.fi, ex: r.ex, O: r.O}));
+			{eF: false, ab: r.ab, eP: r.eP, eT: r.eT, e2: r.e2, fj: r.fj, ey: r.ey, O: r.O}));
 };
 var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
-		{ab: $elm$http$Http$emptyBody, eO: r.eO, eS: _List_Nil, e1: 'GET', fi: $elm$core$Maybe$Nothing, ex: $elm$core$Maybe$Nothing, O: r.O});
+		{ab: $elm$http$Http$emptyBody, eP: r.eP, eT: _List_Nil, e2: 'GET', fj: $elm$core$Maybe$Nothing, ey: $elm$core$Maybe$Nothing, O: r.O});
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -6535,7 +6573,7 @@ var $author$project$Main$load = function (maybeContent) {
 		var content = maybeContent.a;
 		return $elm$http$Http$get(
 			{
-				eO: $elm$http$Http$expectString(
+				eP: $elm$http$Http$expectString(
 					$author$project$Main$Loaded(content)),
 				O: 'https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/Posts/' + content.O
 			});
@@ -6625,7 +6663,7 @@ var $elm$browser$Browser$AnimationManager$Time = function (a) {
 };
 var $elm$browser$Browser$AnimationManager$State = F3(
 	function (subs, request, oldTime) {
-		return {da: oldTime, ed: request, ep: subs};
+		return {db: oldTime, ee: request, eq: subs};
 	});
 var $elm$browser$Browser$AnimationManager$init = $elm$core$Task$succeed(
 	A3($elm$browser$Browser$AnimationManager$State, _List_Nil, $elm$core$Maybe$Nothing, 0));
@@ -6633,8 +6671,8 @@ var $elm$browser$Browser$AnimationManager$now = _Browser_now(0);
 var $elm$browser$Browser$AnimationManager$rAF = _Browser_rAF(0);
 var $elm$browser$Browser$AnimationManager$onEffects = F3(
 	function (router, subs, _v0) {
-		var request = _v0.ed;
-		var oldTime = _v0.da;
+		var request = _v0.ee;
+		var oldTime = _v0.db;
 		var _v1 = _Utils_Tuple2(request, subs);
 		if (_v1.a.$ === 1) {
 			if (!_v1.b.b) {
@@ -6682,8 +6720,8 @@ var $elm$time$Time$Posix = $elm$core$Basics$identity;
 var $elm$time$Time$millisToPosix = $elm$core$Basics$identity;
 var $elm$browser$Browser$AnimationManager$onSelfMsg = F3(
 	function (router, newTime, _v0) {
-		var subs = _v0.ep;
-		var oldTime = _v0.da;
+		var subs = _v0.eq;
+		var oldTime = _v0.db;
 		var send = function (sub) {
 			if (!sub.$) {
 				var tagger = sub.a;
@@ -6799,6 +6837,374 @@ var $elm$core$Maybe$andThen = F2(
 			return $elm$core$Maybe$Nothing;
 		}
 	});
+var $elm$core$String$cons = _String_cons;
+var $elm$core$String$fromChar = function (_char) {
+	return A2($elm$core$String$cons, _char, '');
+};
+var $elm$core$Char$fromCode = _Char_fromCode;
+var $elm$core$Basics$pow = _Basics_pow;
+var $rtfeldman$elm_hex$Hex$fromStringHelp = F3(
+	function (position, chars, accumulated) {
+		fromStringHelp:
+		while (true) {
+			if (!chars.b) {
+				return $elm$core$Result$Ok(accumulated);
+			} else {
+				var _char = chars.a;
+				var rest = chars.b;
+				switch (_char) {
+					case '0':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated;
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case '1':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + A2($elm$core$Basics$pow, 16, position);
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case '2':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (2 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case '3':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (3 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case '4':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (4 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case '5':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (5 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case '6':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (6 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case '7':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (7 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case '8':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (8 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case '9':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (9 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case 'a':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (10 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case 'b':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (11 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case 'c':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (12 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case 'd':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (13 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case 'e':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (14 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					case 'f':
+						var $temp$position = position - 1,
+							$temp$chars = rest,
+							$temp$accumulated = accumulated + (15 * A2($elm$core$Basics$pow, 16, position));
+						position = $temp$position;
+						chars = $temp$chars;
+						accumulated = $temp$accumulated;
+						continue fromStringHelp;
+					default:
+						var nonHex = _char;
+						return $elm$core$Result$Err(
+							$elm$core$String$fromChar(nonHex) + ' is not a valid hexadecimal character.');
+				}
+			}
+		}
+	});
+var $elm$core$Result$map = F2(
+	function (func, ra) {
+		if (!ra.$) {
+			var a = ra.a;
+			return $elm$core$Result$Ok(
+				func(a));
+		} else {
+			var e = ra.a;
+			return $elm$core$Result$Err(e);
+		}
+	});
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $elm$core$String$foldr = _String_foldr;
+var $elm$core$String$toList = function (string) {
+	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
+};
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $rtfeldman$elm_hex$Hex$fromString = function (str) {
+	if ($elm$core$String$isEmpty(str)) {
+		return $elm$core$Result$Err('Empty strings are not valid hexadecimal strings.');
+	} else {
+		var result = function () {
+			if (A2($elm$core$String$startsWith, '-', str)) {
+				var list = A2(
+					$elm$core$Maybe$withDefault,
+					_List_Nil,
+					$elm$core$List$tail(
+						$elm$core$String$toList(str)));
+				return A2(
+					$elm$core$Result$map,
+					$elm$core$Basics$negate,
+					A3(
+						$rtfeldman$elm_hex$Hex$fromStringHelp,
+						$elm$core$List$length(list) - 1,
+						list,
+						0));
+			} else {
+				return A3(
+					$rtfeldman$elm_hex$Hex$fromStringHelp,
+					$elm$core$String$length(str) - 1,
+					$elm$core$String$toList(str),
+					0);
+			}
+		}();
+		var formatError = function (err) {
+			return A2(
+				$elm$core$String$join,
+				' ',
+				_List_fromArray(
+					['\"' + (str + '\"'), 'is not a valid hexadecimal string because', err]));
+		};
+		return A2($elm$core$Result$mapError, formatError, result);
+	}
+};
+var $elm$core$String$fromList = _String_fromList;
+var $elm$core$Basics$modBy = _Basics_modBy;
+var $rtfeldman$elm_hex$Hex$unsafeToDigit = function (num) {
+	unsafeToDigit:
+	while (true) {
+		switch (num) {
+			case 0:
+				return '0';
+			case 1:
+				return '1';
+			case 2:
+				return '2';
+			case 3:
+				return '3';
+			case 4:
+				return '4';
+			case 5:
+				return '5';
+			case 6:
+				return '6';
+			case 7:
+				return '7';
+			case 8:
+				return '8';
+			case 9:
+				return '9';
+			case 10:
+				return 'a';
+			case 11:
+				return 'b';
+			case 12:
+				return 'c';
+			case 13:
+				return 'd';
+			case 14:
+				return 'e';
+			case 15:
+				return 'f';
+			default:
+				var $temp$num = num;
+				num = $temp$num;
+				continue unsafeToDigit;
+		}
+	}
+};
+var $rtfeldman$elm_hex$Hex$unsafePositiveToDigits = F2(
+	function (digits, num) {
+		unsafePositiveToDigits:
+		while (true) {
+			if (num < 16) {
+				return A2(
+					$elm$core$List$cons,
+					$rtfeldman$elm_hex$Hex$unsafeToDigit(num),
+					digits);
+			} else {
+				var $temp$digits = A2(
+					$elm$core$List$cons,
+					$rtfeldman$elm_hex$Hex$unsafeToDigit(
+						A2($elm$core$Basics$modBy, 16, num)),
+					digits),
+					$temp$num = (num / 16) | 0;
+				digits = $temp$digits;
+				num = $temp$num;
+				continue unsafePositiveToDigits;
+			}
+		}
+	});
+var $rtfeldman$elm_hex$Hex$toString = function (num) {
+	return $elm$core$String$fromList(
+		(num < 0) ? A2(
+			$elm$core$List$cons,
+			'-',
+			A2($rtfeldman$elm_hex$Hex$unsafePositiveToDigits, _List_Nil, -num)) : A2($rtfeldman$elm_hex$Hex$unsafePositiveToDigits, _List_Nil, num));
+};
+var $author$project$Main$convert = function (target) {
+	if (A2($elm$core$String$startsWith, '0x', target)) {
+		var _v0 = $rtfeldman$elm_hex$Hex$fromString(
+			A3($elm$core$String$slice, 2, 4, target));
+		if (!_v0.$) {
+			var n = _v0.a;
+			return $elm$core$String$fromChar(
+				$elm$core$Char$fromCode(n));
+		} else {
+			return 'ERROR : hex to char';
+		}
+	} else {
+		var _v1 = $elm$core$String$uncons(target);
+		if (!_v1.$) {
+			var _v2 = _v1.a;
+			var c = _v2.a;
+			return function (s) {
+				return '0x' + s;
+			}(
+				$rtfeldman$elm_hex$Hex$toString(
+					$elm$core$Char$toCode(c)));
+		} else {
+			return 'ERROR : char to hex';
+		}
+	}
+};
+var $elm$core$Bitwise$and = _Bitwise_and;
+var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
+var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
+var $elm$core$Basics$ge = _Utils_ge;
+var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
+var $elm$core$Elm$JsArray$unsafeSet = _JsArray_unsafeSet;
+var $elm$core$Array$setHelp = F4(
+	function (shift, index, value, tree) {
+		var pos = $elm$core$Array$bitMask & (index >>> shift);
+		var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, pos, tree);
+		if (!_v0.$) {
+			var subTree = _v0.a;
+			var newSub = A4($elm$core$Array$setHelp, shift - $elm$core$Array$shiftStep, index, value, subTree);
+			return A3(
+				$elm$core$Elm$JsArray$unsafeSet,
+				pos,
+				$elm$core$Array$SubTree(newSub),
+				tree);
+		} else {
+			var values = _v0.a;
+			var newLeaf = A3($elm$core$Elm$JsArray$unsafeSet, $elm$core$Array$bitMask & index, value, values);
+			return A3(
+				$elm$core$Elm$JsArray$unsafeSet,
+				pos,
+				$elm$core$Array$Leaf(newLeaf),
+				tree);
+		}
+	});
+var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
+var $elm$core$Array$tailIndex = function (len) {
+	return (len >>> 5) << 5;
+};
+var $elm$core$Array$set = F3(
+	function (index, value, array) {
+		var len = array.a;
+		var startShift = array.b;
+		var tree = array.c;
+		var tail = array.d;
+		return ((index < 0) || (_Utils_cmp(index, len) > -1)) ? array : ((_Utils_cmp(
+			index,
+			$elm$core$Array$tailIndex(len)) > -1) ? A4(
+			$elm$core$Array$Array_elm_builtin,
+			len,
+			startShift,
+			tree,
+			A3($elm$core$Elm$JsArray$unsafeSet, $elm$core$Array$bitMask & index, value, tail)) : A4(
+			$elm$core$Array$Array_elm_builtin,
+			len,
+			startShift,
+			A4($elm$core$Array$setHelp, startShift, index, value, tree),
+			tail));
+	});
 var $author$project$Main$errorToString = function (error) {
 	switch (error.$) {
 		case 0:
@@ -6844,9 +7250,6 @@ var $pablohirafuji$elm_markdown$Markdown$Block$Paragraph = F2(
 	function (a, b) {
 		return {$: 4, a: a, b: b};
 	});
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
 var $elm$core$String$right = F2(
 	function (n, string) {
 		return (n < 1) ? '' : A3(
@@ -6876,25 +7279,16 @@ var $elm$core$List$all = F2(
 	});
 var $elm$regex$Regex$Match = F4(
 	function (match, index, number, submatches) {
-		return {eY: index, a2: match, e2: number, eo: submatches};
+		return {eZ: index, a3: match, e3: number, ep: submatches};
 	});
 var $elm$regex$Regex$fromStringWith = _Regex_fromStringWith;
 var $elm$regex$Regex$fromString = function (string) {
 	return A2(
 		$elm$regex$Regex$fromStringWith,
-		{dt: false, dZ: false},
+		{du: false, d_: false},
 		string);
 };
 var $elm$regex$Regex$never = _Regex_never;
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (!maybe.$) {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
 var $pablohirafuji$elm_markdown$Markdown$Block$blockQuoteLineRegex = A2(
 	$elm$core$Maybe$withDefault,
 	$elm$regex$Regex$never,
@@ -6904,7 +7298,6 @@ var $pablohirafuji$elm_markdown$Markdown$Block$blankLineRegex = A2(
 	$elm$regex$Regex$never,
 	$elm$regex$Regex$fromString('^\\s*$'));
 var $elm$regex$Regex$contains = _Regex_contains;
-var $elm$core$Basics$ge = _Utils_ge;
 var $pablohirafuji$elm_markdown$Markdown$Block$calcListIndentLength = function (_v0) {
 	var listBlock = _v0.a;
 	var indentSpace = _v0.b;
@@ -6928,7 +7321,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$Heading = F3(
 		return {$: 2, a: a, b: b, c: c};
 	});
 var $pablohirafuji$elm_markdown$Markdown$Block$extractATXHeadingRM = function (match) {
-	var _v0 = match.eo;
+	var _v0 = match.ep;
 	if ((_v0.b && (!_v0.a.$)) && _v0.b.b) {
 		var lvl = _v0.a.a;
 		var _v1 = _v0.b;
@@ -6998,7 +7391,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$addBlankLineToListBlock = F2(
 				[
 					_List_fromArray(
 					[
-						$pablohirafuji$elm_markdown$Markdown$Block$BlankLine(match.a2)
+						$pablohirafuji$elm_markdown$Markdown$Block$BlankLine(match.a3)
 					])
 				]);
 		} else {
@@ -7054,7 +7447,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$parseBlankLine = F2(
 		}
 		return A2(
 			$elm$core$List$cons,
-			$pablohirafuji$elm_markdown$Markdown$Block$BlankLine(match.a2),
+			$pablohirafuji$elm_markdown$Markdown$Block$BlankLine(match.a3),
 			ast);
 	});
 var $pablohirafuji$elm_markdown$Markdown$Block$checkBlankLine = function (_v0) {
@@ -7285,7 +7678,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$checkIndentedCode = function (_v0
 						A2(
 							$elm$core$Basics$composeR,
 							function ($) {
-								return $.eo;
+								return $.ep;
 							},
 							$elm$core$List$head),
 						$elm$core$List$head(
@@ -7295,12 +7688,6 @@ var $pablohirafuji$elm_markdown$Markdown$Entity$decimalRegex = A2(
 	$elm$core$Maybe$withDefault,
 	$elm$regex$Regex$never,
 	$elm$regex$Regex$fromString('&#([0-9]{1,8});'));
-var $elm$core$String$cons = _String_cons;
-var $elm$core$String$fromChar = function (_char) {
-	return A2($elm$core$String$cons, _char, '');
-};
-var $elm$core$Char$fromCode = _Char_fromCode;
-var $elm$core$Basics$modBy = _Basics_modBy;
 var $pablohirafuji$elm_markdown$Markdown$Entity$isBadEndUnicode = function (_int) {
 	var remain_ = A2($elm$core$Basics$modBy, 16, _int);
 	var remain = A2($elm$core$Basics$modBy, 131070, _int);
@@ -7317,7 +7704,7 @@ var $pablohirafuji$elm_markdown$Markdown$Entity$validUnicode = function (_int) {
 var $pablohirafuji$elm_markdown$Markdown$Entity$replaceDecimal = function (match) {
 	return A2(
 		$elm$core$Maybe$withDefault,
-		match.a2,
+		match.a3,
 		A2(
 			$elm$core$Maybe$map,
 			$pablohirafuji$elm_markdown$Markdown$Entity$validUnicode,
@@ -7327,7 +7714,7 @@ var $pablohirafuji$elm_markdown$Markdown$Entity$replaceDecimal = function (match
 				A2(
 					$elm$core$Maybe$withDefault,
 					$elm$core$Maybe$Nothing,
-					$elm$core$List$head(match.eo)))));
+					$elm$core$List$head(match.ep)))));
 };
 var $pablohirafuji$elm_markdown$Markdown$Entity$replaceDecimals = A2($elm$regex$Regex$replace, $pablohirafuji$elm_markdown$Markdown$Entity$decimalRegex, $pablohirafuji$elm_markdown$Markdown$Entity$replaceDecimal);
 var $pablohirafuji$elm_markdown$Markdown$Entity$entitiesRegex = A2(
@@ -7606,7 +7993,7 @@ var $pablohirafuji$elm_markdown$Markdown$Entity$entities = $elm$core$Dict$fromLi
 var $pablohirafuji$elm_markdown$Markdown$Entity$replaceEntity = function (match) {
 	return A2(
 		$elm$core$Maybe$withDefault,
-		match.a2,
+		match.a3,
 		A2(
 			$elm$core$Maybe$map,
 			A2($elm$core$Basics$composeR, $elm$core$Char$fromCode, $elm$core$String$fromChar),
@@ -7618,14 +8005,13 @@ var $pablohirafuji$elm_markdown$Markdown$Entity$replaceEntity = function (match)
 				A2(
 					$elm$core$Maybe$withDefault,
 					$elm$core$Maybe$Nothing,
-					$elm$core$List$head(match.eo)))));
+					$elm$core$List$head(match.ep)))));
 };
 var $pablohirafuji$elm_markdown$Markdown$Entity$replaceEntities = A2($elm$regex$Regex$replace, $pablohirafuji$elm_markdown$Markdown$Entity$entitiesRegex, $pablohirafuji$elm_markdown$Markdown$Entity$replaceEntity);
 var $pablohirafuji$elm_markdown$Markdown$Helpers$escapableRegex = A2(
 	$elm$core$Maybe$withDefault,
 	$elm$regex$Regex$never,
 	$elm$regex$Regex$fromString('(\\\\+)([!\"#$%&\\\'()*+,./:;<=>?@[\\\\\\]^_`{|}~-])'));
-var $elm$core$Bitwise$and = _Bitwise_and;
 var $elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
 var $elm$core$String$repeatHelp = F3(
 	function (n, chunk, result) {
@@ -7643,7 +8029,7 @@ var $pablohirafuji$elm_markdown$Markdown$Helpers$replaceEscapable = A2(
 	$elm$regex$Regex$replace,
 	$pablohirafuji$elm_markdown$Markdown$Helpers$escapableRegex,
 	function (regexMatch) {
-		var _v0 = regexMatch.eo;
+		var _v0 = regexMatch.ep;
 		if (((_v0.b && (!_v0.a.$)) && _v0.b.b) && (!_v0.b.a.$)) {
 			var backslashes = _v0.a.a;
 			var _v1 = _v0.b;
@@ -7655,17 +8041,13 @@ var $pablohirafuji$elm_markdown$Markdown$Helpers$replaceEscapable = A2(
 					'\\'),
 				escapedStr);
 		} else {
-			return regexMatch.a2;
+			return regexMatch.a3;
 		}
 	});
 var $pablohirafuji$elm_markdown$Markdown$Entity$hexadecimalRegex = A2(
 	$elm$core$Maybe$withDefault,
 	$elm$regex$Regex$never,
 	$elm$regex$Regex$fromString('&#[Xx]([0-9a-fA-F]{1,8});'));
-var $elm$core$String$foldr = _String_foldr;
-var $elm$core$String$toList = function (string) {
-	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
-};
 var $elm$core$String$toLower = _String_toLower;
 var $pablohirafuji$elm_markdown$Markdown$Entity$hexToInt = A2(
 	$elm$core$Basics$composeR,
@@ -7686,14 +8068,14 @@ var $pablohirafuji$elm_markdown$Markdown$Entity$hexToInt = A2(
 var $pablohirafuji$elm_markdown$Markdown$Entity$replaceHexadecimal = function (match) {
 	return A2(
 		$elm$core$Maybe$withDefault,
-		match.a2,
+		match.a3,
 		A2(
 			$elm$core$Maybe$map,
 			A2($elm$core$Basics$composeR, $pablohirafuji$elm_markdown$Markdown$Entity$hexToInt, $pablohirafuji$elm_markdown$Markdown$Entity$validUnicode),
 			A2(
 				$elm$core$Maybe$withDefault,
 				$elm$core$Maybe$Nothing,
-				$elm$core$List$head(match.eo))));
+				$elm$core$List$head(match.ep))));
 };
 var $pablohirafuji$elm_markdown$Markdown$Entity$replaceHexadecimals = A2($elm$regex$Regex$replace, $pablohirafuji$elm_markdown$Markdown$Entity$hexadecimalRegex, $pablohirafuji$elm_markdown$Markdown$Entity$replaceHexadecimal);
 var $pablohirafuji$elm_markdown$Markdown$Helpers$formatStr = function (str) {
@@ -7704,7 +8086,7 @@ var $pablohirafuji$elm_markdown$Markdown$Helpers$formatStr = function (str) {
 };
 var $elm$core$String$words = _String_words;
 var $pablohirafuji$elm_markdown$Markdown$Block$extractOpenCodeFenceRM = function (match) {
-	var _v0 = match.eo;
+	var _v0 = match.ep;
 	if (((_v0.b && _v0.b.b) && (!_v0.b.a.$)) && _v0.b.b.b) {
 		var maybeIndent = _v0.a;
 		var _v1 = _v0.b;
@@ -7716,13 +8098,13 @@ var $pablohirafuji$elm_markdown$Markdown$Block$extractOpenCodeFenceRM = function
 				$pablohirafuji$elm_markdown$Markdown$Block$Fenced,
 				true,
 				{
-					cZ: A2($elm$core$String$left, 1, fence),
-					c_: $elm$core$String$length(fence),
+					c_: A2($elm$core$String$left, 1, fence),
+					c$: $elm$core$String$length(fence),
 					u: A2(
 						$elm$core$Maybe$withDefault,
 						0,
 						A2($elm$core$Maybe$map, $elm$core$String$length, maybeIndent)),
-					c4: A2(
+					c5: A2(
 						$elm$core$Maybe$map,
 						$pablohirafuji$elm_markdown$Markdown$Helpers$formatStr,
 						A2(
@@ -7771,7 +8153,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$Ordered = function (a) {
 };
 var $pablohirafuji$elm_markdown$Markdown$Block$Unordered = {$: 0};
 var $pablohirafuji$elm_markdown$Markdown$Block$extractOrderedListRM = function (match) {
-	var _v0 = match.eo;
+	var _v0 = match.ep;
 	if (((((((_v0.b && (!_v0.a.$)) && _v0.b.b) && (!_v0.b.a.$)) && _v0.b.b.b) && (!_v0.b.b.a.$)) && _v0.b.b.b.b) && _v0.b.b.b.b.b) {
 		var indentString = _v0.a.a;
 		var _v1 = _v0.b;
@@ -7788,7 +8170,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$extractOrderedListRM = function (
 					aW: delimiter,
 					u: $elm$core$String$length(indentString) + 1,
 					V: false,
-					bj: A2(
+					bk: A2(
 						$elm$core$Maybe$withDefault,
 						$pablohirafuji$elm_markdown$Markdown$Block$Unordered,
 						A2(
@@ -7817,7 +8199,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$checkOrderedListLine = function (
 				A3($elm$regex$Regex$findAtMost, 1, $pablohirafuji$elm_markdown$Markdown$Block$orderedListLineRegex, rawLine))));
 };
 var $pablohirafuji$elm_markdown$Markdown$Block$extractSetextHeadingRM = function (match) {
-	var _v0 = match.eo;
+	var _v0 = match.ep;
 	if (_v0.b && (!_v0.a.$)) {
 		var delimiter = _v0.a.a;
 		return A2($elm$core$String$startsWith, '=', delimiter) ? $elm$core$Maybe$Just(
@@ -7883,7 +8265,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$checkThematicBreakLine = function
 				A3($elm$regex$Regex$findAtMost, 1, $pablohirafuji$elm_markdown$Markdown$Block$thematicBreakLineRegex, rawLine))));
 };
 var $pablohirafuji$elm_markdown$Markdown$Block$extractUnorderedListRM = function (match) {
-	var _v0 = match.eo;
+	var _v0 = match.ep;
 	if ((((((_v0.b && (!_v0.a.$)) && _v0.b.b) && (!_v0.b.a.$)) && _v0.b.b.b) && _v0.b.b.b.b) && (!_v0.b.b.b.b.b)) {
 		var indentString = _v0.a.a;
 		var _v1 = _v0.b;
@@ -7898,7 +8280,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$extractUnorderedListRM = function
 					aW: delimiter,
 					u: $elm$core$String$length(indentString) + 1,
 					V: false,
-					bj: $pablohirafuji$elm_markdown$Markdown$Block$Unordered
+					bk: $pablohirafuji$elm_markdown$Markdown$Block$Unordered
 				},
 				A2($elm$core$Maybe$withDefault, '', maybeIndentSpace),
 				A2($elm$core$Maybe$withDefault, '', maybeRawLine)));
@@ -7926,14 +8308,14 @@ var $pablohirafuji$elm_markdown$Markdown$Block$closeCodeFenceLineRegex = A2(
 	$elm$regex$Regex$fromString('^ {0,3}(`{3,}|~{3,})\\s*$'));
 var $pablohirafuji$elm_markdown$Markdown$Block$isCloseFenceLineHelp = F2(
 	function (fence, match) {
-		var _v0 = match.eo;
+		var _v0 = match.ep;
 		if (_v0.b && (!_v0.a.$)) {
 			var fenceStr = _v0.a.a;
 			return (_Utils_cmp(
 				$elm$core$String$length(fenceStr),
-				fence.c_) > -1) && _Utils_eq(
+				fence.c$) > -1) && _Utils_eq(
 				A2($elm$core$String$left, 1, fenceStr),
-				fence.cZ);
+				fence.c_);
 		} else {
 			return false;
 		}
@@ -7994,7 +8376,7 @@ var $pablohirafuji$elm_markdown$Markdown$Helpers$indentLength = A2(
 					A2(
 						$elm$core$Basics$composeR,
 						function ($) {
-							return $.a2;
+							return $.a3;
 						},
 						$elm$core$String$length)),
 				$elm$core$Maybe$withDefault(0)))));
@@ -8033,17 +8415,6 @@ var $pablohirafuji$elm_markdown$Markdown$Block$isBlankLineLast = function (items
 		}
 	}
 };
-var $elm$core$Result$map = F2(
-	function (func, ra) {
-		if (!ra.$) {
-			var a = ra.a;
-			return $elm$core$Result$Ok(
-				func(a));
-		} else {
-			var e = ra.a;
-			return $elm$core$Result$Err(e);
-		}
-	});
 var $pablohirafuji$elm_markdown$Markdown$Block$parseTextLine = F2(
 	function (rawLine, ast) {
 		return A2(
@@ -8080,7 +8451,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$checkBlockQuote = function (_v16)
 				A2(
 					$elm$core$Basics$composeR,
 					function ($) {
-						return $.eo;
+						return $.ep;
 					},
 					A2(
 						$elm$core$Basics$composeR,
@@ -8312,7 +8683,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$parseListLine = F3(
 								A2($pablohirafuji$elm_markdown$Markdown$Block$addToParagraph, rawText, rawLine),
 								astTail);
 						} else {
-							var _v5 = listBlock.bj;
+							var _v5 = listBlock.bk;
 							if (_v5.$ === 1) {
 								if (_v5.a === 1) {
 									return newList;
@@ -8393,14 +8764,14 @@ var $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlAttributes = _
 	['name', 'class']);
 var $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlElements = _List_fromArray(
 	['address', 'article', 'aside', 'b', 'blockquote', 'br', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'dd', 'details', 'div', 'dl', 'dt', 'figcaption', 'figure', 'footer', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'legend', 'li', 'menu', 'menuitem', 'nav', 'ol', 'optgroup', 'option', 'p', 'pre', 'section', 'strike', 'summary', 'small', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'ul']);
-var $pablohirafuji$elm_markdown$Markdown$Config$defaultSanitizeOptions = {dp: $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlAttributes, dq: $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlElements};
+var $pablohirafuji$elm_markdown$Markdown$Config$defaultSanitizeOptions = {dq: $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlAttributes, dr: $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlElements};
 var $pablohirafuji$elm_markdown$Markdown$Config$defaultOptions = {
-	ea: $pablohirafuji$elm_markdown$Markdown$Config$Sanitize($pablohirafuji$elm_markdown$Markdown$Config$defaultSanitizeOptions),
-	el: false
+	eb: $pablohirafuji$elm_markdown$Markdown$Config$Sanitize($pablohirafuji$elm_markdown$Markdown$Config$defaultSanitizeOptions),
+	em: false
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$initParser = F3(
 	function (options, refs, rawText) {
-		return {b: _List_Nil, e6: options, A: rawText, df: refs, j: _List_Nil};
+		return {b: _List_Nil, e7: options, A: rawText, dg: refs, j: _List_Nil};
 	});
 var $pablohirafuji$elm_markdown$Markdown$Inline$CodeInline = function (a) {
 	return {$: 2, a: a};
@@ -8427,7 +8798,7 @@ var $pablohirafuji$elm_markdown$Markdown$Inline$Text = function (a) {
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$matchToInline = function (_v0) {
 	var match = _v0;
-	var _v1 = match.bj;
+	var _v1 = match.bk;
 	switch (_v1.$) {
 		case 0:
 			return $pablohirafuji$elm_markdown$Markdown$Inline$Text(match.t);
@@ -8469,8 +8840,8 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$matchToInline = function (
 			var model = _v1.a;
 			return A3(
 				$pablohirafuji$elm_markdown$Markdown$Inline$HtmlInline,
-				model.be,
-				model.bC,
+				model.bf,
+				model.bD,
 				$pablohirafuji$elm_markdown$Markdown$InlineParser$matchesToInlines(match.b));
 		default:
 			var length = _v1.a;
@@ -8488,7 +8859,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$prepareChildMatch = F2(
 	function (parentMatch, childMatch) {
 		return _Utils_update(
 			childMatch,
-			{dD: childMatch.dD - parentMatch.M, dh: childMatch.dh - parentMatch.M, aJ: childMatch.aJ - parentMatch.M, M: childMatch.M - parentMatch.M});
+			{dE: childMatch.dE - parentMatch.M, di: childMatch.di - parentMatch.M, aJ: childMatch.aJ - parentMatch.M, M: childMatch.M - parentMatch.M});
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$addChild = F2(
 	function (parentMatch, childMatch) {
@@ -8510,7 +8881,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$organizeMatch = F2(
 		} else {
 			var prevMatch = matches.a;
 			var matchesTail = matches.b;
-			return (_Utils_cmp(prevMatch.dD, match.dh) < 1) ? A2($elm$core$List$cons, match, matches) : (((_Utils_cmp(prevMatch.dh, match.dh) < 0) && (_Utils_cmp(prevMatch.dD, match.dD) > 0)) ? A2(
+			return (_Utils_cmp(prevMatch.dE, match.di) < 1) ? A2($elm$core$List$cons, match, matches) : (((_Utils_cmp(prevMatch.di, match.di) < 0) && (_Utils_cmp(prevMatch.dE, match.dE) > 0)) ? A2(
 				$elm$core$List$cons,
 				A2($pablohirafuji$elm_markdown$Markdown$InlineParser$addChild, prevMatch, match),
 				matchesTail) : matches);
@@ -8523,7 +8894,7 @@ function $pablohirafuji$elm_markdown$Markdown$InlineParser$cyclic$organizeMatche
 		$elm$core$List$sortBy(
 			function (_v0) {
 				var match = _v0;
-				return match.dh;
+				return match.di;
 			}),
 		A2(
 			$elm$core$Basics$composeR,
@@ -8552,13 +8923,13 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$organizeParserMatches = fu
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$NormalType = {$: 0};
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$normalMatch = function (text) {
 	return {
-		dD: 0,
+		dE: 0,
 		b: _List_Nil,
-		dh: 0,
+		di: 0,
 		t: $pablohirafuji$elm_markdown$Markdown$Helpers$formatStr(text),
 		aJ: 0,
 		M: 0,
-		bj: $pablohirafuji$elm_markdown$Markdown$InlineParser$NormalType
+		bk: $pablohirafuji$elm_markdown$Markdown$InlineParser$NormalType
 	};
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatch = F3(
@@ -8570,7 +8941,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatch = F3(
 				b: A3($pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatches, matchModel.t, _List_Nil, matchModel.b)
 			});
 		if (!parsedMatches.b) {
-			var finalStr = A2($elm$core$String$dropLeft, matchModel.dD, rawText);
+			var finalStr = A2($elm$core$String$dropLeft, matchModel.dE, rawText);
 			return $elm$core$String$isEmpty(finalStr) ? _List_fromArray(
 				[updtMatch]) : _List_fromArray(
 				[
@@ -8580,13 +8951,13 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatch = F3(
 		} else {
 			var matchHead = parsedMatches.a;
 			var matchesTail = parsedMatches.b;
-			return _Utils_eq(matchHead.bj, $pablohirafuji$elm_markdown$Markdown$InlineParser$NormalType) ? A2($elm$core$List$cons, updtMatch, parsedMatches) : (_Utils_eq(matchModel.dD, matchHead.dh) ? A2($elm$core$List$cons, updtMatch, parsedMatches) : ((_Utils_cmp(matchModel.dD, matchHead.dh) < 0) ? A2(
+			return _Utils_eq(matchHead.bk, $pablohirafuji$elm_markdown$Markdown$InlineParser$NormalType) ? A2($elm$core$List$cons, updtMatch, parsedMatches) : (_Utils_eq(matchModel.dE, matchHead.di) ? A2($elm$core$List$cons, updtMatch, parsedMatches) : ((_Utils_cmp(matchModel.dE, matchHead.di) < 0) ? A2(
 				$elm$core$List$cons,
 				updtMatch,
 				A2(
 					$elm$core$List$cons,
 					$pablohirafuji$elm_markdown$Markdown$InlineParser$normalMatch(
-						A3($elm$core$String$slice, matchModel.dD, matchHead.dh, rawText)),
+						A3($elm$core$String$slice, matchModel.dE, matchHead.di, rawText)),
 					parsedMatches)) : parsedMatches));
 		}
 	});
@@ -8602,10 +8973,10 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatches = F3(
 						]);
 				} else {
 					var matchModel = parsedMatches.a;
-					return (matchModel.dh > 0) ? A2(
+					return (matchModel.di > 0) ? A2(
 						$elm$core$List$cons,
 						$pablohirafuji$elm_markdown$Markdown$InlineParser$normalMatch(
-							A2($elm$core$String$left, matchModel.dh, rawText)),
+							A2($elm$core$String$left, matchModel.di, rawText)),
 						parsedMatches) : parsedMatches;
 				}
 			} else {
@@ -8640,7 +9011,7 @@ var $pablohirafuji$elm_markdown$Markdown$Helpers$isEven = function (_int) {
 	return !A2($elm$core$Basics$modBy, 2, _int);
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToAngleBracketLToken = function (regMatch) {
-	var _v0 = regMatch.eo;
+	var _v0 = regMatch.ep;
 	if ((_v0.b && _v0.b.b) && (!_v0.b.a.$)) {
 		var maybeBackslashes = _v0.a;
 		var _v1 = _v0.b;
@@ -8651,7 +9022,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToAngleBracketLTok
 			A2($elm$core$Maybe$map, $elm$core$String$length, maybeBackslashes));
 		return $pablohirafuji$elm_markdown$Markdown$Helpers$isEven(backslashesLength) ? $elm$core$Maybe$Just(
 			{
-				eY: regMatch.eY + backslashesLength,
+				eZ: regMatch.eZ + backslashesLength,
 				c: 1,
 				g: $pablohirafuji$elm_markdown$Markdown$InlineParser$CharToken('<')
 			}) : $elm$core$Maybe$Nothing;
@@ -8673,7 +9044,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$RightAngleBracket = functi
 	return {$: 4, a: a};
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToAngleBracketRToken = function (regMatch) {
-	var _v0 = regMatch.eo;
+	var _v0 = regMatch.ep;
 	if ((_v0.b && _v0.b.b) && (!_v0.b.a.$)) {
 		var maybeBackslashes = _v0.a;
 		var _v1 = _v0.b;
@@ -8683,7 +9054,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToAngleBracketRTok
 			A2($elm$core$Maybe$map, $elm$core$String$length, maybeBackslashes));
 		return $elm$core$Maybe$Just(
 			{
-				eY: regMatch.eY + backslashesLength,
+				eZ: regMatch.eZ + backslashesLength,
 				c: 1,
 				g: $pablohirafuji$elm_markdown$Markdown$InlineParser$RightAngleBracket(
 					!$pablohirafuji$elm_markdown$Markdown$Helpers$isEven(backslashesLength))
@@ -8740,7 +9111,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$getFringeRank = A2(
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToEmphasisToken = F3(
 	function (_char, rawText, regMatch) {
-		var _v0 = regMatch.eo;
+		var _v0 = regMatch.ep;
 		if ((((_v0.b && _v0.b.b) && _v0.b.b.b) && (!_v0.b.b.a.$)) && _v0.b.b.b.b) {
 			var maybeBackslashes = _v0.a;
 			var _v1 = _v0.b;
@@ -8753,8 +9124,8 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToEmphasisToken = 
 				$elm$core$Maybe$withDefault,
 				0,
 				A2($elm$core$Maybe$map, $elm$core$String$length, maybeLeftFringe));
-			var mLeftFringe = ((!(!regMatch.eY)) && (!leftFringeLength)) ? $elm$core$Maybe$Just(
-				A3($elm$core$String$slice, regMatch.eY - 1, regMatch.eY, rawText)) : maybeLeftFringe;
+			var mLeftFringe = ((!(!regMatch.eZ)) && (!leftFringeLength)) ? $elm$core$Maybe$Just(
+				A3($elm$core$String$slice, regMatch.eZ - 1, regMatch.eZ, rawText)) : maybeLeftFringe;
 			var backslashesLength = A2(
 				$elm$core$Maybe$withDefault,
 				0,
@@ -8766,12 +9137,12 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToEmphasisToken = 
 			var fringeRank = _Utils_Tuple2(
 				isEscaped ? 1 : $pablohirafuji$elm_markdown$Markdown$InlineParser$getFringeRank(mLeftFringe),
 				$pablohirafuji$elm_markdown$Markdown$InlineParser$getFringeRank(maybeRightFringe));
-			var index = ((regMatch.eY + backslashesLength) + leftFringeLength) + (isEscaped ? 1 : 0);
+			var index = ((regMatch.eZ + backslashesLength) + leftFringeLength) + (isEscaped ? 1 : 0);
 			return ((delimiterLength <= 0) || ((_char === '_') && _Utils_eq(
 				fringeRank,
 				_Utils_Tuple2(2, 2)))) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(
 				{
-					eY: index,
+					eZ: index,
 					c: delimiterLength,
 					g: A2($pablohirafuji$elm_markdown$Markdown$InlineParser$EmphasisToken, _char, fringeRank)
 				});
@@ -8793,7 +9164,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$CodeToken = function (a) {
 	return {$: 0, a: a};
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToCodeToken = function (regMatch) {
-	var _v0 = regMatch.eo;
+	var _v0 = regMatch.ep;
 	if ((_v0.b && _v0.b.b) && (!_v0.b.a.$)) {
 		var maybeBackslashes = _v0.a;
 		var _v1 = _v0.b;
@@ -8804,7 +9175,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToCodeToken = func
 			A2($elm$core$Maybe$map, $elm$core$String$length, maybeBackslashes));
 		return $elm$core$Maybe$Just(
 			{
-				eY: regMatch.eY + backslashesLength,
+				eZ: regMatch.eZ + backslashesLength,
 				c: $elm$core$String$length(backtick),
 				g: $pablohirafuji$elm_markdown$Markdown$InlineParser$CodeToken(
 					!$pablohirafuji$elm_markdown$Markdown$Helpers$isEven(backslashesLength))
@@ -8825,7 +9196,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$hardBreakTokenRegex = A2(
 	$elm$regex$Regex$fromString('(?:(\\\\+)|( {2,}))\\n'));
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken = {$: 8};
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToHardBreakToken = function (regMatch) {
-	var _v0 = regMatch.eo;
+	var _v0 = regMatch.ep;
 	_v0$2:
 	while (true) {
 		if (_v0.b) {
@@ -8833,14 +9204,14 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToHardBreakToken =
 				var backslashes = _v0.a.a;
 				var backslashesLength = $elm$core$String$length(backslashes);
 				return (!$pablohirafuji$elm_markdown$Markdown$Helpers$isEven(backslashesLength)) ? $elm$core$Maybe$Just(
-					{eY: (regMatch.eY + backslashesLength) - 1, c: 2, g: $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken}) : $elm$core$Maybe$Nothing;
+					{eZ: (regMatch.eZ + backslashesLength) - 1, c: 2, g: $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken}) : $elm$core$Maybe$Nothing;
 			} else {
 				if (_v0.b.b && (!_v0.b.a.$)) {
 					var _v1 = _v0.b;
 					return $elm$core$Maybe$Just(
 						{
-							eY: regMatch.eY,
-							c: $elm$core$String$length(regMatch.a2),
+							eZ: regMatch.eZ,
+							c: $elm$core$String$length(regMatch.a3),
 							g: $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken
 						});
 				} else {
@@ -8854,7 +9225,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToHardBreakToken =
 	return $elm$core$Maybe$Nothing;
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToSoftHardBreakToken = function (regMatch) {
-	var _v0 = regMatch.eo;
+	var _v0 = regMatch.ep;
 	_v0$2:
 	while (true) {
 		if (_v0.b) {
@@ -8862,16 +9233,16 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToSoftHardBreakTok
 				var backslashes = _v0.a.a;
 				var backslashesLength = $elm$core$String$length(backslashes);
 				return $pablohirafuji$elm_markdown$Markdown$Helpers$isEven(backslashesLength) ? $elm$core$Maybe$Just(
-					{eY: regMatch.eY + backslashesLength, c: 1, g: $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken}) : $elm$core$Maybe$Just(
-					{eY: (regMatch.eY + backslashesLength) - 1, c: 2, g: $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken});
+					{eZ: regMatch.eZ + backslashesLength, c: 1, g: $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken}) : $elm$core$Maybe$Just(
+					{eZ: (regMatch.eZ + backslashesLength) - 1, c: 2, g: $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken});
 			} else {
 				if (_v0.b.b) {
 					var _v1 = _v0.b;
 					var maybeSpaces = _v1.a;
 					return $elm$core$Maybe$Just(
 						{
-							eY: regMatch.eY,
-							c: $elm$core$String$length(regMatch.a2),
+							eZ: regMatch.eZ,
+							c: $elm$core$String$length(regMatch.a3),
 							g: $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken
 						});
 				} else {
@@ -8903,7 +9274,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$linkImageCloseTokenRegex =
 	$elm$regex$Regex$never,
 	$elm$regex$Regex$fromString('(\\\\*)(\\])'));
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToLinkImageCloseToken = function (regMatch) {
-	var _v0 = regMatch.eo;
+	var _v0 = regMatch.ep;
 	if ((_v0.b && _v0.b.b) && (!_v0.b.a.$)) {
 		var maybeBackslashes = _v0.a;
 		var _v1 = _v0.b;
@@ -8914,7 +9285,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToLinkImageCloseTo
 			A2($elm$core$Maybe$map, $elm$core$String$length, maybeBackslashes));
 		return $pablohirafuji$elm_markdown$Markdown$Helpers$isEven(backslashesLength) ? $elm$core$Maybe$Just(
 			{
-				eY: regMatch.eY + backslashesLength,
+				eZ: regMatch.eZ + backslashesLength,
 				c: 1,
 				g: $pablohirafuji$elm_markdown$Markdown$InlineParser$CharToken(']')
 			}) : $elm$core$Maybe$Nothing;
@@ -8937,7 +9308,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$LinkOpenToken = function (
 	return {$: 1, a: a};
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToLinkImageOpenToken = function (regMatch) {
-	var _v0 = regMatch.eo;
+	var _v0 = regMatch.ep;
 	if (((_v0.b && _v0.b.b) && _v0.b.b.b) && (!_v0.b.b.a.$)) {
 		var maybeBackslashes = _v0.a;
 		var _v1 = _v0.b;
@@ -8949,7 +9320,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToLinkImageOpenTok
 			0,
 			A2($elm$core$Maybe$map, $elm$core$String$length, maybeBackslashes));
 		var isEscaped = !$pablohirafuji$elm_markdown$Markdown$Helpers$isEven(backslashesLength);
-		var index = (regMatch.eY + backslashesLength) + ((isEscaped && _Utils_eq(
+		var index = (regMatch.eZ + backslashesLength) + ((isEscaped && _Utils_eq(
 			maybeImageOpen,
 			$elm$core$Maybe$Just('!'))) ? 1 : 0);
 		var meaning = isEscaped ? A2(
@@ -8971,7 +9342,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$regMatchToLinkImageOpenTok
 			meaning,
 			$elm$core$Maybe$Just($pablohirafuji$elm_markdown$Markdown$InlineParser$ImageOpenToken)) ? 2 : 1;
 		var toModel = function (m) {
-			return {eY: index, c: length, g: m};
+			return {eZ: index, c: length, g: m};
 		};
 		return A2($elm$core$Maybe$map, toModel, meaning);
 	} else {
@@ -9001,14 +9372,14 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$tokenize = function (model
 			j: A2(
 				$elm$core$List$sortBy,
 				function ($) {
-					return $.eY;
+					return $.eZ;
 				},
 				_Utils_ap(
 					$pablohirafuji$elm_markdown$Markdown$InlineParser$findAngleBracketRTokens(model.A),
 					_Utils_ap(
 						$pablohirafuji$elm_markdown$Markdown$InlineParser$findAngleBracketLTokens(model.A),
 						_Utils_ap(
-							A2($pablohirafuji$elm_markdown$Markdown$InlineParser$findHardBreakTokens, model.e6.el, model.A),
+							A2($pablohirafuji$elm_markdown$Markdown$InlineParser$findHardBreakTokens, model.e7.em, model.A),
 							_Utils_ap(
 								$pablohirafuji$elm_markdown$Markdown$InlineParser$findLinkImageCloseTokens(model.A),
 								_Utils_ap(
@@ -9086,8 +9457,8 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$encodeUrl = A2(
 		function (match) {
 			return A2(
 				$elm$core$Maybe$withDefault,
-				match.a2,
-				$elm$url$Url$percentDecode(match.a2));
+				match.a3,
+				$elm$url$Url$percentDecode(match.a3));
 		}));
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$urlRegex = A2(
 	$elm$core$Maybe$withDefault,
@@ -9099,7 +9470,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$autolinkToMatch = function
 		_Utils_update(
 			match,
 			{
-				bj: $pablohirafuji$elm_markdown$Markdown$InlineParser$AutolinkType(
+				bk: $pablohirafuji$elm_markdown$Markdown$InlineParser$AutolinkType(
 					_Utils_Tuple2(
 						match.t,
 						$pablohirafuji$elm_markdown$Markdown$InlineParser$encodeUrl(match.t)))
@@ -9134,7 +9505,7 @@ var $pablohirafuji$elm_markdown$Markdown$Helpers$returnFirstJust = function (may
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$inlineLinkTypeOrImageTypeRegexToMatch = F3(
 	function (matchModel, model, regexMatch) {
-		var _v0 = regexMatch.eo;
+		var _v0 = regexMatch.ep;
 		if ((((_v0.b && _v0.b.b) && _v0.b.b.b) && _v0.b.b.b.b) && _v0.b.b.b.b.b) {
 			var maybeRawUrlAngleBrackets = _v0.a;
 			var _v1 = _v0.b;
@@ -9152,9 +9523,9 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$inlineLinkTypeOrImageTypeR
 				return _Utils_update(
 					matchModel,
 					{
-						dD: matchModel.dD + $elm$core$String$length(regexMatch.a2),
-						bj: function () {
-							var _v5 = matchModel.bj;
+						dE: matchModel.dE + $elm$core$String$length(regexMatch.a3),
+						bk: function () {
+							var _v5 = matchModel.bk;
 							if (_v5.$ === 5) {
 								return $pablohirafuji$elm_markdown$Markdown$InlineParser$ImageType;
 							} else {
@@ -9220,7 +9591,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$refRegexToMatch = F3(
 				A2(
 					$elm$core$Basics$composeR,
 					function ($) {
-						return $.a2;
+						return $.a3;
 					},
 					$elm$core$String$length),
 				maybeRegexMatch));
@@ -9228,9 +9599,9 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$refRegexToMatch = F3(
 			return _Utils_update(
 				matchModel,
 				{
-					dD: matchModel.dD + regexMatchLength,
-					bj: function () {
-						var _v0 = matchModel.bj;
+					dE: matchModel.dE + regexMatchLength,
+					bk: function () {
+						var _v0 = matchModel.bk;
 						if (_v0.$ === 5) {
 							return $pablohirafuji$elm_markdown$Markdown$InlineParser$ImageType;
 						} else {
@@ -9257,14 +9628,14 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$refRegexToMatch = F3(
 							A2(
 								$elm$core$Basics$composeR,
 								function ($) {
-									return $.eo;
+									return $.ep;
 								},
 								$elm$core$List$head),
 							maybeRegexMatch)))));
 		var maybeRefItem = A2(
 			$elm$core$Dict$get,
 			$pablohirafuji$elm_markdown$Markdown$Helpers$prepareRefLabel(refLabel),
-			model.df);
+			model.dg);
 		return A2($elm$core$Maybe$map, toMatch, maybeRefItem);
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$checkForRefLinkTypeOrImageType = function (_v0) {
@@ -9313,7 +9684,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$checkParsedAheadOverlappin
 			$elm$core$List$filter,
 			function (_v1) {
 				var testMatch = _v1;
-				return (_Utils_cmp(match.dD, testMatch.dh) > 0) && (_Utils_cmp(match.dD, testMatch.dD) < 0);
+				return (_Utils_cmp(match.dE, testMatch.di) > 0) && (_Utils_cmp(match.dE, testMatch.dE) < 0);
 			},
 			remainMatches);
 		return ($elm$core$List$isEmpty(remainMatches) || $elm$core$List$isEmpty(overlappingMatches)) ? $elm$core$Result$Ok(parser) : $elm$core$Result$Err(0);
@@ -9329,7 +9700,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$emailAutolinkTypeToMatch =
 		_Utils_update(
 			match,
 			{
-				bj: $pablohirafuji$elm_markdown$Markdown$InlineParser$AutolinkType(
+				bk: $pablohirafuji$elm_markdown$Markdown$InlineParser$AutolinkType(
 					_Utils_Tuple2(
 						match.t,
 						'mailto:' + $pablohirafuji$elm_markdown$Markdown$InlineParser$encodeUrl(match.t)))
@@ -9388,14 +9759,14 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$findToken = F2(
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$HtmlModel = F2(
 	function (tag, attributes) {
-		return {bC: attributes, be: tag};
+		return {bD: attributes, bf: tag};
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$HtmlToken = F2(
 	function (a, b) {
 		return {$: 5, a: a, b: b};
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$attributesFromRegex = function (regexMatch) {
-	var _v0 = regexMatch.eo;
+	var _v0 = regexMatch.ep;
 	_v0$2:
 	while (true) {
 		if (_v0.b && (!_v0.a.$)) {
@@ -9435,7 +9806,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$applyAttributesRegex = A2(
 	$elm$core$List$filterMap($pablohirafuji$elm_markdown$Markdown$InlineParser$attributesFromRegex));
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$htmlFromRegex = F3(
 	function (model, match, regexMatch) {
-		var _v0 = regexMatch.eo;
+		var _v0 = regexMatch.ep;
 		if ((((_v0.b && _v0.b.b) && (!_v0.b.a.$)) && _v0.b.b.b) && _v0.b.b.b.b) {
 			var maybeClose = _v0.a;
 			var _v1 = _v0.b;
@@ -9449,8 +9820,8 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$htmlFromRegex = F3(
 					$pablohirafuji$elm_markdown$Markdown$InlineParser$addToken,
 					model,
 					{
-						eY: match.dh,
-						c: match.dD - match.dh,
+						eZ: match.di,
+						c: match.dE - match.di,
 						g: A2(
 							$pablohirafuji$elm_markdown$Markdown$InlineParser$HtmlToken,
 							_Utils_eq(maybeClose, $elm$core$Maybe$Nothing) && _Utils_eq(maybeSelfClosing, $elm$core$Maybe$Nothing),
@@ -9471,14 +9842,14 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$htmlFromRegex = F3(
 				_List_Nil,
 				A2($elm$core$Maybe$map, $pablohirafuji$elm_markdown$Markdown$InlineParser$applyAttributesRegex, maybeAttributes));
 			var noAttributesInCloseTag = _Utils_eq(maybeClose, $elm$core$Maybe$Nothing) || ((!_Utils_eq(maybeClose, $elm$core$Maybe$Nothing)) && _Utils_eq(attributes, _List_Nil));
-			var _v4 = model.e6.ea;
+			var _v4 = model.e7.eb;
 			switch (_v4.$) {
 				case 0:
 					return noAttributesInCloseTag ? $elm$core$Maybe$Just(
 						updateModel(attributes)) : $elm$core$Maybe$Nothing;
 				case 1:
-					var allowedHtmlElements = _v4.a.dq;
-					var allowedHtmlAttributes = _v4.a.dp;
+					var allowedHtmlElements = _v4.a.dr;
+					var allowedHtmlAttributes = _v4.a.dq;
 					return (A2($elm$core$List$member, tag, allowedHtmlElements) && noAttributesInCloseTag) ? $elm$core$Maybe$Just(
 						updateModel(
 							A2(filterAttributes, attributes, allowedHtmlAttributes))) : $elm$core$Maybe$Nothing;
@@ -9496,7 +9867,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$htmlRegex = A2(
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$htmlToToken = F2(
 	function (model, _v0) {
 		var match = _v0;
-		var _v1 = model.e6.ea;
+		var _v1 = model.e7.eb;
 		if (_v1.$ === 2) {
 			return $elm$core$Maybe$Nothing;
 		} else {
@@ -9512,7 +9883,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$isCloseToken = F2(
 		var _v0 = token.g;
 		if ((_v0.$ === 5) && (!_v0.a)) {
 			var htmlModel_ = _v0.b;
-			return _Utils_eq(htmlModel.be, htmlModel_.be);
+			return _Utils_eq(htmlModel.bf, htmlModel_.bf);
 		} else {
 			return false;
 		}
@@ -9563,7 +9934,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$isOpenEmphasisToken = F2(
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$voidHtmlTags = _List_fromArray(
 	['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$isVoidTag = function (htmlModel) {
-	return A2($elm$core$List$member, htmlModel.be, $pablohirafuji$elm_markdown$Markdown$InlineParser$voidHtmlTags);
+	return A2($elm$core$List$member, htmlModel.bf, $pablohirafuji$elm_markdown$Markdown$InlineParser$voidHtmlTags);
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakType = {$: 1};
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$SoftLineBreakToken = {$: 7};
@@ -9576,7 +9947,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$reverseTokens = function (
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$tokenToMatch = F2(
 	function (token, type_) {
-		return {dD: token.eY + token.c, b: _List_Nil, dh: token.eY, t: '', aJ: 0, M: 0, bj: type_};
+		return {dE: token.eZ + token.c, b: _List_Nil, di: token.eZ, t: '', aJ: 0, M: 0, bk: type_};
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$lineBreakTTM = function (_v0) {
 	lineBreakTTM:
@@ -9588,7 +9959,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$lineBreakTTM = function (_
 		} else {
 			var token = tokens.a;
 			var tokensTail = tokens.b;
-			if (_Utils_eq(token.g, $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken) || (_Utils_eq(token.g, $pablohirafuji$elm_markdown$Markdown$InlineParser$SoftLineBreakToken) && model.e6.el)) {
+			if (_Utils_eq(token.g, $pablohirafuji$elm_markdown$Markdown$InlineParser$HardLineBreakToken) || (_Utils_eq(token.g, $pablohirafuji$elm_markdown$Markdown$InlineParser$SoftLineBreakToken) && model.e7.em)) {
 				return $pablohirafuji$elm_markdown$Markdown$InlineParser$lineBreakTTM(
 					function (b) {
 						return _Utils_Tuple2(tokensTail, b);
@@ -9622,7 +9993,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$removeParsedAheadTokens = 
 				A2(
 					$elm$core$List$filter,
 					function (token) {
-						return _Utils_cmp(token.eY, match.dD) > -1;
+						return _Utils_cmp(token.eZ, match.dE) > -1;
 					},
 					tokensTail),
 				parser);
@@ -9755,7 +10126,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$codeToMatch = F3(
 			openToken.g,
 			$pablohirafuji$elm_markdown$Markdown$InlineParser$CodeToken(true)) ? _Utils_update(
 			openToken,
-			{eY: openToken.eY + 1, c: openToken.c - 1}) : openToken;
+			{eZ: openToken.eZ + 1, c: openToken.c - 1}) : openToken;
 		return _Utils_update(
 			model,
 			{
@@ -9839,29 +10210,29 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$emphasisToMatch = F4(
 		var innerTokens = _v15.b;
 		var remainTokens = _v15.c;
 		var remainLength = openToken.c - closeToken.c;
-		var updt = (!remainLength) ? {bJ: closeToken, a6: openToken, cx: remainTokens, cJ: tokensTail} : ((remainLength > 0) ? {
-			bJ: closeToken,
-			a6: _Utils_update(
+		var updt = (!remainLength) ? {bK: closeToken, a7: openToken, cy: remainTokens, cK: tokensTail} : ((remainLength > 0) ? {
+			bK: closeToken,
+			a7: _Utils_update(
 				openToken,
-				{eY: openToken.eY + remainLength, c: closeToken.c}),
-			cx: A2(
+				{eZ: openToken.eZ + remainLength, c: closeToken.c}),
+			cy: A2(
 				$elm$core$List$cons,
 				_Utils_update(
 					openToken,
 					{c: remainLength}),
 				remainTokens),
-			cJ: tokensTail
+			cK: tokensTail
 		} : {
-			bJ: _Utils_update(
+			bK: _Utils_update(
 				closeToken,
 				{c: openToken.c}),
-			a6: openToken,
-			cx: remainTokens,
-			cJ: A2(
+			a7: openToken,
+			cy: remainTokens,
+			cK: A2(
 				$elm$core$List$cons,
 				_Utils_update(
 					closeToken,
-					{eY: closeToken.eY + openToken.c, c: -remainLength}),
+					{eZ: closeToken.eZ + openToken.c, c: -remainLength}),
 				tokensTail)
 		});
 		var match = A6(
@@ -9870,17 +10241,17 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$emphasisToMatch = F4(
 			function (s) {
 				return s;
 			},
-			$pablohirafuji$elm_markdown$Markdown$InlineParser$EmphasisType(updt.a6.c),
-			updt.a6,
-			updt.bJ,
+			$pablohirafuji$elm_markdown$Markdown$InlineParser$EmphasisType(updt.a7.c),
+			updt.a7,
+			updt.bK,
 			$elm$core$List$reverse(innerTokens));
 		return _Utils_Tuple2(
-			updt.cJ,
+			updt.cK,
 			_Utils_update(
 				model,
 				{
 					b: A2($elm$core$List$cons, match, model.b),
-					j: updt.cx
+					j: updt.cy
 				}));
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$htmlElementTTM = function (_v12) {
@@ -10018,7 +10389,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$linkOrImageTypeToMatch = F
 				{
 					j: _Utils_ap(innerTokens, remainTokens)
 				}));
-		var remainText = A2($elm$core$String$dropLeft, closeToken.eY + 1, model.A);
+		var remainText = A2($elm$core$String$dropLeft, closeToken.eZ + 1, model.A);
 		var linkOpenTokenToInactive = function (model_) {
 			var process = function (token) {
 				var _v7 = token.g;
@@ -10107,19 +10478,19 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$linkOrImageTypeToMatch = F
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$tokenPairToMatch = F6(
 	function (model, processText, type_, openToken, closeToken, innerTokens) {
-		var textStart = openToken.eY + openToken.c;
-		var textEnd = closeToken.eY;
-		var start = openToken.eY;
-		var end = closeToken.eY + closeToken.c;
+		var textStart = openToken.eZ + openToken.c;
+		var textEnd = closeToken.eZ;
+		var start = openToken.eZ;
+		var end = closeToken.eZ + closeToken.c;
 		var match = {
-			dD: end,
+			dE: end,
 			b: _List_Nil,
-			dh: start,
+			di: start,
 			t: processText(
 				A3($elm$core$String$slice, textStart, textEnd, model.A)),
 			aJ: textEnd,
 			M: textStart,
-			bj: type_
+			bk: type_
 		};
 		var matches = A2(
 			$elm$core$List$map,
@@ -10245,7 +10616,7 @@ var $elm$core$Tuple$mapSecond = F2(
 	});
 var $pablohirafuji$elm_markdown$Markdown$Block$dropRefString = F2(
 	function (rawText, inlineMatch) {
-		var strippedText = A2($elm$core$String$dropLeft, inlineMatch.c5, rawText);
+		var strippedText = A2($elm$core$String$dropLeft, inlineMatch.c6, rawText);
 		return A2($elm$regex$Regex$contains, $pablohirafuji$elm_markdown$Markdown$Block$blankLineRegex, strippedText) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(strippedText);
 	});
 var $elm$core$Dict$member = F2(
@@ -10262,11 +10633,11 @@ var $pablohirafuji$elm_markdown$Markdown$Block$insertLinkMatch = F2(
 		return A2($elm$core$Dict$member, linkMatch.ag, refs) ? refs : A3(
 			$elm$core$Dict$insert,
 			linkMatch.ag,
-			_Utils_Tuple2(linkMatch.O, linkMatch.c6),
+			_Utils_Tuple2(linkMatch.O, linkMatch.c7),
 			refs);
 	});
 var $pablohirafuji$elm_markdown$Markdown$Block$extractUrlTitleRegex = function (regexMatch) {
-	var _v0 = regexMatch.eo;
+	var _v0 = regexMatch.ep;
 	if ((((((_v0.b && (!_v0.a.$)) && _v0.b.b) && _v0.b.b.b) && _v0.b.b.b.b) && _v0.b.b.b.b.b) && _v0.b.b.b.b.b.b) {
 		var rawText = _v0.a.a;
 		var _v1 = _v0.b;
@@ -10282,8 +10653,8 @@ var $pablohirafuji$elm_markdown$Markdown$Block$extractUrlTitleRegex = function (
 		var toReturn = function (rawUrl) {
 			return {
 				ag: rawText,
-				c5: $elm$core$String$length(regexMatch.a2),
-				c6: $pablohirafuji$elm_markdown$Markdown$Helpers$returnFirstJust(
+				c6: $elm$core$String$length(regexMatch.a3),
+				c7: $pablohirafuji$elm_markdown$Markdown$Helpers$returnFirstJust(
 					_List_fromArray(
 						[maybeTitleSingleQuotes, maybeTitleDoubleQuotes, maybeTitleParenthesis])),
 				O: rawUrl
@@ -10753,7 +11124,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$defaultHtml = F3(
 									]))
 							]);
 					};
-					var _v3 = model.c4;
+					var _v3 = model.c5;
 					if (!_v3.$) {
 						var language = _v3.a;
 						return basicView(
@@ -10801,7 +11172,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$defaultHtml = F3(
 					return A2($elm$core$List$cons, a, _List_Nil);
 				}(
 					function () {
-						var _v5 = model.bj;
+						var _v5 = model.bk;
 						if (_v5.$ === 1) {
 							var startInt = _v5.a;
 							return (startInt === 1) ? $elm$html$Html$ol(_List_Nil) : $elm$html$Html$ol(
@@ -10878,30 +11249,45 @@ var $author$project$Main$setContent = F2(
 	});
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		if (!msg.$) {
-			var content = msg.a;
-			var response = msg.b;
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{
-						aT: _Utils_ap(
-							model.aT,
-							_List_fromArray(
-								[
-									A2($author$project$Main$setContent, response, content)
-								])),
-						W: A2($elm$core$Maybe$andThen, $elm$core$List$tail, model.W)
-					}),
-				$author$project$Main$load(
-					A2($elm$core$Maybe$andThen, $elm$core$List$head, model.W)));
-		} else {
-			var state = msg.a;
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{aL: state}),
-				$elm$core$Platform$Cmd$none);
+		switch (msg.$) {
+			case 0:
+				var content = msg.a;
+				var response = msg.b;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							aT: _Utils_ap(
+								model.aT,
+								_List_fromArray(
+									[
+										A2($author$project$Main$setContent, response, content)
+									])),
+							W: A2($elm$core$Maybe$andThen, $elm$core$List$tail, model.W)
+						}),
+					$author$project$Main$load(
+						A2($elm$core$Maybe$andThen, $elm$core$List$head, model.W)));
+			case 1:
+				var state = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{aL: state}),
+					$elm$core$Platform$Cmd$none);
+			default:
+				var s = msg.a;
+				var idx = msg.b;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							a2: A3(
+								$elm$core$Array$set,
+								idx,
+								$author$project$Main$convert(s),
+								model.a2)
+						}),
+					$elm$core$Platform$Cmd$none);
 		}
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$BlockAttrs = function (a) {
@@ -10946,11 +11332,11 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$applyBlockModifier = 
 				return _Utils_update(
 					options,
 					{
-						bC: _Utils_ap(options.bC, attrs)
+						bD: _Utils_ap(options.bD, attrs)
 					});
 		}
 	});
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$defaultBlockOptions = {R: $elm$core$Maybe$Nothing, bC: _List_Nil, T: $elm$core$Maybe$Nothing, _: $elm$core$Maybe$Nothing};
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$defaultBlockOptions = {R: $elm$core$Maybe$Nothing, bD: _List_Nil, T: $elm$core$Maybe$Nothing, _: $elm$core$Maybe$Nothing};
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption = function (size) {
 	switch (size) {
 		case 0:
@@ -10976,8 +11362,8 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Text$textAlignDirOption = 
 	}
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Text$textAlignClass = function (_v0) {
-	var dir = _v0.dB;
-	var size = _v0.cD;
+	var dir = _v0.dC;
+	var size = _v0.cE;
 	return $elm$html$Html$Attributes$class(
 		'text' + (A2(
 			$elm$core$Maybe$withDefault,
@@ -11067,7 +11453,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$blockAttributes = fun
 							return _List_Nil;
 						}
 					}(),
-					options.bC))));
+					options.bD))));
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$block = F2(
 	function (options, items) {
@@ -11089,8 +11475,8 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$block = F3(
 		return _Utils_update(
 			conf,
 			{
-				eG: _Utils_ap(
-					conf.eG,
+				eH: _Utils_ap(
+					conf.eH,
 					_List_fromArray(
 						[
 							A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$block, options, items)
@@ -11098,9 +11484,8 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$block = F3(
 			});
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$config = function (options) {
-	return {eG: _List_Nil, c$: $elm$core$Maybe$Nothing, eR: $elm$core$Maybe$Nothing, c1: $elm$core$Maybe$Nothing, c2: $elm$core$Maybe$Nothing, e6: options};
+	return {eH: _List_Nil, c0: $elm$core$Maybe$Nothing, eS: $elm$core$Maybe$Nothing, c2: $elm$core$Maybe$Nothing, c3: $elm$core$Maybe$Nothing, e7: options};
 };
-var $author$project$Main$configs = _List_Nil;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$BlockItem = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Block$custom = function (element) {
 	return element;
@@ -11113,7 +11498,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$footer = F3(
 		return _Utils_update(
 			conf,
 			{
-				c$: $elm$core$Maybe$Just(
+				c0: $elm$core$Maybe$Just(
 					A2(
 						$elm$html$Html$div,
 						A2(
@@ -11130,7 +11515,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$headerPrivate = F4(
 		return _Utils_update(
 			conf,
 			{
-				eR: $elm$core$Maybe$Just(
+				eS: $elm$core$Maybe$Just(
 					A2(
 						elemFn,
 						A2(
@@ -11141,6 +11526,96 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$headerPrivate = F4(
 			});
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$headerH1 = $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$headerPrivate($elm$html$Html$h1);
+var $author$project$Main$Convert = F2(
+	function (a, b) {
+		return {$: 2, a: a, b: b};
+	});
+var $elm$core$Elm$JsArray$foldl = _JsArray_foldl;
+var $elm$core$Elm$JsArray$indexedMap = _JsArray_indexedMap;
+var $elm$core$Array$indexedMap = F2(
+	function (func, _v0) {
+		var len = _v0.a;
+		var tree = _v0.c;
+		var tail = _v0.d;
+		var initialBuilder = {
+			r: _List_Nil,
+			m: 0,
+			n: A3(
+				$elm$core$Elm$JsArray$indexedMap,
+				func,
+				$elm$core$Array$tailIndex(len),
+				tail)
+		};
+		var helper = F2(
+			function (node, builder) {
+				if (!node.$) {
+					var subTree = node.a;
+					return A3($elm$core$Elm$JsArray$foldl, helper, builder, subTree);
+				} else {
+					var leaf = node.a;
+					var offset = builder.m * $elm$core$Array$branchFactor;
+					var mappedLeaf = $elm$core$Array$Leaf(
+						A3($elm$core$Elm$JsArray$indexedMap, func, offset, leaf));
+					return {
+						r: A2($elm$core$List$cons, mappedLeaf, builder.r),
+						m: builder.m + 1,
+						n: builder.n
+					};
+				}
+			});
+		return A2(
+			$elm$core$Array$builderToArray,
+			true,
+			A3($elm$core$Elm$JsArray$foldl, helper, initialBuilder, tree));
+	});
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $elm$html$Html$Events$onMouseOver = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'mouseover',
+		$elm$json$Json$Decode$succeed(msg));
+};
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $author$project$Main$makeTitle = function (lmdexpr) {
+	return _Utils_ap(
+		_List_fromArray(
+			[
+				$elm$html$Html$text('λx. { ')
+			]),
+		_Utils_ap(
+			$elm$core$Array$toList(
+				A2(
+					$elm$core$Array$indexedMap,
+					F2(
+						function (idx, s) {
+							return A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onMouseOver(
+										A2($author$project$Main$Convert, s, idx))
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(s + ' ')
+									]));
+						}),
+					lmdexpr)),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('}')
+				])));
+};
 var $elm$html$Html$Attributes$rel = _VirtualDom_attribute('rel');
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$CDN$stylesheet = A3(
 	$elm$html$Html$node,
@@ -11181,11 +11656,11 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$applyModifier = F2(
 				return _Utils_update(
 					options,
 					{
-						bC: _Utils_ap(options.bC, attrs)
+						bD: _Utils_ap(options.bD, attrs)
 					});
 		}
 	});
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$defaultOptions = {R: $elm$core$Maybe$Nothing, bC: _List_Nil, T: $elm$core$Maybe$Nothing, _: $elm$core$Maybe$Nothing};
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$defaultOptions = {R: $elm$core$Maybe$Nothing, bD: _List_Nil, T: $elm$core$Maybe$Nothing, _: $elm$core$Maybe$Nothing};
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$cardAttributes = function (modifiers) {
 	var options = A3($elm$core$List$foldl, $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$applyModifier, $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$defaultOptions, modifiers);
 	return _Utils_ap(
@@ -11240,7 +11715,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$cardAttributes = func
 							return _List_Nil;
 						}
 					}(),
-					options.bC))));
+					options.bD))));
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$renderBlocks = function (blocks) {
 	return A2(
@@ -11260,7 +11735,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$view = function (_v0) {
 	var conf = _v0;
 	return A2(
 		$elm$html$Html$div,
-		$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$cardAttributes(conf.e6),
+		$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$cardAttributes(conf.e7),
 		_Utils_ap(
 			A2(
 				$elm$core$List$filterMap,
@@ -11273,17 +11748,17 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$view = function (_v0) {
 							var e = _v1;
 							return e;
 						},
-						conf.eR),
+						conf.eS),
 						A2(
 						$elm$core$Maybe$map,
 						function (_v2) {
 							var e = _v2;
 							return e;
 						},
-						conf.c2)
+						conf.c3)
 					])),
 			_Utils_ap(
-				$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$renderBlocks(conf.eG),
+				$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$renderBlocks(conf.eH),
 				A2(
 					$elm$core$List$filterMap,
 					$elm$core$Basics$identity,
@@ -11295,14 +11770,14 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$view = function (_v0) {
 								var e = _v3;
 								return e;
 							},
-							conf.c$),
+							conf.c0),
 							A2(
 							$elm$core$Maybe$map,
 							function (_v4) {
 								var e = _v4;
 								return e;
 							},
-							conf.c1)
+							conf.c2)
 						])))));
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$Attrs = function (a) {
@@ -11321,7 +11796,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$applyModifier = F2(
 				return _Utils_update(
 					options,
 					{
-						cD: $elm$core$Maybe$Just(size)
+						cE: $elm$core$Maybe$Just(size)
 					});
 			case 1:
 				var coloring = modifier.a;
@@ -11333,18 +11808,18 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$applyModifier = F2(
 			case 2:
 				return _Utils_update(
 					options,
-					{bE: true});
+					{bF: true});
 			case 3:
 				var val = modifier.a;
 				return _Utils_update(
 					options,
-					{bQ: val});
+					{bR: val});
 			default:
 				var attrs = modifier.a;
 				return _Utils_update(
 					options,
 					{
-						bC: _Utils_ap(options.bC, attrs)
+						bD: _Utils_ap(options.bD, attrs)
 					});
 		}
 	});
@@ -11362,7 +11837,7 @@ var $elm$html$Html$Attributes$classList = function (classes) {
 				$elm$core$Tuple$first,
 				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
 };
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$defaultOptions = {bC: _List_Nil, bE: false, T: $elm$core$Maybe$Nothing, bQ: false, cD: $elm$core$Maybe$Nothing};
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$defaultOptions = {bD: _List_Nil, bF: false, T: $elm$core$Maybe$Nothing, bR: false, cE: $elm$core$Maybe$Nothing};
 var $elm$json$Json$Encode$bool = _Json_wrap;
 var $elm$html$Html$Attributes$boolProperty = F2(
 	function (key, bool) {
@@ -11403,14 +11878,14 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$buttonAttributes = 
 				_List_fromArray(
 					[
 						_Utils_Tuple2('btn', true),
-						_Utils_Tuple2('btn-block', options.bE),
-						_Utils_Tuple2('disabled', options.bQ)
+						_Utils_Tuple2('btn-block', options.bF),
+						_Utils_Tuple2('disabled', options.bR)
 					])),
-				$elm$html$Html$Attributes$disabled(options.bQ)
+				$elm$html$Html$Attributes$disabled(options.bR)
 			]),
 		_Utils_ap(
 			function () {
-				var _v0 = A2($elm$core$Maybe$andThen, $EdutainmentLIVE$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption, options.cD);
+				var _v0 = A2($elm$core$Maybe$andThen, $EdutainmentLIVE$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption, options.cE);
 				if (!_v0.$) {
 					var s = _v0.a;
 					return _List_fromArray(
@@ -11444,7 +11919,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Button$buttonAttributes = 
 						return _List_Nil;
 					}
 				}(),
-				options.bC)));
+				options.bD)));
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Button$button = F2(
 	function (options, children) {
@@ -11455,7 +11930,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Button$button = F2(
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Card = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$card = function (rec) {
-	return {eG: rec.eG, eR: rec.eR, eW: rec.eW, e6: rec.e6};
+	return {eH: rec.eH, eS: rec.eS, eX: rec.eX, e7: rec.e7};
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Config = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$cards = F2(
@@ -11463,21 +11938,21 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$cards = F2(
 		var configRec = _v0;
 		return _Utils_update(
 			configRec,
-			{bF: cards_});
+			{bG: cards_});
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$config = function (toMsg) {
-	return {bF: _List_Nil, a5: false, dl: toMsg, am: false};
+	return {bG: _List_Nil, a6: false, dm: toMsg, am: false};
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Header = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$headerPrivate = F3(
 	function (elemFn, attributes, toggle_) {
-		return {bC: attributes, bH: _List_Nil, bI: _List_Nil, dC: elemFn, et: toggle_};
+		return {bD: attributes, bI: _List_Nil, bJ: _List_Nil, dD: elemFn, eu: toggle_};
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$header = $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$headerPrivate($elm$html$Html$div);
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Toggle = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$toggle = F2(
 	function (attributes, children) {
-		return {bC: attributes, dv: children};
+		return {bD: attributes, dw: children};
 	});
 var $elm$core$String$fromFloat = _String_fromNumber;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$getOrInitCardState = F2(
@@ -11512,7 +11987,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$transitionStyle = F2(
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$animationAttributes = F3(
 	function (state, configRec, _v0) {
-		var id = _v0.eW;
+		var id = _v0.eX;
 		var styles = $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$transitionStyle(configRec.am);
 		var cardState = A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$getOrInitCardState, id, state);
 		var pixelHeight = A2(
@@ -11545,8 +12020,8 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$animationAttributes = F3(
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderCardBlock = F3(
 	function (state, configRec, card_) {
-		var id = card_.eW;
-		var blocks = card_.eG;
+		var id = card_.eX;
+		var blocks = card_.eH;
 		return A2(
 			$elm$html$Html$div,
 			_Utils_ap(
@@ -11598,7 +12073,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$visibilityTransition = F2
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$clickHandler = F4(
 	function (state, configRec, decoder, _v0) {
 		var cardStates = state;
-		var id = _v0.eW;
+		var id = _v0.eX;
 		var currentCardState = A2(
 			$elm$core$Maybe$withDefault,
 			{at: $elm$core$Maybe$Nothing, v: 0},
@@ -11612,9 +12087,9 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$clickHandler = F4(
 						return _Utils_eq(i, id) ? {
 							at: $elm$core$Maybe$Just(h),
 							v: A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$visibilityTransition, configRec.am, c.v)
-						} : (((c.v === 3) && (configRec.am && configRec.a5)) ? _Utils_update(
+						} : (((c.v === 3) && (configRec.am && configRec.a6)) ? _Utils_update(
 							c,
-							{v: 2}) : (((c.v === 3) && ((!configRec.am) && configRec.a5)) ? _Utils_update(
+							{v: 2}) : (((c.v === 3) && ((!configRec.am) && configRec.a6)) ? _Utils_update(
 							c,
 							{v: 0}) : c));
 					}),
@@ -11625,10 +12100,10 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$clickHandler = F4(
 			function (v) {
 				return $elm$json$Json$Decode$succeed(
 					{
-						e0: configRec.dl(
+						e1: configRec.dm(
 							updOthersHidden(v)),
-						e7: true,
-						fg: true
+						e8: true,
+						fh: true
 					});
 			},
 			decoder);
@@ -11636,7 +12111,6 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$clickHandler = F4(
 var $elm$virtual_dom$VirtualDom$Custom = function (a) {
 	return {$: 3, a: a};
 };
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var $elm$html$Html$Events$custom = F2(
 	function (event, decoder) {
 		return A2(
@@ -11674,11 +12148,11 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$heightDecoder = A2(
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderToggle = F3(
 	function (state, configRec, card_) {
 		var cardRec = card_;
-		var _v0 = cardRec.eR;
+		var _v0 = cardRec.eS;
 		var headerRec = _v0;
-		var _v1 = headerRec.et;
-		var attributes = _v1.bC;
-		var children = _v1.dv;
+		var _v1 = headerRec.eu;
+		var attributes = _v1.bD;
+		var children = _v1.dw;
 		return A2(
 			$elm$html$Html$button,
 			_Utils_ap(
@@ -11696,28 +12170,28 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderToggle = F3(
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderCardHeader = F3(
 	function (state, configRec, card_) {
 		var cardRec = card_;
-		var _v0 = cardRec.eR;
+		var _v0 = cardRec.eS;
 		var headerRec = _v0;
 		return A2(
-			headerRec.dC,
+			headerRec.dD,
 			_Utils_ap(
-				headerRec.bC,
+				headerRec.bD,
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$class('card-header')
 					])),
 			_Utils_ap(
-				headerRec.bI,
+				headerRec.bJ,
 				_Utils_ap(
 					_List_fromArray(
 						[
 							A3($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderToggle, state, configRec, card_)
 						]),
-					headerRec.bH)));
+					headerRec.bI)));
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderCard = F3(
 	function (state, configRec, card_) {
-		var options = card_.e6;
+		var options = card_.e7;
 		return A2(
 			$elm$html$Html$div,
 			_Utils_ap(
@@ -11741,7 +12215,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$view = F2(
 			A2(
 				$elm$core$List$map,
 				A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderCard, state, configRec),
-				configRec.bF));
+				configRec.bG));
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$withAnimation = function (_v0) {
 	var configRec = _v0;
@@ -11760,7 +12234,7 @@ var $author$project$Main$viewLoaded = function (model) {
 				function (content) {
 					return $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$card(
 						{
-							eG: _List_fromArray(
+							eH: _List_fromArray(
 								[
 									A2(
 									$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$block,
@@ -11771,7 +12245,7 @@ var $author$project$Main$viewLoaded = function (model) {
 											A2($elm$html$Html$div, _List_Nil, content.ab))
 										]))
 								]),
-							eR: A2(
+							eS: A2(
 								$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$header,
 								_List_fromArray(
 									[
@@ -11798,8 +12272,8 @@ var $author$project$Main$viewLoaded = function (model) {
 													$elm$html$Html$text('[' + (content.P + ('] ' + content.N)))
 												]))
 										]))),
-							eW: content.N,
-							e6: _List_Nil
+							eX: content.N,
+							e7: _List_Nil
 						});
 				},
 				model.aT),
@@ -11907,14 +12381,11 @@ var $author$project$Main$view = function (model) {
 									$author$project$Main$textcolor('#eeeeaa'),
 									$author$project$Main$font('Roboto Condensed, sans-serif')
 								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('λx. {0x6c, 0x6d, 0x64, 0x65, 0x78, 0x70, 0x72}')
-								]),
-							$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$config($author$project$Main$configs)))))
+							$author$project$Main$makeTitle(model.a2),
+							$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$config(_List_Nil)))))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
-	{eZ: $author$project$Main$init, fh: $author$project$Main$subscriptions, fj: $author$project$Main$update, fk: $author$project$Main$view});
+	{e_: $author$project$Main$init, fi: $author$project$Main$subscriptions, fk: $author$project$Main$update, fl: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
