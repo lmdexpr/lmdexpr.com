@@ -10883,20 +10883,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$block = F3(
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$config = function (options) {
 	return {eG: _List_Nil, c$: $elm$core$Maybe$Nothing, eR: $elm$core$Maybe$Nothing, c1: $elm$core$Maybe$Nothing, c2: $elm$core$Maybe$Nothing, e6: options};
 };
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$Attrs = function (a) {
-	return {$: 3, a: a};
-};
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$attrs = function (attrs_) {
-	return $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$Attrs(attrs_);
-};
-var $author$project$Main$configs = _List_fromArray(
-	[
-		$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$attrs(
-		_List_fromArray(
-			[
-				A2($elm$html$Html$Attributes$style, 'min-width', '800px')
-			]))
-	]);
+var $author$project$Main$configs = _List_Nil;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Internal$BlockItem = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Block$custom = function (element) {
 	return element;
@@ -11619,11 +11606,7 @@ var $author$project$Main$view = function (model) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('responsive'),
-				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-				A2($elm$html$Html$Attributes$style, 'padding', '60px'),
-				A2($elm$html$Html$Attributes$style, 'width', '80%'),
-				A2($elm$html$Html$Attributes$style, 'opacity', '0.9')
+				$elm$html$Html$Attributes$class('responsive')
 			]),
 		_List_fromArray(
 			[

@@ -1,5 +1,27 @@
-@media only screen and (max-device-width : 480px) {
-  	.responsive { 
- 		  width:100%;
-  	}
+.responsive {
+  margin: auto;
+  padding: 0px;
+  width: 100%;
+  opacity: 0.9
+}
+
+@media screen and (min-width:480px) {
+  .responsive {
+    padding: 40px;
+    width: 100%;
   }
+}
+
+@media screen and (min-width:768px) and ( max-width:1024px) {
+  .responsive {
+    padding: 60px;
+    width: 90%;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  .responsive {
+    padding: 80px;
+    width: 80%;
+  }
+}
