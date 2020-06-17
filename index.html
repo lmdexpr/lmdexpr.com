@@ -11,7 +11,7 @@
   <script src="elm.min.js"></script>
 </head>
 
-<body style="background-color: #222222">
+<body>
   <div id="elm"></div>
   <script>
     var app;
@@ -23,6 +23,8 @@
           node: document.getElementById('elm'),
           flags: JSON.parse(xmlhttp.responseText)
         });
+        
+        document.body.style.backgroundColor = "#222222";
       }
     }
     xmlhttp.open("GET", "Posts/contents.json");
