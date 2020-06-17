@@ -4375,9 +4375,9 @@ var _Http_toTask = F3(function(router, toTask, request)
 		$elm$core$Maybe$isJust(request.ex) && _Http_track(router, xhr, request.ex.a);
 
 		try {
-			xhr.open(request.e1, request.C, true);
+			xhr.open(request.e1, request.v, true);
 		} catch (e) {
-			return done($elm$http$Http$BadUrl_(request.C));
+			return done($elm$http$Http$BadUrl_(request.v));
 		}
 
 		_Http_configureRequest(xhr, request);
@@ -4421,7 +4421,7 @@ function _Http_toResponse(toBody, xhr)
 function _Http_toMetadata(xhr)
 {
 	return {
-		C: xhr.responseURL,
+		v: xhr.responseURL,
 		fe: xhr.status,
 		ff: xhr.statusText,
 		eS: _Http_parseHeaders(xhr.getAllResponseHeaders())
@@ -4530,6 +4530,23 @@ function _Http_track(router, xhr, tracker)
 			cD: event.lengthComputable ? $elm$core$Maybe$Just(event.total) : $elm$core$Maybe$Nothing
 		}))));
 	});
+}
+
+function _Url_percentEncode(string)
+{
+	return encodeURIComponent(string);
+}
+
+function _Url_percentDecode(string)
+{
+	try
+	{
+		return $elm$core$Maybe$Just(decodeURIComponent(string));
+	}
+	catch (e)
+	{
+		return $elm$core$Maybe$Nothing;
+	}
 }
 
 
@@ -4668,24 +4685,7 @@ var _Regex_splitAtMost = F3(function(n, re, str)
 });
 
 var _Regex_infinity = Infinity;
-
-
-function _Url_percentEncode(string)
-{
-	return encodeURIComponent(string);
-}
-
-function _Url_percentDecode(string)
-{
-	try
-	{
-		return $elm$core$Maybe$Just(decodeURIComponent(string));
-	}
-	catch (e)
-	{
-		return $elm$core$Maybe$Nothing;
-	}
-}var $author$project$Main$LinkClicked = function (a) {
+var $author$project$Main$LinkClicked = function (a) {
 	return {$: 3, a: a};
 };
 var $author$project$Main$UrlChanged = function (a) {
@@ -5476,7 +5476,7 @@ var $elm$core$Task$perform = F2(
 var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$JsonContent = F3(
 	function (title, date, url) {
-		return {U: date, P: title, C: url};
+		return {U: date, P: title, v: url};
 	});
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$map3 = _Json_map3;
@@ -5596,7 +5596,7 @@ var $author$project$Main$aboutme = {
 		]),
 	U: $elm$core$String$fromChar('\u03BB'),
 	P: 'About me',
-	C: 'dammy'
+	v: 'about'
 };
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$i = _VirtualDom_node('i');
@@ -5735,7 +5735,7 @@ var $author$project$Main$contact = {
 		]),
 	U: $elm$core$String$fromChar('\u03BB'),
 	P: 'Contact',
-	C: 'dammy'
+	v: 'contact'
 };
 var $elm$core$Array$fromListHelp = F3(
 	function (list, nodeList, nodeListSize) {
@@ -5787,73 +5787,15 @@ var $author$project$Main$initialModel = F3(
 				_List_fromArray(
 					['0x6c', '0x6d', '0x64', '0x65', '0x78', '0x70', '0x72'])),
 			a1: loadQueue,
-			C: url
+			v: url
 		};
 	});
 var $elm$json$Json$Decode$list = _Json_decodeList;
-var $author$project$Main$Loaded = F2(
-	function (a, b) {
-		return {$: 0, a: a, b: b};
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$CardState = F2(
+	function (visibility, height) {
+		return {at: height, w: visibility};
 	});
-var $elm$http$Http$BadStatus_ = F2(
-	function (a, b) {
-		return {$: 3, a: a, b: b};
-	});
-var $elm$http$Http$BadUrl_ = function (a) {
-	return {$: 0, a: a};
-};
-var $elm$http$Http$GoodStatus_ = F2(
-	function (a, b) {
-		return {$: 4, a: a, b: b};
-	});
-var $elm$http$Http$NetworkError_ = {$: 2};
-var $elm$http$Http$Receiving = function (a) {
-	return {$: 1, a: a};
-};
-var $elm$http$Http$Sending = function (a) {
-	return {$: 0, a: a};
-};
-var $elm$http$Http$Timeout_ = {$: 1};
-var $elm$core$Maybe$isJust = function (maybe) {
-	if (!maybe.$) {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $elm$core$Platform$sendToSelf = _Platform_sendToSelf;
-var $elm$core$Basics$compare = _Utils_compare;
-var $elm$core$Dict$get = F2(
-	function (targetKey, dict) {
-		get:
-		while (true) {
-			if (dict.$ === -2) {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var key = dict.b;
-				var value = dict.c;
-				var left = dict.d;
-				var right = dict.e;
-				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
-				switch (_v1) {
-					case 0:
-						var $temp$targetKey = targetKey,
-							$temp$dict = left;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-					case 1:
-						return $elm$core$Maybe$Just(value);
-					default:
-						var $temp$targetKey = targetKey,
-							$temp$dict = right;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-				}
-			}
-		}
-	});
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Shown = 3;
 var $elm$core$Dict$Black = 1;
 var $elm$core$Dict$RBNode_elm_builtin = F5(
 	function (a, b, c, d, e) {
@@ -5914,6 +5856,7 @@ var $elm$core$Dict$balance = F5(
 			}
 		}
 	});
+var $elm$core$Basics$compare = _Utils_compare;
 var $elm$core$Dict$insertHelp = F3(
 	function (key, value, dict) {
 		if (dict.$ === -2) {
@@ -5960,6 +5903,89 @@ var $elm$core$Dict$insert = F3(
 		} else {
 			var x = _v0;
 			return x;
+		}
+	});
+var $elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, dict) {
+				var key = _v0.a;
+				var value = _v0.b;
+				return A3($elm$core$Dict$insert, key, value, dict);
+			}),
+		$elm$core$Dict$empty,
+		assocs);
+};
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialStateCardOpen = function (id) {
+	return $elm$core$Dict$fromList(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				id,
+				A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$CardState, 3, $elm$core$Maybe$Nothing))
+			]));
+};
+var $author$project$Main$Loaded = F2(
+	function (a, b) {
+		return {$: 0, a: a, b: b};
+	});
+var $elm$http$Http$BadStatus_ = F2(
+	function (a, b) {
+		return {$: 3, a: a, b: b};
+	});
+var $elm$http$Http$BadUrl_ = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$http$Http$GoodStatus_ = F2(
+	function (a, b) {
+		return {$: 4, a: a, b: b};
+	});
+var $elm$http$Http$NetworkError_ = {$: 2};
+var $elm$http$Http$Receiving = function (a) {
+	return {$: 1, a: a};
+};
+var $elm$http$Http$Sending = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$http$Http$Timeout_ = {$: 1};
+var $elm$core$Maybe$isJust = function (maybe) {
+	if (!maybe.$) {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $elm$core$Platform$sendToSelf = _Platform_sendToSelf;
+var $elm$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			if (dict.$ === -2) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
+				switch (_v1) {
+					case 0:
+						var $temp$targetKey = targetKey,
+							$temp$dict = left;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+					case 1:
+						return $elm$core$Maybe$Just(value);
+					default:
+						var $temp$targetKey = targetKey,
+							$temp$dict = right;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+				}
+			}
 		}
 	});
 var $elm$core$Dict$getMin = function (dict) {
@@ -6543,7 +6569,7 @@ var $elm$http$Http$cmdMap = F2(
 					e1: r.e1,
 					fi: r.fi,
 					ex: r.ex,
-					C: r.C
+					v: r.v
 				});
 		}
 	});
@@ -6566,14 +6592,14 @@ var $elm$http$Http$subscription = _Platform_leaf('Http');
 var $elm$http$Http$request = function (r) {
 	return $elm$http$Http$command(
 		$elm$http$Http$Request(
-			{eE: false, S: r.S, eO: r.eO, eS: r.eS, e1: r.e1, fi: r.fi, ex: r.ex, C: r.C}));
+			{eE: false, S: r.S, eO: r.eO, eS: r.eS, e1: r.e1, fi: r.fi, ex: r.ex, v: r.v}));
 };
 var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
-		{S: $elm$http$Http$emptyBody, eO: r.eO, eS: _List_Nil, e1: 'GET', fi: $elm$core$Maybe$Nothing, ex: $elm$core$Maybe$Nothing, C: r.C});
+		{S: $elm$http$Http$emptyBody, eO: r.eO, eS: _List_Nil, e1: 'GET', fi: $elm$core$Maybe$Nothing, ex: $elm$core$Maybe$Nothing, v: r.v});
 };
 var $author$project$Main$jsonToContent = function (json) {
-	return {S: _List_Nil, U: json.U, P: json.P, C: json.C};
+	return {S: _List_Nil, U: json.U, P: json.P, v: json.v};
 };
 var $author$project$Main$load = function (json) {
 	return $elm$http$Http$get(
@@ -6581,11 +6607,244 @@ var $author$project$Main$load = function (json) {
 			eO: $elm$http$Http$expectString(
 				$author$project$Main$Loaded(
 					$author$project$Main$jsonToContent(json))),
-			C: 'https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/Posts/' + (json.C + '.md')
+			v: 'https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/Posts/' + (json.v + '.md')
 		});
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $elm$url$Url$Parser$State = F5(
+	function (visited, unvisited, params, frag, value) {
+		return {ae: frag, ah: params, aa: unvisited, cR: value, ak: visited};
+	});
+var $elm$url$Url$Parser$getFirstMatch = function (states) {
+	getFirstMatch:
+	while (true) {
+		if (!states.b) {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var state = states.a;
+			var rest = states.b;
+			var _v1 = state.aa;
+			if (!_v1.b) {
+				return $elm$core$Maybe$Just(state.cR);
+			} else {
+				if ((_v1.a === '') && (!_v1.b.b)) {
+					return $elm$core$Maybe$Just(state.cR);
+				} else {
+					var $temp$states = rest;
+					states = $temp$states;
+					continue getFirstMatch;
+				}
+			}
+		}
+	}
+};
+var $elm$url$Url$Parser$removeFinalEmpty = function (segments) {
+	if (!segments.b) {
+		return _List_Nil;
+	} else {
+		if ((segments.a === '') && (!segments.b.b)) {
+			return _List_Nil;
+		} else {
+			var segment = segments.a;
+			var rest = segments.b;
+			return A2(
+				$elm$core$List$cons,
+				segment,
+				$elm$url$Url$Parser$removeFinalEmpty(rest));
+		}
+	}
+};
+var $elm$url$Url$Parser$preparePath = function (path) {
+	var _v0 = A2($elm$core$String$split, '/', path);
+	if (_v0.b && (_v0.a === '')) {
+		var segments = _v0.b;
+		return $elm$url$Url$Parser$removeFinalEmpty(segments);
+	} else {
+		var segments = _v0;
+		return $elm$url$Url$Parser$removeFinalEmpty(segments);
+	}
+};
+var $elm$url$Url$Parser$addToParametersHelp = F2(
+	function (value, maybeList) {
+		if (maybeList.$ === 1) {
+			return $elm$core$Maybe$Just(
+				_List_fromArray(
+					[value]));
+		} else {
+			var list = maybeList.a;
+			return $elm$core$Maybe$Just(
+				A2($elm$core$List$cons, value, list));
+		}
+	});
+var $elm$url$Url$percentDecode = _Url_percentDecode;
+var $elm$url$Url$Parser$addParam = F2(
+	function (segment, dict) {
+		var _v0 = A2($elm$core$String$split, '=', segment);
+		if ((_v0.b && _v0.b.b) && (!_v0.b.b.b)) {
+			var rawKey = _v0.a;
+			var _v1 = _v0.b;
+			var rawValue = _v1.a;
+			var _v2 = $elm$url$Url$percentDecode(rawKey);
+			if (_v2.$ === 1) {
+				return dict;
+			} else {
+				var key = _v2.a;
+				var _v3 = $elm$url$Url$percentDecode(rawValue);
+				if (_v3.$ === 1) {
+					return dict;
+				} else {
+					var value = _v3.a;
+					return A3(
+						$elm$core$Dict$update,
+						key,
+						$elm$url$Url$Parser$addToParametersHelp(value),
+						dict);
+				}
+			}
+		} else {
+			return dict;
+		}
+	});
+var $elm$url$Url$Parser$prepareQuery = function (maybeQuery) {
+	if (maybeQuery.$ === 1) {
+		return $elm$core$Dict$empty;
+	} else {
+		var qry = maybeQuery.a;
+		return A3(
+			$elm$core$List$foldr,
+			$elm$url$Url$Parser$addParam,
+			$elm$core$Dict$empty,
+			A2($elm$core$String$split, '&', qry));
+	}
+};
+var $elm$url$Url$Parser$parse = F2(
+	function (_v0, url) {
+		var parser = _v0;
+		return $elm$url$Url$Parser$getFirstMatch(
+			parser(
+				A5(
+					$elm$url$Url$Parser$State,
+					_List_Nil,
+					$elm$url$Url$Parser$preparePath(url.d1),
+					$elm$url$Url$Parser$prepareQuery(url.d9),
+					url.dI,
+					$elm$core$Basics$identity)));
+	});
+var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
+var $elm$url$Url$Parser$query = function (_v0) {
+	var queryParser = _v0;
+	return function (_v1) {
+		var visited = _v1.ak;
+		var unvisited = _v1.aa;
+		var params = _v1.ah;
+		var frag = _v1.ae;
+		var value = _v1.cR;
+		return _List_fromArray(
+			[
+				A5(
+				$elm$url$Url$Parser$State,
+				visited,
+				unvisited,
+				params,
+				frag,
+				value(
+					queryParser(params)))
+			]);
+	};
+};
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
+var $elm$core$List$concatMap = F2(
+	function (f, list) {
+		return $elm$core$List$concat(
+			A2($elm$core$List$map, f, list));
+	});
+var $elm$url$Url$Parser$slash = F2(
+	function (_v0, _v1) {
+		var parseBefore = _v0;
+		var parseAfter = _v1;
+		return function (state) {
+			return A2(
+				$elm$core$List$concatMap,
+				parseAfter,
+				parseBefore(state));
+		};
+	});
+var $elm$url$Url$Parser$questionMark = F2(
+	function (parser, queryParser) {
+		return A2(
+			$elm$url$Url$Parser$slash,
+			parser,
+			$elm$url$Url$Parser$query(queryParser));
+	});
+var $elm$url$Url$Parser$s = function (str) {
+	return function (_v0) {
+		var visited = _v0.ak;
+		var unvisited = _v0.aa;
+		var params = _v0.ah;
+		var frag = _v0.ae;
+		var value = _v0.cR;
+		if (!unvisited.b) {
+			return _List_Nil;
+		} else {
+			var next = unvisited.a;
+			var rest = unvisited.b;
+			return _Utils_eq(next, str) ? _List_fromArray(
+				[
+					A5(
+					$elm$url$Url$Parser$State,
+					A2($elm$core$List$cons, next, visited),
+					rest,
+					params,
+					frag,
+					value)
+				]) : _List_Nil;
+		}
+	};
+};
+var $elm$url$Url$Parser$Internal$Parser = $elm$core$Basics$identity;
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $elm$url$Url$Parser$Query$custom = F2(
+	function (key, func) {
+		return function (dict) {
+			return func(
+				A2(
+					$elm$core$Maybe$withDefault,
+					_List_Nil,
+					A2($elm$core$Dict$get, key, dict)));
+		};
+	});
+var $elm$url$Url$Parser$Query$string = function (key) {
+	return A2(
+		$elm$url$Url$Parser$Query$custom,
+		key,
+		function (stringList) {
+			if (stringList.b && (!stringList.b.b)) {
+				var str = stringList.a;
+				return $elm$core$Maybe$Just(str);
+			} else {
+				return $elm$core$Maybe$Nothing;
+			}
+		});
+};
 var $author$project$Main$loadNext = function (model) {
 	var _v0 = model.a1;
 	if (_v0.b) {
@@ -6597,7 +6856,25 @@ var $author$project$Main$loadNext = function (model) {
 				{a1: tl}),
 			$author$project$Main$load(hd));
 	} else {
-		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		var _v1 = A2(
+			$elm$url$Url$Parser$parse,
+			A2(
+				$elm$url$Url$Parser$questionMark,
+				$elm$url$Url$Parser$s(''),
+				$elm$url$Url$Parser$Query$string('content')),
+			model.v);
+		if ((!_v1.$) && (!_v1.a.$)) {
+			var cid = _v1.a.a;
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{
+						an: $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialStateCardOpen(cid)
+					}),
+				$elm$core$Platform$Cmd$none);
+		} else {
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		}
 	}
 };
 var $elm$core$Result$withDefault = F2(
@@ -6628,7 +6905,6 @@ var $author$project$Main$AccordionMsg = function (a) {
 	return {$: 1, a: a};
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Hidden = 0;
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Shown = 3;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$StartDown = 1;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$StartUp = 2;
 var $elm$core$List$any = F2(
@@ -6818,16 +7094,16 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$subscriptions = F2(
 			$elm$core$Dict$map,
 			F2(
 				function (id, state) {
-					var _v3 = state.v;
+					var _v3 = state.w;
 					switch (_v3) {
 						case 1:
 							return _Utils_update(
 								state,
-								{v: 3});
+								{w: 3});
 						case 2:
 							return _Utils_update(
 								state,
-								{v: 0});
+								{w: 0});
 						default:
 							return state;
 					}
@@ -6839,7 +7115,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$subscriptions = F2(
 				var state = _v2.b;
 				return A2(
 					$elm$core$List$member,
-					state.v,
+					state.w,
 					_List_fromArray(
 						[1, 2]));
 			},
@@ -7027,15 +7303,6 @@ var $elm$core$String$foldr = _String_foldr;
 var $elm$core$String$toList = function (string) {
 	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
 };
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (!maybe.$) {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
 var $rtfeldman$elm_hex$Hex$fromString = function (str) {
 	if ($elm$core$String$isEmpty(str)) {
 		return $elm$core$Result$Err('Empty strings are not valid hexadecimal strings.');
@@ -7173,31 +7440,6 @@ var $author$project$Main$convert = function (target) {
 		}
 	}
 };
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$CardState = F2(
-	function (visibility, height) {
-		return {at: height, v: visibility};
-	});
-var $elm$core$Dict$fromList = function (assocs) {
-	return A3(
-		$elm$core$List$foldl,
-		F2(
-			function (_v0, dict) {
-				var key = _v0.a;
-				var value = _v0.b;
-				return A3($elm$core$Dict$insert, key, value, dict);
-			}),
-		$elm$core$Dict$empty,
-		assocs);
-};
-var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialStateCardOpen = function (id) {
-	return $elm$core$Dict$fromList(
-		_List_fromArray(
-			[
-				_Utils_Tuple2(
-				id,
-				A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$CardState, 3, $elm$core$Maybe$Nothing))
-			]));
-};
 var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $elm$core$Bitwise$and = _Bitwise_and;
@@ -7274,17 +7516,6 @@ var $author$project$Main$errorToString = function (error) {
 			var errorMessage = error.a;
 			return errorMessage;
 	}
-};
-var $elm$core$List$append = F2(
-	function (xs, ys) {
-		if (!ys.b) {
-			return xs;
-		} else {
-			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
-		}
-	});
-var $elm$core$List$concat = function (lists) {
-	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
 };
 var $pablohirafuji$elm_markdown$Markdown$Block$BlockQuote = function (a) {
 	return {$: 5, a: a};
@@ -8815,7 +9046,7 @@ var $pablohirafuji$elm_markdown$Markdown$Config$defaultOptions = {
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$initParser = F3(
 	function (options, refs, rawText) {
-		return {b: _List_Nil, e6: options, A: rawText, dg: refs, j: _List_Nil};
+		return {b: _List_Nil, e6: options, B: rawText, dg: refs, j: _List_Nil};
 	});
 var $pablohirafuji$elm_markdown$Markdown$Inline$CodeInline = function (a) {
 	return {$: 2, a: a};
@@ -9040,7 +9271,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$parseText = function (mode
 	return _Utils_update(
 		model,
 		{
-			b: A3($pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatches, model.A, _List_Nil, model.b)
+			b: A3($pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatches, model.B, _List_Nil, model.b)
 		});
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$angleBracketLTokenRegex = A2(
@@ -9419,20 +9650,20 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$tokenize = function (model
 					return $.eY;
 				},
 				_Utils_ap(
-					$pablohirafuji$elm_markdown$Markdown$InlineParser$findAngleBracketRTokens(model.A),
+					$pablohirafuji$elm_markdown$Markdown$InlineParser$findAngleBracketRTokens(model.B),
 					_Utils_ap(
-						$pablohirafuji$elm_markdown$Markdown$InlineParser$findAngleBracketLTokens(model.A),
+						$pablohirafuji$elm_markdown$Markdown$InlineParser$findAngleBracketLTokens(model.B),
 						_Utils_ap(
-							A2($pablohirafuji$elm_markdown$Markdown$InlineParser$findHardBreakTokens, model.e6.el, model.A),
+							A2($pablohirafuji$elm_markdown$Markdown$InlineParser$findHardBreakTokens, model.e6.el, model.B),
 							_Utils_ap(
-								$pablohirafuji$elm_markdown$Markdown$InlineParser$findLinkImageCloseTokens(model.A),
+								$pablohirafuji$elm_markdown$Markdown$InlineParser$findLinkImageCloseTokens(model.B),
 								_Utils_ap(
-									$pablohirafuji$elm_markdown$Markdown$InlineParser$findLinkImageOpenTokens(model.A),
+									$pablohirafuji$elm_markdown$Markdown$InlineParser$findLinkImageOpenTokens(model.B),
 									_Utils_ap(
-										$pablohirafuji$elm_markdown$Markdown$InlineParser$findUnderlineEmphasisTokens(model.A),
+										$pablohirafuji$elm_markdown$Markdown$InlineParser$findUnderlineEmphasisTokens(model.B),
 										_Utils_ap(
-											$pablohirafuji$elm_markdown$Markdown$InlineParser$findAsteriskEmphasisTokens(model.A),
-											$pablohirafuji$elm_markdown$Markdown$InlineParser$findCodeTokens(model.A)))))))))
+											$pablohirafuji$elm_markdown$Markdown$InlineParser$findAsteriskEmphasisTokens(model.B),
+											$pablohirafuji$elm_markdown$Markdown$InlineParser$findCodeTokens(model.B)))))))))
 		});
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$CodeType = {$: 2};
@@ -9490,7 +9721,6 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$decodeUrlRegex = A2(
 	$elm$core$Maybe$withDefault,
 	$elm$regex$Regex$never,
 	$elm$regex$Regex$fromString('%(?:3B|2C|2F|3F|3A|40|26|3D|2B|24|23|25)'));
-var $elm$url$Url$percentDecode = _Url_percentDecode;
 var $elm$url$Url$percentEncode = _Url_percentEncode;
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$encodeUrl = A2(
 	$elm$core$Basics$composeR,
@@ -10433,7 +10663,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$linkOrImageTypeToMatch = F
 				{
 					j: _Utils_ap(innerTokens, remainTokens)
 				}));
-		var remainText = A2($elm$core$String$dropLeft, closeToken.eY + 1, model.A);
+		var remainText = A2($elm$core$String$dropLeft, closeToken.eY + 1, model.B);
 		var linkOpenTokenToInactive = function (model_) {
 			var process = function (token) {
 				var _v7 = token.g;
@@ -10531,7 +10761,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$tokenPairToMatch = F6(
 			b: _List_Nil,
 			di: start,
 			t: processText(
-				A3($elm$core$String$slice, textStart, textEnd, model.A)),
+				A3($elm$core$String$slice, textStart, textEnd, model.B)),
 			aI: textEnd,
 			N: textStart,
 			bj: type_
@@ -10677,7 +10907,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$insertLinkMatch = F2(
 		return A2($elm$core$Dict$member, linkMatch.af, refs) ? refs : A3(
 			$elm$core$Dict$insert,
 			linkMatch.af,
-			_Utils_Tuple2(linkMatch.C, linkMatch.c7),
+			_Utils_Tuple2(linkMatch.v, linkMatch.c7),
 			refs);
 	});
 var $pablohirafuji$elm_markdown$Markdown$Block$extractUrlTitleRegex = function (regexMatch) {
@@ -10701,7 +10931,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$extractUrlTitleRegex = function (
 				c7: $pablohirafuji$elm_markdown$Markdown$Helpers$returnFirstJust(
 					_List_fromArray(
 						[maybeTitleSingleQuotes, maybeTitleDoubleQuotes, maybeTitleParenthesis])),
-				C: rawUrl
+				v: rawUrl
 			};
 		};
 		var maybeRawUrl = $pablohirafuji$elm_markdown$Markdown$Helpers$returnFirstJust(
@@ -10721,7 +10951,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$maybeLinkMatch = function (rawTex
 	return A2(
 		$elm$core$Maybe$andThen,
 		function (linkMatch) {
-			return ((linkMatch.C === '') || (linkMatch.af === '')) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(linkMatch);
+			return ((linkMatch.v === '') || (linkMatch.af === '')) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(linkMatch);
 		},
 		A2(
 			$elm$core$Maybe$map,
@@ -11278,7 +11508,7 @@ var $author$project$Main$setContent = F2(
 					]),
 				U: '',
 				P: 'HTTP request ERROR',
-				C: ''
+				v: ''
 			};
 		} else {
 			var raw = response.a;
@@ -11392,11 +11622,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{
-							an: $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialStateCardOpen(
-								$elm$url$Url$toString(url)),
-							C: url
-						}),
+						{v: url}),
 					$elm$core$Platform$Cmd$none);
 		}
 	});
@@ -11916,6 +12142,12 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$headerPrivate = F3(
 		return {bC: attributes, bH: _List_Nil, bI: _List_Nil, dD: elemFn, et: toggle_};
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$header = $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$headerPrivate($elm$html$Html$div);
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$onlyOneOpen = function (_v0) {
+	var configRec = _v0;
+	return _Utils_update(
+		configRec,
+		{a5: true});
+};
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Toggle = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$toggle = F2(
 	function (attributes, children) {
@@ -11927,7 +12159,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$getOrInitCardState = F2(
 		var cardStates = _v0;
 		return A2(
 			$elm$core$Maybe$withDefault,
-			{at: $elm$core$Maybe$Nothing, v: 0},
+			{at: $elm$core$Maybe$Nothing, w: 0},
 			A2($elm$core$Dict$get, id, cardStates));
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$transitionStyle = F2(
@@ -11966,7 +12198,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$animationAttributes = F3(
 					return $elm$core$String$fromFloat(v) + 'px';
 				},
 				cardState.at));
-		var _v1 = cardState.v;
+		var _v1 = cardState.w;
 		switch (_v1) {
 			case 0:
 				return styles('0px');
@@ -12044,7 +12276,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$clickHandler = F4(
 		var id = _v0.eW;
 		var currentCardState = A2(
 			$elm$core$Maybe$withDefault,
-			{at: $elm$core$Maybe$Nothing, v: 0},
+			{at: $elm$core$Maybe$Nothing, w: 0},
 			A2($elm$core$Dict$get, id, cardStates));
 		var initStates = A3($elm$core$Dict$insert, id, currentCardState, cardStates);
 		var updOthersHidden = function (h) {
@@ -12054,12 +12286,12 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$clickHandler = F4(
 					function (i, c) {
 						return _Utils_eq(i, id) ? {
 							at: $elm$core$Maybe$Just(h),
-							v: A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$visibilityTransition, configRec.al, c.v)
-						} : (((c.v === 3) && (configRec.al && configRec.a5)) ? _Utils_update(
+							w: A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$visibilityTransition, configRec.al, c.w)
+						} : (((c.w === 3) && (configRec.al && configRec.a5)) ? _Utils_update(
 							c,
-							{v: 2}) : (((c.v === 3) && ((!configRec.al) && configRec.a5)) ? _Utils_update(
+							{w: 2}) : (((c.w === 3) && ((!configRec.al) && configRec.a5)) ? _Utils_update(
 							c,
-							{v: 0}) : c));
+							{w: 0}) : c));
 					}),
 				initStates);
 		};
@@ -12229,7 +12461,7 @@ var $author$project$Main$viewLoaded = function (model) {
 									_List_fromArray(
 										[
 											A2(
-											$elm$html$Html$div,
+											$elm$html$Html$a,
 											_List_fromArray(
 												[
 													$author$project$Main$bg('#444444'),
@@ -12237,20 +12469,22 @@ var $author$project$Main$viewLoaded = function (model) {
 													A2($elm$html$Html$Attributes$style, 'overflow', 'hidden'),
 													A2($elm$html$Html$Attributes$style, 'white-space', 'nowrap'),
 													A2($elm$html$Html$Attributes$style, 'width', 'auto'),
-													A2($elm$html$Html$Attributes$style, 'text-overflow', 'ellipsis')
+													A2($elm$html$Html$Attributes$style, 'text-overflow', 'ellipsis'),
+													$elm$html$Html$Attributes$href('?content=' + content.v)
 												]),
 											_List_fromArray(
 												[
 													$elm$html$Html$text('[' + (content.U + ('] ' + content.P)))
 												]))
 										]))),
-							eW: content.C,
+							eW: content.v,
 							e6: _List_Nil
 						});
 				},
 				model.aR),
-			$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$withAnimation(
-				$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$config($author$project$Main$AccordionMsg))));
+			$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$onlyOneOpen(
+				$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$withAnimation(
+					$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$config($author$project$Main$AccordionMsg)))));
 };
 var $author$project$Main$viewLoading = A2(
 	$elm$html$Html$div,

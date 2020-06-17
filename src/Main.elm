@@ -8,6 +8,8 @@ import Browser.Navigation as Nav
 import Task
 
 import Url
+import Url.Parser as Parser exposing ((<?>))
+import Url.Parser.Query as Query
 
 import Http exposing (Error)
 
@@ -87,7 +89,7 @@ aboutme : Content
 aboutme =
   { title = "About me"
   , date = String.fromChar '\u{03bb}'
-  , url = "dammy"
+  , url = "about"
   , body =
     [ h3 [] [ text "LMDEXPR a.k.a. Yuki Tajiri" ]
     , p [] [ text "I work as server-side engineer @", a [ href "https://corp.chatwork.com/ja/" ] [ text "Chatwork Inc." ], text " (2020/06/01 ~)" ]
@@ -101,7 +103,7 @@ contact : Content
 contact =
   { title = "Contact"
   , date = String.fromChar '\u{03bb}'
-  , url = "dammy"
+  , url = "contact"
   , body =
     [ p [] [ i [ class "far fa-envelope" ] [], text " tajiri@chatwork.com" ]
     , p [] [ a [ href "https://twitter.com/lmdexpr" ] [ i [ class "fab fa-twitter" ] [], text " Twitter" ] ]
@@ -139,7 +141,9 @@ loadNext : Model -> (Model, Cmd Msg)
 loadNext model =
   case model.loadQueue of
     hd :: tl -> ( { model | loadQueue = tl }, load hd )
-    _        -> ( model, Cmd.none )
+    _        -> case Parser.parse (Parser.s "" <?> Query.string "content") model.url of
+      Just (Just cid) -> ( { model | accordionState = Accordion.initialStateCardOpen cid }, Cmd.none )
+      _               -> ( model, Cmd.none)
 
 load : JsonContent -> Cmd Msg
 load json =
@@ -158,7 +162,7 @@ update msg model =
       case request of
         Browser.Internal url  -> ( model, Nav.pushUrl model.key (Url.toString url) )
         Browser.External href -> ( model, Nav.load href )
-    UrlChanged url          -> ( { model | url = url, accordionState = Accordion.initialStateCardOpen <| Url.toString url }, Cmd.none )
+    UrlChanged url -> ( { model | url = url }, Cmd.none )
 
 convert : String -> String
 convert target =
@@ -225,6 +229,7 @@ makeTitle lmdexpr =
 viewLoaded : Model -> Html Msg
 viewLoaded model = Accordion.config AccordionMsg
   |> Accordion.withAnimation
+  |> Accordion.onlyOneOpen
   |> Accordion.cards
     ( List.map
       (\content ->
@@ -233,12 +238,13 @@ viewLoaded model = Accordion.config AccordionMsg
           , options = []
           , header = Accordion.header [ bg "#444444" ]
             <| Accordion.toggle [ style "width" "100%", style "text-align" "left", style "padding" "0" ]
-              [ div [ bg "#444444"
+              [ a [ bg "#444444"
                     , tc "#eeeeee"
                     , style "overflow" "hidden"
                     , style "white-space" "nowrap"
                     , style "width" "auto"
-                    , style "text-overflow" "ellipsis" ]
+                    , style "text-overflow" "ellipsis"
+                    , href <| "?content=" ++ content.url ]
                 [ text ("[" ++ content.date ++ "] " ++ content.title) ]
               ]
           , blocks = [ Accordion.block [] [ Block.custom <| div [] content.body ] ]
