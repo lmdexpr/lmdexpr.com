@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>lmdexpr.com</title>
   <link rel="stylesheet" type="text/css" href="src/responsive.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&family=Roboto+Condensed:wght@700&display=swap">
   <script src="https://kit.fontawesome.com/c153f36e9e.js" crossorigin="anonymous"></script>
   <script src="elm.min.js"></script>
 </head>
@@ -12,9 +12,19 @@
 <body style="background-color: #222222">
   <div id="elm"></div>
   <script>
-    var app = Elm.Main.init({
-      node: document.getElementById('elm')
-    });
+    var app;
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        app = Elm.Main.init({
+          node: document.getElementById('elm'),
+          flags: JSON.parse(xmlhttp.responseText)
+        });
+      }
+    }
+    xmlhttp.open("GET", "Posts/contents.json");
+    xmlhttp.send();
   </script>
 </body>
 </html>

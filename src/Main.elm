@@ -7,8 +7,11 @@ import Task
 
 import Http exposing (Error)
 
+import Json.Decode as D
+import Json.Encode exposing (string)
+
 import Html exposing ( Html, Attribute, main_, span, a, p, img ,br, text, strong, option, i, div, h1, h3 )
-import Html.Attributes exposing ( rel, href, class, style, width )
+import Html.Attributes exposing ( rel, href, class, style, width, property )
 import Html.Events exposing ( onClick, onMouseOver )
 
 import Bootstrap.CDN as CDN
@@ -28,7 +31,8 @@ import Hex
 
 -- MAIN
 
-main = Browser.element
+main : Program D.Value Model Msg
+main = Browser.document
   { init = init
   , update = update
   , view = view
@@ -42,20 +46,39 @@ type alias Content =
   , date : String
   , url : String
   , body : List (Html Msg)
-  , loaded : Bool
   }
 
 type alias Model =
   { contents : List Content
-  , loadQueue : Maybe (List Content)
+  , loadQueue : List JsonContent
   , accordionState : Accordion.State
   , lmdexpr : Array String
   }
 
+-- JSON
+
+type alias JsonContent =
+  { title : String
+  , date  : String
+  , url   : String
+  }
+
+decodeOfJsonContent : D.Decoder JsonContent
+decodeOfJsonContent =
+  D.map3 JsonContent
+    (D.field "title" D.string)
+    (D.field "date"  D.string)
+    (D.field "url"   D.string)
+
+jsonToContent : JsonContent -> Content
+jsonToContent json = { title = json.title, date = json.date, url = json.url, body = [] }
+
+-- initialize
+
 aboutme : Content
 aboutme =
   { title = "About me"
-  , date = "λ"
+  , date = String.fromChar '\u{03bb}'
   , url = "dammy"
   , body =
     [ h3 [] [ text "LMDEXPR a.k.a. Yuki Tajiri" ]
@@ -64,13 +87,12 @@ aboutme =
     , p [] [ text "Graduated Bachelor of Mathematics @", a [ href "https://www.kobe-u.ac.jp/" ] [ text "Kobe University" ], text " (2017/04 ~ 2019/03)" ]
     , p [] [ text "Graduated Associate Degree of Engineering @", a [ href "https://kumamoto-nct.ac.jp/" ] [ text "NIT, Kumamoto College" ], text " (2017/04 ~ 2019/03)" ]
     ]
-  , loaded = True
   }
 
 contact : Content
 contact =
   { title = "Contact"
-  , date = "λ"
+  , date = String.fromChar '\u{03bb}'
   , url = "dammy"
   , body =
     [ p [] [ i [ class "far fa-envelope" ] [], text " tajiri@chatwork.com" ]
@@ -80,39 +102,19 @@ contact =
     , p [] [ a [ href "https://www.amazon.jp/hz/wishlist/ls/2Z7ZETUODB09J?ref_=wl_share" ] [ i [ class "fab fa-amazon" ] [], text " Amazon" ] ]
     , p [] [ a [ href "https://lmdexpr.github.io" ] [ i [ class "fas fa-angle-double-left" ] [], text " Ruin" ] ]
     ]
-  , loaded = True
   }
 
 initialModel : Model
 initialModel =
   { contents  = [ aboutme, contact ]
-  , loadQueue = Nothing
+  , loadQueue = []
   , accordionState = Accordion.initialState
   , lmdexpr = Array.fromList [ "0x6c", "0x6d", "0x64", "0x65", "0x78", "0x70", "0x72" ]
   }
 
-defaultContent : Content
-defaultContent = { title = "", date = "", url = "", body = [], loaded = False }
-
-initialLoadQueue : List Content
-initialLoadQueue =
-  [ { defaultContent | title = "おすすめラノベ五選", date = "2017-12-19", url = "2017-12-19-adc.md" }
-  , { defaultContent | title = "Chatworkサマーインターン", date = "2019-10-01", url = "2019-10-01-intern.md" }
-  , { defaultContent | title = "『CATS』考察未満感想記事", date = "2020-01-30", url = "2020-01-30-cats.md" }
-  ]
-
-load : Maybe Content -> Cmd Msg
-load maybeContent =
-  case maybeContent of
-    Just content -> Http.get
-      { url = "https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/Posts/" ++ content.url
-      , expect = Http.expectString <| Loaded content
-      }
-    Nothing -> Cmd.none
-
-init : () -> (Model, Cmd Msg)
-init _ = ( { initialModel | loadQueue = List.tail initialLoadQueue } , load <| List.head initialLoadQueue )
-
+init : D.Value -> (Model, Cmd Msg)
+init v =
+  loadNext { initialModel | loadQueue = Result.withDefault [] <| D.decodeValue (D.list decodeOfJsonContent) v }
 
 -- ACTION, UPDATE
 
@@ -121,17 +123,25 @@ type Msg
   | AccordionMsg Accordion.State
   | Convert String Int
 
+loadNext : Model -> (Model, Cmd Msg)
+loadNext model =
+  case model.loadQueue of
+    hd :: tl -> ( { model | loadQueue = tl }, load hd )
+    _        -> ( model, Cmd.none )
+
+load : JsonContent -> Cmd Msg
+load json =
+  Http.get
+    { url = "https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/Posts/" ++ json.url
+    , expect = Http.expectString <| Loaded <| jsonToContent json
+    }
+
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    Loaded content response ->
-      ({ model
-       | contents = model.contents ++ [ setContent response content ]
-       , loadQueue = Maybe.andThen List.tail model.loadQueue
-       }
-      , load <| Maybe.andThen List.head model.loadQueue)
-    AccordionMsg state -> ( { model | accordionState = state }, Cmd.none )
-    Convert s idx -> ( { model | lmdexpr = Array.set idx (convert s) model.lmdexpr }, Cmd.none )
+    Loaded content response -> loadNext { model | contents = model.contents ++ [ setContent response content ] }
+    AccordionMsg state      -> ( { model | accordionState = state }, Cmd.none )
+    Convert s idx           -> ( { model | lmdexpr = Array.set idx (convert s) model.lmdexpr }, Cmd.none )
 
 convert : String -> String
 convert target =
@@ -147,8 +157,8 @@ convert target =
 setContent : Result Http.Error String -> Content -> Content
 setContent response content =
   case response of
-    Err err -> { title = "HTTP request ERROR", date = "", url = "", body = [ text <| errorToString err ], loaded = True }
-    Ok  raw -> { content | body = Markdown.toHtml Nothing raw, loaded = True }
+    Err err -> { title = "HTTP request ERROR", date = "", url = "", body = [ text <| errorToString err ] }
+    Ok  raw -> { content | body = Markdown.toHtml Nothing raw }
 
 errorToString : Http.Error -> String
 errorToString error =
@@ -167,38 +177,33 @@ errorToString error =
 subscriptions : Model -> Sub Msg
 subscriptions model = Accordion.subscriptions model.accordionState AccordionMsg
 
+
 -- VIEW
 
-view : Model -> Html Msg
-view model = div [ class "responsive" ]
-  [ CDN.stylesheet
-  , Html.node "link" [href "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"] []
-  , Html.node "link" [href "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&family=Roboto+Condensed:wght@700&display=swap", rel "stylesheet"] []
-  , Card.config []
-    |> Card.headerH1 [ background "#222233", textcolor "#eeeeaa", font "Roboto Condensed, sans-serif" ] (makeTitle model.lmdexpr)
-    |> Card.footer [ background "#222233", textcolor "#ccccaa", font "Noto Sans JP, sans-serif", style "text-align" "right" ]
-      [ text "(c) 2020 "
-      , a [href "http://lmdexpr.com"] [text "Yuki Tajiri(lmdexpr)"]
+view : Model -> Browser.Document Msg
+view model =
+  { title = "lmdexpr.com"
+  , body  =
+    [ div [ class "responsive" ]
+      [ CDN.stylesheet
+      , Card.config []
+        |> Card.headerH1 [ bg "#222233", tc "#eeeeaa", ft roboto ] (makeTitle model.lmdexpr)
+        |> Card.footer [ bg "#222233", tc "#ccccaa", ft noto, style "text-align" "right" ]
+          [ text "(c) 2020 "
+          , a [href "http://lmdexpr.com"] [text "Yuki Tajiri(lmdexpr)"]
+          ]
+        |> Card.block [ Block.attrs [ bg "#222233", ft noto] ]
+          [ Block.custom <| if List.isEmpty model.loadQueue then viewLoaded model else viewLoading ]
+        |> Card.view
       ]
-    |> Card.block [ Block.attrs [ background "#222233", font "Noto Sans JP, sans-serif" ] ]
-      [ Block.custom <| case model.loadQueue of
-        Nothing -> viewLoaded model
-        _       -> viewLoading
-      ]
-    |> Card.view
-  ]
+    ]
+  }
 
 makeTitle : Array String -> List (Html Msg)
 makeTitle lmdexpr =
-  [ text "λx. { " ]
+  [ text <| String.fromChar '\u{03bb}' ++ "x. { " ]
   ++ Array.toList (Array.indexedMap (\ idx s -> span [ onMouseOver (Convert s idx) ] [ text <| s ++ " " ]) lmdexpr)
   ++ [ text "}" ]
-
-viewMain : Model -> Html Msg
-viewMain model =
-  case model.loadQueue of
-    Nothing -> viewLoaded model
-    _       -> viewLoading
 
 viewLoaded : Model -> Html Msg
 viewLoaded model = Accordion.config AccordionMsg
@@ -209,10 +214,10 @@ viewLoaded model = Accordion.config AccordionMsg
         Accordion.card
           { id = content.title
           , options = []
-          , header = Accordion.header [ style "background-color" "#444444" ]
+          , header = Accordion.header [ bg "#444444" ]
             <| Accordion.toggle [ style "width" "100%", style "text-align" "left", style "padding" "0" ]
-              [ div [ style "background-color" "#444444"
-                    , style "color" "#eeeeee"
+              [ div [ bg "#444444"
+                    , tc "#eeeeee"
                     , style "overflow" "hidden"
                     , style "white-space" "nowrap"
                     , style "width" "auto"
@@ -227,9 +232,15 @@ viewLoaded model = Accordion.config AccordionMsg
 
 viewLoading : Html Msg
 viewLoading =
-  div [ style "text-align" "center", font "Noto Sans JP, sans-serif", textcolor "#ccccaa" ]
+  div [ style "text-align" "center", ft noto, tc "#ccccaa" ]
     [ i [ class "fa fa-spinner fa-spin" ] [], text " Loading ..." ]
 
-font = style "font-family"
-background = style "background-color"
-textcolor = style "color"
+
+-- Utilities
+
+ft = style "font-family"
+bg = style "background-color"
+tc = style "color"
+
+roboto = "Roboto Condensed, sans-serif"
+noto   = "Noto Sans JP, sans-serif"
