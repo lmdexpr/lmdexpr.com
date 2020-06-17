@@ -141,7 +141,7 @@ loadNext : Model -> (Model, Cmd Msg)
 loadNext model =
   case model.loadQueue of
     hd :: tl -> ( { model | loadQueue = tl }, load hd )
-    _        -> case Parser.parse (Parser.s "" <?> Query.string "content") model.url of
+    _        -> case Parser.parse (Parser.query <| Query.string "content") model.url of
       Just (Just cid) -> ( { model | accordionState = Accordion.initialStateCardOpen cid }, Cmd.none )
       _               -> ( model, Cmd.none)
 

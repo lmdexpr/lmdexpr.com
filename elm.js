@@ -6753,65 +6753,6 @@ var $elm$url$Url$Parser$query = function (_v0) {
 			]);
 	};
 };
-var $elm$core$List$append = F2(
-	function (xs, ys) {
-		if (!ys.b) {
-			return xs;
-		} else {
-			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
-		}
-	});
-var $elm$core$List$concat = function (lists) {
-	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
-};
-var $elm$core$List$concatMap = F2(
-	function (f, list) {
-		return $elm$core$List$concat(
-			A2($elm$core$List$map, f, list));
-	});
-var $elm$url$Url$Parser$slash = F2(
-	function (_v0, _v1) {
-		var parseBefore = _v0;
-		var parseAfter = _v1;
-		return function (state) {
-			return A2(
-				$elm$core$List$concatMap,
-				parseAfter,
-				parseBefore(state));
-		};
-	});
-var $elm$url$Url$Parser$questionMark = F2(
-	function (parser, queryParser) {
-		return A2(
-			$elm$url$Url$Parser$slash,
-			parser,
-			$elm$url$Url$Parser$query(queryParser));
-	});
-var $elm$url$Url$Parser$s = function (str) {
-	return function (_v0) {
-		var visited = _v0.ak;
-		var unvisited = _v0.aa;
-		var params = _v0.ah;
-		var frag = _v0.ae;
-		var value = _v0.cR;
-		if (!unvisited.b) {
-			return _List_Nil;
-		} else {
-			var next = unvisited.a;
-			var rest = unvisited.b;
-			return _Utils_eq(next, str) ? _List_fromArray(
-				[
-					A5(
-					$elm$url$Url$Parser$State,
-					A2($elm$core$List$cons, next, visited),
-					rest,
-					params,
-					frag,
-					value)
-				]) : _List_Nil;
-		}
-	};
-};
 var $elm$url$Url$Parser$Internal$Parser = $elm$core$Basics$identity;
 var $elm$core$Maybe$withDefault = F2(
 	function (_default, maybe) {
@@ -6858,9 +6799,7 @@ var $author$project$Main$loadNext = function (model) {
 	} else {
 		var _v1 = A2(
 			$elm$url$Url$Parser$parse,
-			A2(
-				$elm$url$Url$Parser$questionMark,
-				$elm$url$Url$Parser$s(''),
+			$elm$url$Url$Parser$query(
 				$elm$url$Url$Parser$Query$string('content')),
 			model.v);
 		if ((!_v1.$) && (!_v1.a.$)) {
@@ -7516,6 +7455,17 @@ var $author$project$Main$errorToString = function (error) {
 			var errorMessage = error.a;
 			return errorMessage;
 	}
+};
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
 };
 var $pablohirafuji$elm_markdown$Markdown$Block$BlockQuote = function (a) {
 	return {$: 5, a: a};
