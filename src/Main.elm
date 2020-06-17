@@ -3,7 +3,11 @@ module Main exposing (..)
 import Array exposing (Array)
 
 import Browser
+import Browser.Navigation as Nav
+
 import Task
+
+import Url
 
 import Http exposing (Error)
 
@@ -32,11 +36,13 @@ import Hex
 -- MAIN
 
 main : Program D.Value Model Msg
-main = Browser.document
+main = Browser.application
   { init = init
-  , update = update
   , view = view
+  , update = update
   , subscriptions = subscriptions
+  , onUrlChange = UrlChanged
+  , onUrlRequest = LinkClicked
   }
 
 -- MODEL
@@ -53,6 +59,8 @@ type alias Model =
   , loadQueue : List JsonContent
   , accordionState : Accordion.State
   , lmdexpr : Array String
+  , key : Nav.Key
+  , url : Url.Url
   }
 
 -- JSON
@@ -104,17 +112,19 @@ contact =
     ]
   }
 
-initialModel : Model
-initialModel =
+initialModel : Url.Url -> Nav.Key -> List JsonContent -> Model
+initialModel url key loadQueue =
   { contents  = [ aboutme, contact ]
-  , loadQueue = []
+  , loadQueue = loadQueue
   , accordionState = Accordion.initialState
   , lmdexpr = Array.fromList [ "0x6c", "0x6d", "0x64", "0x65", "0x78", "0x70", "0x72" ]
+  , url = url
+  , key = key
   }
 
-init : D.Value -> (Model, Cmd Msg)
-init v =
-  loadNext { initialModel | loadQueue = Result.withDefault [] <| D.decodeValue (D.list decodeOfJsonContent) v }
+init : D.Value -> Url.Url -> Nav.Key -> (Model, Cmd Msg)
+init v url key =
+  loadNext <| initialModel url key <| Result.withDefault [] <| D.decodeValue (D.list decodeOfJsonContent) v
 
 -- ACTION, UPDATE
 
@@ -122,6 +132,8 @@ type Msg
   = Loaded Content (Result Http.Error String)
   | AccordionMsg Accordion.State
   | Convert String Int
+  | LinkClicked Browser.UrlRequest
+  | UrlChanged Url.Url
 
 loadNext : Model -> (Model, Cmd Msg)
 loadNext model =
@@ -132,7 +144,7 @@ loadNext model =
 load : JsonContent -> Cmd Msg
 load json =
   Http.get
-    { url = "https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/Posts/" ++ json.url
+    { url = "https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/Posts/" ++ json.url ++ ".md"
     , expect = Http.expectString <| Loaded <| jsonToContent json
     }
 
@@ -142,6 +154,11 @@ update msg model =
     Loaded content response -> loadNext { model | contents = model.contents ++ [ setContent response content ] }
     AccordionMsg state      -> ( { model | accordionState = state }, Cmd.none )
     Convert s idx           -> ( { model | lmdexpr = Array.set idx (convert s) model.lmdexpr }, Cmd.none )
+    LinkClicked request     ->
+      case request of
+        Browser.Internal url  -> ( model, Nav.pushUrl model.key (Url.toString url) )
+        Browser.External href -> ( model, Nav.load href )
+    UrlChanged url          -> ( { model | url = url, accordionState = Accordion.initialStateCardOpen <| Url.toString url }, Cmd.none )
 
 convert : String -> String
 convert target =
@@ -212,7 +229,7 @@ viewLoaded model = Accordion.config AccordionMsg
     ( List.map
       (\content ->
         Accordion.card
-          { id = content.title
+          { id = content.url
           , options = []
           , header = Accordion.header [ bg "#444444" ]
             <| Accordion.toggle [ style "width" "100%", style "text-align" "left", style "padding" "0" ]

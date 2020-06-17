@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.dh.dX === region.dD.dX)
+	if (region.di.dX === region.dE.dX)
 	{
-		return 'on line ' + region.dh.dX;
+		return 'on line ' + region.di.dX;
 	}
-	return 'on lines ' + region.dh.dX + ' through ' + region.dD.dX;
+	return 'on lines ' + region.di.dX + ' through ' + region.dE.dX;
 }
 
 
@@ -3968,7 +3968,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 		impl.fj,
 		impl.fh,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.dg && impl.dg(sendToApp)
+			var divertHrefToApp = impl.dh && impl.dh(sendToApp)
 			var view = impl.fk;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
@@ -3982,7 +3982,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.N) && (_VirtualDom_doc.title = title = doc.N);
+				(title !== doc.P) && (_VirtualDom_doc.title = title = doc.P);
 			});
 		}
 	);
@@ -4043,7 +4043,7 @@ function _Browser_application(impl)
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		dg: function(sendToApp)
+		dh: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4060,7 +4060,7 @@ function _Browser_application(impl)
 					sendToApp(onUrlRequest(
 						(next
 							&& curr.d8 === next.d8
-							&& curr.dI === next.dI
+							&& curr.dJ === next.dJ
 							&& curr.d3.a === next.d3.a
 						)
 							? $elm$browser$Browser$Internal(next)
@@ -4237,7 +4237,7 @@ function _Browser_getViewport()
 			eA: _Browser_window.pageXOffset,
 			eB: _Browser_window.pageYOffset,
 			cT: _Browser_doc.documentElement.clientWidth,
-			as: _Browser_doc.documentElement.clientHeight
+			at: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4248,7 +4248,7 @@ function _Browser_getScene()
 	var elem = _Browser_doc.documentElement;
 	return {
 		cT: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		as: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		at: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4273,13 +4273,13 @@ function _Browser_getViewportOf(id)
 		return {
 			ei: {
 				cT: node.scrollWidth,
-				as: node.scrollHeight
+				at: node.scrollHeight
 			},
 			fl: {
 				eA: node.scrollLeft,
 				eB: node.scrollTop,
 				cT: node.clientWidth,
-				as: node.clientHeight
+				at: node.clientHeight
 			}
 		};
 	});
@@ -4314,13 +4314,13 @@ function _Browser_getElement(id)
 				eA: x,
 				eB: y,
 				cT: _Browser_doc.documentElement.clientWidth,
-				as: _Browser_doc.documentElement.clientHeight
+				at: _Browser_doc.documentElement.clientHeight
 			},
 			eN: {
 				eA: x + rect.left,
 				eB: y + rect.top,
 				cT: rect.width,
-				as: rect.height
+				at: rect.height
 			}
 		};
 	});
@@ -4375,9 +4375,9 @@ var _Http_toTask = F3(function(router, toTask, request)
 		$elm$core$Maybe$isJust(request.ex) && _Http_track(router, xhr, request.ex.a);
 
 		try {
-			xhr.open(request.e1, request.P, true);
+			xhr.open(request.e1, request.C, true);
 		} catch (e) {
-			return done($elm$http$Http$BadUrl_(request.P));
+			return done($elm$http$Http$BadUrl_(request.C));
 		}
 
 		_Http_configureRequest(xhr, request);
@@ -4421,7 +4421,7 @@ function _Http_toResponse(toBody, xhr)
 function _Http_toMetadata(xhr)
 {
 	return {
-		P: xhr.responseURL,
+		C: xhr.responseURL,
 		fe: xhr.status,
 		ff: xhr.statusText,
 		eS: _Http_parseHeaders(xhr.getAllResponseHeaders())
@@ -4577,7 +4577,7 @@ var _Regex_fromStringWith = F2(function(options, string)
 {
 	var flags = 'g';
 	if (options.dZ) { flags += 'm'; }
-	if (options.dt) { flags += 'i'; }
+	if (options.du) { flags += 'i'; }
 
 	try
 	{
@@ -4685,7 +4685,13 @@ function _Url_percentDecode(string)
 	{
 		return $elm$core$Maybe$Nothing;
 	}
-}var $elm$core$Basics$EQ = 1;
+}var $author$project$Main$LinkClicked = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Main$UrlChanged = function (a) {
+	return {$: 4, a: a};
+};
+var $elm$core$Basics$EQ = 1;
 var $elm$core$Basics$GT = 2;
 var $elm$core$Basics$LT = 0;
 var $elm$core$List$cons = _List_cons;
@@ -5189,7 +5195,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {dH: fragment, dI: host, d1: path, d3: port_, d8: protocol, d9: query};
+		return {dI: fragment, dJ: host, d1: path, d3: port_, d8: protocol, d9: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5467,10 +5473,10 @@ var $elm$core$Task$perform = F2(
 		return $elm$core$Task$command(
 			A2($elm$core$Task$map, toMessage, task));
 	});
-var $elm$browser$Browser$document = _Browser_document;
+var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$JsonContent = F3(
 	function (title, date, url) {
-		return {U: date, N: title, P: url};
+		return {U: date, P: title, C: url};
 	});
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$map3 = _Json_map3;
@@ -5589,8 +5595,8 @@ var $author$project$Main$aboutme = {
 				]))
 		]),
 	U: $elm$core$String$fromChar('\u03BB'),
-	N: 'About me',
-	P: 'dammy'
+	P: 'About me',
+	C: 'dammy'
 };
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$i = _VirtualDom_node('i');
@@ -5728,8 +5734,8 @@ var $author$project$Main$contact = {
 				]))
 		]),
 	U: $elm$core$String$fromChar('\u03BB'),
-	N: 'Contact',
-	P: 'dammy'
+	P: 'Contact',
+	C: 'dammy'
 };
 var $elm$core$Array$fromListHelp = F3(
 	function (list, nodeList, nodeListSize) {
@@ -5770,15 +5776,20 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$State = $elm$core$Basics$
 var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
 var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialState = $elm$core$Dict$empty;
-var $author$project$Main$initialModel = {
-	aK: $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialState,
-	aS: _List_fromArray(
-		[$author$project$Main$aboutme, $author$project$Main$contact]),
-	a1: $elm$core$Array$fromList(
-		_List_fromArray(
-			['0x6c', '0x6d', '0x64', '0x65', '0x78', '0x70', '0x72'])),
-	aB: _List_Nil
-};
+var $author$project$Main$initialModel = F3(
+	function (url, key, loadQueue) {
+		return {
+			an: $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialState,
+			aR: _List_fromArray(
+				[$author$project$Main$aboutme, $author$project$Main$contact]),
+			c4: key,
+			a0: $elm$core$Array$fromList(
+				_List_fromArray(
+					['0x6c', '0x6d', '0x64', '0x65', '0x78', '0x70', '0x72'])),
+			a1: loadQueue,
+			C: url
+		};
+	});
 var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Main$Loaded = F2(
 	function (a, b) {
@@ -6532,7 +6543,7 @@ var $elm$http$Http$cmdMap = F2(
 					e1: r.e1,
 					fi: r.fi,
 					ex: r.ex,
-					P: r.P
+					C: r.C
 				});
 		}
 	});
@@ -6555,14 +6566,14 @@ var $elm$http$Http$subscription = _Platform_leaf('Http');
 var $elm$http$Http$request = function (r) {
 	return $elm$http$Http$command(
 		$elm$http$Http$Request(
-			{eE: false, S: r.S, eO: r.eO, eS: r.eS, e1: r.e1, fi: r.fi, ex: r.ex, P: r.P}));
+			{eE: false, S: r.S, eO: r.eO, eS: r.eS, e1: r.e1, fi: r.fi, ex: r.ex, C: r.C}));
 };
 var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
-		{S: $elm$http$Http$emptyBody, eO: r.eO, eS: _List_Nil, e1: 'GET', fi: $elm$core$Maybe$Nothing, ex: $elm$core$Maybe$Nothing, P: r.P});
+		{S: $elm$http$Http$emptyBody, eO: r.eO, eS: _List_Nil, e1: 'GET', fi: $elm$core$Maybe$Nothing, ex: $elm$core$Maybe$Nothing, C: r.C});
 };
 var $author$project$Main$jsonToContent = function (json) {
-	return {S: _List_Nil, U: json.U, N: json.N, P: json.P};
+	return {S: _List_Nil, U: json.U, P: json.P, C: json.C};
 };
 var $author$project$Main$load = function (json) {
 	return $elm$http$Http$get(
@@ -6570,20 +6581,20 @@ var $author$project$Main$load = function (json) {
 			eO: $elm$http$Http$expectString(
 				$author$project$Main$Loaded(
 					$author$project$Main$jsonToContent(json))),
-			P: 'https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/Posts/' + json.P
+			C: 'https://raw.githubusercontent.com/lmdexpr/lmdexpr.com/master/Posts/' + (json.C + '.md')
 		});
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$loadNext = function (model) {
-	var _v0 = model.aB;
+	var _v0 = model.a1;
 	if (_v0.b) {
 		var hd = _v0.a;
 		var tl = _v0.b;
 		return _Utils_Tuple2(
 			_Utils_update(
 				model,
-				{aB: tl}),
+				{a1: tl}),
 			$author$project$Main$load(hd));
 	} else {
 		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
@@ -6598,20 +6609,21 @@ var $elm$core$Result$withDefault = F2(
 			return def;
 		}
 	});
-var $author$project$Main$init = function (v) {
-	return $author$project$Main$loadNext(
-		_Utils_update(
-			$author$project$Main$initialModel,
-			{
-				aB: A2(
+var $author$project$Main$init = F3(
+	function (v, url, key) {
+		return $author$project$Main$loadNext(
+			A3(
+				$author$project$Main$initialModel,
+				url,
+				key,
+				A2(
 					$elm$core$Result$withDefault,
 					_List_Nil,
 					A2(
 						$elm$json$Json$Decode$decodeValue,
 						$elm$json$Json$Decode$list($author$project$Main$decodeOfJsonContent),
-						v))
-			}));
-};
+						v))));
+	});
 var $author$project$Main$AccordionMsg = function (a) {
 	return {$: 1, a: a};
 };
@@ -6675,7 +6687,7 @@ var $elm$browser$Browser$AnimationManager$Time = function (a) {
 };
 var $elm$browser$Browser$AnimationManager$State = F3(
 	function (subs, request, oldTime) {
-		return {da: oldTime, ed: request, ep: subs};
+		return {db: oldTime, ed: request, ep: subs};
 	});
 var $elm$browser$Browser$AnimationManager$init = $elm$core$Task$succeed(
 	A3($elm$browser$Browser$AnimationManager$State, _List_Nil, $elm$core$Maybe$Nothing, 0));
@@ -6684,7 +6696,7 @@ var $elm$browser$Browser$AnimationManager$rAF = _Browser_rAF(0);
 var $elm$browser$Browser$AnimationManager$onEffects = F3(
 	function (router, subs, _v0) {
 		var request = _v0.ed;
-		var oldTime = _v0.da;
+		var oldTime = _v0.db;
 		var _v1 = _Utils_Tuple2(request, subs);
 		if (_v1.a.$ === 1) {
 			if (!_v1.b.b) {
@@ -6733,7 +6745,7 @@ var $elm$time$Time$millisToPosix = $elm$core$Basics$identity;
 var $elm$browser$Browser$AnimationManager$onSelfMsg = F3(
 	function (router, newTime, _v0) {
 		var subs = _v0.ep;
-		var oldTime = _v0.da;
+		var oldTime = _v0.db;
 		var send = function (sub) {
 			if (!sub.$) {
 				var tagger = sub.a;
@@ -6838,7 +6850,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$subscriptions = F2(
 			}) : $elm$core$Platform$Sub$none;
 	});
 var $author$project$Main$subscriptions = function (model) {
-	return A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$subscriptions, model.aK, $author$project$Main$AccordionMsg);
+	return A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$subscriptions, model.an, $author$project$Main$AccordionMsg);
 };
 var $elm$core$Char$fromCode = _Char_fromCode;
 var $elm$core$Basics$pow = _Basics_pow;
@@ -7161,6 +7173,33 @@ var $author$project$Main$convert = function (target) {
 		}
 	}
 };
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$CardState = F2(
+	function (visibility, height) {
+		return {at: height, v: visibility};
+	});
+var $elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, dict) {
+				var key = _v0.a;
+				var value = _v0.b;
+				return A3($elm$core$Dict$insert, key, value, dict);
+			}),
+		$elm$core$Dict$empty,
+		assocs);
+};
+var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialStateCardOpen = function (id) {
+	return $elm$core$Dict$fromList(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				id,
+				A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$CardState, 3, $elm$core$Maybe$Nothing))
+			]));
+};
+var $elm$browser$Browser$Navigation$load = _Browser_load;
+var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $elm$core$Bitwise$and = _Bitwise_and;
 var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
 var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
@@ -7293,7 +7332,7 @@ var $elm$regex$Regex$fromStringWith = _Regex_fromStringWith;
 var $elm$regex$Regex$fromString = function (string) {
 	return A2(
 		$elm$regex$Regex$fromStringWith,
-		{dt: false, dZ: false},
+		{du: false, dZ: false},
 		string);
 };
 var $elm$regex$Regex$never = _Regex_never;
@@ -7747,18 +7786,6 @@ var $pablohirafuji$elm_markdown$Markdown$Entity$entitiesRegex = A2(
 	$elm$core$Maybe$withDefault,
 	$elm$regex$Regex$never,
 	$elm$regex$Regex$fromString('&([0-9a-zA-Z]+);'));
-var $elm$core$Dict$fromList = function (assocs) {
-	return A3(
-		$elm$core$List$foldl,
-		F2(
-			function (_v0, dict) {
-				var key = _v0.a;
-				var value = _v0.b;
-				return A3($elm$core$Dict$insert, key, value, dict);
-			}),
-		$elm$core$Dict$empty,
-		assocs);
-};
 var $pablohirafuji$elm_markdown$Markdown$Entity$entities = $elm$core$Dict$fromList(
 	_List_fromArray(
 		[
@@ -8130,7 +8157,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$extractOpenCodeFenceRM = function
 						$elm$core$Maybe$withDefault,
 						0,
 						A2($elm$core$Maybe$map, $elm$core$String$length, maybeIndent)),
-					c4: A2(
+					c5: A2(
 						$elm$core$Maybe$map,
 						$pablohirafuji$elm_markdown$Markdown$Helpers$formatStr,
 						A2(
@@ -8193,7 +8220,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$extractOrderedListRM = function (
 		return $elm$core$Maybe$Just(
 			_Utils_Tuple3(
 				{
-					aV: delimiter,
+					aU: delimiter,
 					u: $elm$core$String$length(indentString) + 1,
 					W: false,
 					bj: A2(
@@ -8303,7 +8330,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$extractUnorderedListRM = function
 		return $elm$core$Maybe$Just(
 			_Utils_Tuple3(
 				{
-					aV: delimiter,
+					aU: delimiter,
 					u: $elm$core$String$length(indentString) + 1,
 					W: false,
 					bj: $pablohirafuji$elm_markdown$Markdown$Block$Unordered
@@ -8677,7 +8704,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$parseListLine = F3(
 						var model = _v2.a;
 						var items = _v2.b;
 						var astTail = ast.b;
-						return _Utils_eq(listBlock.aV, model.aV) ? function (a) {
+						return _Utils_eq(listBlock.aU, model.aU) ? function (a) {
 							return A2($elm$core$List$cons, a, astTail);
 						}(
 							A2(
@@ -8781,14 +8808,14 @@ var $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlAttributes = _
 	['name', 'class']);
 var $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlElements = _List_fromArray(
 	['address', 'article', 'aside', 'b', 'blockquote', 'br', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'dd', 'details', 'div', 'dl', 'dt', 'figcaption', 'figure', 'footer', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'legend', 'li', 'menu', 'menuitem', 'nav', 'ol', 'optgroup', 'option', 'p', 'pre', 'section', 'strike', 'summary', 'small', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'ul']);
-var $pablohirafuji$elm_markdown$Markdown$Config$defaultSanitizeOptions = {dp: $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlAttributes, dq: $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlElements};
+var $pablohirafuji$elm_markdown$Markdown$Config$defaultSanitizeOptions = {dq: $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlAttributes, dr: $pablohirafuji$elm_markdown$Markdown$Config$defaultAllowedHtmlElements};
 var $pablohirafuji$elm_markdown$Markdown$Config$defaultOptions = {
 	ea: $pablohirafuji$elm_markdown$Markdown$Config$Sanitize($pablohirafuji$elm_markdown$Markdown$Config$defaultSanitizeOptions),
 	el: false
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$initParser = F3(
 	function (options, refs, rawText) {
-		return {b: _List_Nil, e6: options, A: rawText, df: refs, j: _List_Nil};
+		return {b: _List_Nil, e6: options, A: rawText, dg: refs, j: _List_Nil};
 	});
 var $pablohirafuji$elm_markdown$Markdown$Inline$CodeInline = function (a) {
 	return {$: 2, a: a};
@@ -8876,7 +8903,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$prepareChildMatch = F2(
 	function (parentMatch, childMatch) {
 		return _Utils_update(
 			childMatch,
-			{dD: childMatch.dD - parentMatch.M, dh: childMatch.dh - parentMatch.M, aI: childMatch.aI - parentMatch.M, M: childMatch.M - parentMatch.M});
+			{dE: childMatch.dE - parentMatch.N, di: childMatch.di - parentMatch.N, aI: childMatch.aI - parentMatch.N, N: childMatch.N - parentMatch.N});
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$addChild = F2(
 	function (parentMatch, childMatch) {
@@ -8898,7 +8925,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$organizeMatch = F2(
 		} else {
 			var prevMatch = matches.a;
 			var matchesTail = matches.b;
-			return (_Utils_cmp(prevMatch.dD, match.dh) < 1) ? A2($elm$core$List$cons, match, matches) : (((_Utils_cmp(prevMatch.dh, match.dh) < 0) && (_Utils_cmp(prevMatch.dD, match.dD) > 0)) ? A2(
+			return (_Utils_cmp(prevMatch.dE, match.di) < 1) ? A2($elm$core$List$cons, match, matches) : (((_Utils_cmp(prevMatch.di, match.di) < 0) && (_Utils_cmp(prevMatch.dE, match.dE) > 0)) ? A2(
 				$elm$core$List$cons,
 				A2($pablohirafuji$elm_markdown$Markdown$InlineParser$addChild, prevMatch, match),
 				matchesTail) : matches);
@@ -8911,7 +8938,7 @@ function $pablohirafuji$elm_markdown$Markdown$InlineParser$cyclic$organizeMatche
 		$elm$core$List$sortBy(
 			function (_v0) {
 				var match = _v0;
-				return match.dh;
+				return match.di;
 			}),
 		A2(
 			$elm$core$Basics$composeR,
@@ -8940,12 +8967,12 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$organizeParserMatches = fu
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$NormalType = {$: 0};
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$normalMatch = function (text) {
 	return {
-		dD: 0,
+		dE: 0,
 		b: _List_Nil,
-		dh: 0,
+		di: 0,
 		t: $pablohirafuji$elm_markdown$Markdown$Helpers$formatStr(text),
 		aI: 0,
-		M: 0,
+		N: 0,
 		bj: $pablohirafuji$elm_markdown$Markdown$InlineParser$NormalType
 	};
 };
@@ -8958,7 +8985,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatch = F3(
 				b: A3($pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatches, matchModel.t, _List_Nil, matchModel.b)
 			});
 		if (!parsedMatches.b) {
-			var finalStr = A2($elm$core$String$dropLeft, matchModel.dD, rawText);
+			var finalStr = A2($elm$core$String$dropLeft, matchModel.dE, rawText);
 			return $elm$core$String$isEmpty(finalStr) ? _List_fromArray(
 				[updtMatch]) : _List_fromArray(
 				[
@@ -8968,13 +8995,13 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatch = F3(
 		} else {
 			var matchHead = parsedMatches.a;
 			var matchesTail = parsedMatches.b;
-			return _Utils_eq(matchHead.bj, $pablohirafuji$elm_markdown$Markdown$InlineParser$NormalType) ? A2($elm$core$List$cons, updtMatch, parsedMatches) : (_Utils_eq(matchModel.dD, matchHead.dh) ? A2($elm$core$List$cons, updtMatch, parsedMatches) : ((_Utils_cmp(matchModel.dD, matchHead.dh) < 0) ? A2(
+			return _Utils_eq(matchHead.bj, $pablohirafuji$elm_markdown$Markdown$InlineParser$NormalType) ? A2($elm$core$List$cons, updtMatch, parsedMatches) : (_Utils_eq(matchModel.dE, matchHead.di) ? A2($elm$core$List$cons, updtMatch, parsedMatches) : ((_Utils_cmp(matchModel.dE, matchHead.di) < 0) ? A2(
 				$elm$core$List$cons,
 				updtMatch,
 				A2(
 					$elm$core$List$cons,
 					$pablohirafuji$elm_markdown$Markdown$InlineParser$normalMatch(
-						A3($elm$core$String$slice, matchModel.dD, matchHead.dh, rawText)),
+						A3($elm$core$String$slice, matchModel.dE, matchHead.di, rawText)),
 					parsedMatches)) : parsedMatches));
 		}
 	});
@@ -8990,10 +9017,10 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$parseTextMatches = F3(
 						]);
 				} else {
 					var matchModel = parsedMatches.a;
-					return (matchModel.dh > 0) ? A2(
+					return (matchModel.di > 0) ? A2(
 						$elm$core$List$cons,
 						$pablohirafuji$elm_markdown$Markdown$InlineParser$normalMatch(
-							A2($elm$core$String$left, matchModel.dh, rawText)),
+							A2($elm$core$String$left, matchModel.di, rawText)),
 						parsedMatches) : parsedMatches;
 				}
 			} else {
@@ -9540,7 +9567,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$inlineLinkTypeOrImageTypeR
 				return _Utils_update(
 					matchModel,
 					{
-						dD: matchModel.dD + $elm$core$String$length(regexMatch.a2),
+						dE: matchModel.dE + $elm$core$String$length(regexMatch.a2),
 						bj: function () {
 							var _v5 = matchModel.bj;
 							if (_v5.$ === 5) {
@@ -9616,7 +9643,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$refRegexToMatch = F3(
 			return _Utils_update(
 				matchModel,
 				{
-					dD: matchModel.dD + regexMatchLength,
+					dE: matchModel.dE + regexMatchLength,
 					bj: function () {
 						var _v0 = matchModel.bj;
 						if (_v0.$ === 5) {
@@ -9652,7 +9679,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$refRegexToMatch = F3(
 		var maybeRefItem = A2(
 			$elm$core$Dict$get,
 			$pablohirafuji$elm_markdown$Markdown$Helpers$prepareRefLabel(refLabel),
-			model.df);
+			model.dg);
 		return A2($elm$core$Maybe$map, toMatch, maybeRefItem);
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$checkForRefLinkTypeOrImageType = function (_v0) {
@@ -9701,7 +9728,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$checkParsedAheadOverlappin
 			$elm$core$List$filter,
 			function (_v1) {
 				var testMatch = _v1;
-				return (_Utils_cmp(match.dD, testMatch.dh) > 0) && (_Utils_cmp(match.dD, testMatch.dD) < 0);
+				return (_Utils_cmp(match.dE, testMatch.di) > 0) && (_Utils_cmp(match.dE, testMatch.dE) < 0);
 			},
 			remainMatches);
 		return ($elm$core$List$isEmpty(remainMatches) || $elm$core$List$isEmpty(overlappingMatches)) ? $elm$core$Result$Ok(parser) : $elm$core$Result$Err(0);
@@ -9837,8 +9864,8 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$htmlFromRegex = F3(
 					$pablohirafuji$elm_markdown$Markdown$InlineParser$addToken,
 					model,
 					{
-						eY: match.dh,
-						c: match.dD - match.dh,
+						eY: match.di,
+						c: match.dE - match.di,
 						g: A2(
 							$pablohirafuji$elm_markdown$Markdown$InlineParser$HtmlToken,
 							_Utils_eq(maybeClose, $elm$core$Maybe$Nothing) && _Utils_eq(maybeSelfClosing, $elm$core$Maybe$Nothing),
@@ -9865,8 +9892,8 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$htmlFromRegex = F3(
 					return noAttributesInCloseTag ? $elm$core$Maybe$Just(
 						updateModel(attributes)) : $elm$core$Maybe$Nothing;
 				case 1:
-					var allowedHtmlElements = _v4.a.dq;
-					var allowedHtmlAttributes = _v4.a.dp;
+					var allowedHtmlElements = _v4.a.dr;
+					var allowedHtmlAttributes = _v4.a.dq;
 					return (A2($elm$core$List$member, tag, allowedHtmlElements) && noAttributesInCloseTag) ? $elm$core$Maybe$Just(
 						updateModel(
 							A2(filterAttributes, attributes, allowedHtmlAttributes))) : $elm$core$Maybe$Nothing;
@@ -9964,7 +9991,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$reverseTokens = function (
 };
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$tokenToMatch = F2(
 	function (token, type_) {
-		return {dD: token.eY + token.c, b: _List_Nil, dh: token.eY, t: '', aI: 0, M: 0, bj: type_};
+		return {dE: token.eY + token.c, b: _List_Nil, di: token.eY, t: '', aI: 0, N: 0, bj: type_};
 	});
 var $pablohirafuji$elm_markdown$Markdown$InlineParser$lineBreakTTM = function (_v0) {
 	lineBreakTTM:
@@ -10010,7 +10037,7 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$removeParsedAheadTokens = 
 				A2(
 					$elm$core$List$filter,
 					function (token) {
-						return _Utils_cmp(token.eY, match.dD) > -1;
+						return _Utils_cmp(token.eY, match.dE) > -1;
 					},
 					tokensTail),
 				parser);
@@ -10500,13 +10527,13 @@ var $pablohirafuji$elm_markdown$Markdown$InlineParser$tokenPairToMatch = F6(
 		var start = openToken.eY;
 		var end = closeToken.eY + closeToken.c;
 		var match = {
-			dD: end,
+			dE: end,
 			b: _List_Nil,
-			dh: start,
+			di: start,
 			t: processText(
 				A3($elm$core$String$slice, textStart, textEnd, model.A)),
 			aI: textEnd,
-			M: textStart,
+			N: textStart,
 			bj: type_
 		};
 		var matches = A2(
@@ -10633,7 +10660,7 @@ var $elm$core$Tuple$mapSecond = F2(
 	});
 var $pablohirafuji$elm_markdown$Markdown$Block$dropRefString = F2(
 	function (rawText, inlineMatch) {
-		var strippedText = A2($elm$core$String$dropLeft, inlineMatch.c5, rawText);
+		var strippedText = A2($elm$core$String$dropLeft, inlineMatch.c6, rawText);
 		return A2($elm$regex$Regex$contains, $pablohirafuji$elm_markdown$Markdown$Block$blankLineRegex, strippedText) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(strippedText);
 	});
 var $elm$core$Dict$member = F2(
@@ -10650,7 +10677,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$insertLinkMatch = F2(
 		return A2($elm$core$Dict$member, linkMatch.af, refs) ? refs : A3(
 			$elm$core$Dict$insert,
 			linkMatch.af,
-			_Utils_Tuple2(linkMatch.P, linkMatch.c6),
+			_Utils_Tuple2(linkMatch.C, linkMatch.c7),
 			refs);
 	});
 var $pablohirafuji$elm_markdown$Markdown$Block$extractUrlTitleRegex = function (regexMatch) {
@@ -10670,11 +10697,11 @@ var $pablohirafuji$elm_markdown$Markdown$Block$extractUrlTitleRegex = function (
 		var toReturn = function (rawUrl) {
 			return {
 				af: rawText,
-				c5: $elm$core$String$length(regexMatch.a2),
-				c6: $pablohirafuji$elm_markdown$Markdown$Helpers$returnFirstJust(
+				c6: $elm$core$String$length(regexMatch.a2),
+				c7: $pablohirafuji$elm_markdown$Markdown$Helpers$returnFirstJust(
 					_List_fromArray(
 						[maybeTitleSingleQuotes, maybeTitleDoubleQuotes, maybeTitleParenthesis])),
-				P: rawUrl
+				C: rawUrl
 			};
 		};
 		var maybeRawUrl = $pablohirafuji$elm_markdown$Markdown$Helpers$returnFirstJust(
@@ -10694,7 +10721,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$maybeLinkMatch = function (rawTex
 	return A2(
 		$elm$core$Maybe$andThen,
 		function (linkMatch) {
-			return ((linkMatch.P === '') || (linkMatch.af === '')) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(linkMatch);
+			return ((linkMatch.C === '') || (linkMatch.af === '')) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(linkMatch);
 		},
 		A2(
 			$elm$core$Maybe$map,
@@ -11141,7 +11168,7 @@ var $pablohirafuji$elm_markdown$Markdown$Block$defaultHtml = F3(
 									]))
 							]);
 					};
-					var _v3 = model.c4;
+					var _v3 = model.c5;
 					if (!_v3.$) {
 						var language = _v3.a;
 						return basicView(
@@ -11250,8 +11277,8 @@ var $author$project$Main$setContent = F2(
 						$author$project$Main$errorToString(err))
 					]),
 				U: '',
-				N: 'HTTP request ERROR',
-				P: ''
+				P: 'HTTP request ERROR',
+				C: ''
 			};
 		} else {
 			var raw = response.a;
@@ -11262,6 +11289,50 @@ var $author$project$Main$setContent = F2(
 				});
 		}
 	});
+var $elm$url$Url$addPort = F2(
+	function (maybePort, starter) {
+		if (maybePort.$ === 1) {
+			return starter;
+		} else {
+			var port_ = maybePort.a;
+			return starter + (':' + $elm$core$String$fromInt(port_));
+		}
+	});
+var $elm$url$Url$addPrefixed = F3(
+	function (prefix, maybeSegment, starter) {
+		if (maybeSegment.$ === 1) {
+			return starter;
+		} else {
+			var segment = maybeSegment.a;
+			return _Utils_ap(
+				starter,
+				_Utils_ap(prefix, segment));
+		}
+	});
+var $elm$url$Url$toString = function (url) {
+	var http = function () {
+		var _v0 = url.d8;
+		if (!_v0) {
+			return 'http://';
+		} else {
+			return 'https://';
+		}
+	}();
+	return A3(
+		$elm$url$Url$addPrefixed,
+		'#',
+		url.dI,
+		A3(
+			$elm$url$Url$addPrefixed,
+			'?',
+			url.d9,
+			_Utils_ap(
+				A2(
+					$elm$url$Url$addPort,
+					url.d3,
+					_Utils_ap(http, url.dJ)),
+				url.d1)));
+};
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -11272,8 +11343,8 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							aS: _Utils_ap(
-								model.aS,
+							aR: _Utils_ap(
+								model.aR,
 								_List_fromArray(
 									[
 										A2($author$project$Main$setContent, response, content)
@@ -11284,20 +11355,47 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aK: state}),
+						{an: state}),
 					$elm$core$Platform$Cmd$none);
-			default:
+			case 2:
 				var s = msg.a;
 				var idx = msg.b;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
-							a1: A3(
+							a0: A3(
 								$elm$core$Array$set,
 								idx,
 								$author$project$Main$convert(s),
-								model.a1)
+								model.a0)
+						}),
+					$elm$core$Platform$Cmd$none);
+			case 3:
+				var request = msg.a;
+				if (!request.$) {
+					var url = request.a;
+					return _Utils_Tuple2(
+						model,
+						A2(
+							$elm$browser$Browser$Navigation$pushUrl,
+							model.c4,
+							$elm$url$Url$toString(url)));
+				} else {
+					var href = request.a;
+					return _Utils_Tuple2(
+						model,
+						$elm$browser$Browser$Navigation$load(href));
+				}
+			default:
+				var url = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							an: $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$initialStateCardOpen(
+								$elm$url$Url$toString(url)),
+							C: url
 						}),
 					$elm$core$Platform$Cmd$none);
 		}
@@ -11375,7 +11473,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Text$textAlignDirOption = 
 	}
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Internal$Text$textAlignClass = function (_v0) {
-	var dir = _v0.dB;
+	var dir = _v0.dC;
 	var size = _v0.cD;
 	return $elm$html$Html$Attributes$class(
 		'text' + (A2(
@@ -11810,18 +11908,18 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$cards = F2(
 			{bF: cards_});
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$config = function (toMsg) {
-	return {bF: _List_Nil, a5: false, dl: toMsg, al: false};
+	return {bF: _List_Nil, a5: false, dm: toMsg, al: false};
 };
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Header = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$headerPrivate = F3(
 	function (elemFn, attributes, toggle_) {
-		return {bC: attributes, bH: _List_Nil, bI: _List_Nil, dC: elemFn, et: toggle_};
+		return {bC: attributes, bH: _List_Nil, bI: _List_Nil, dD: elemFn, et: toggle_};
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$header = $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$headerPrivate($elm$html$Html$div);
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$Toggle = $elm$core$Basics$identity;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$toggle = F2(
 	function (attributes, children) {
-		return {bC: attributes, dv: children};
+		return {bC: attributes, dw: children};
 	});
 var $elm$core$String$fromFloat = _String_fromNumber;
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$getOrInitCardState = F2(
@@ -11829,7 +11927,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$getOrInitCardState = F2(
 		var cardStates = _v0;
 		return A2(
 			$elm$core$Maybe$withDefault,
-			{as: $elm$core$Maybe$Nothing, v: 0},
+			{at: $elm$core$Maybe$Nothing, v: 0},
 			A2($elm$core$Dict$get, id, cardStates));
 	});
 var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$transitionStyle = F2(
@@ -11867,7 +11965,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$animationAttributes = F3(
 				function (v) {
 					return $elm$core$String$fromFloat(v) + 'px';
 				},
-				cardState.as));
+				cardState.at));
 		var _v1 = cardState.v;
 		switch (_v1) {
 			case 0:
@@ -11877,7 +11975,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$animationAttributes = F3(
 			case 2:
 				return styles(pixelHeight);
 			default:
-				var _v2 = cardState.as;
+				var _v2 = cardState.at;
 				if (!_v2.$) {
 					var x = _v2.a;
 					return styles(pixelHeight);
@@ -11946,7 +12044,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$clickHandler = F4(
 		var id = _v0.eW;
 		var currentCardState = A2(
 			$elm$core$Maybe$withDefault,
-			{as: $elm$core$Maybe$Nothing, v: 0},
+			{at: $elm$core$Maybe$Nothing, v: 0},
 			A2($elm$core$Dict$get, id, cardStates));
 		var initStates = A3($elm$core$Dict$insert, id, currentCardState, cardStates);
 		var updOthersHidden = function (h) {
@@ -11955,7 +12053,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$clickHandler = F4(
 				F2(
 					function (i, c) {
 						return _Utils_eq(i, id) ? {
-							as: $elm$core$Maybe$Just(h),
+							at: $elm$core$Maybe$Just(h),
 							v: A2($EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$visibilityTransition, configRec.al, c.v)
 						} : (((c.v === 3) && (configRec.al && configRec.a5)) ? _Utils_update(
 							c,
@@ -11970,7 +12068,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$clickHandler = F4(
 			function (v) {
 				return $elm$json$Json$Decode$succeed(
 					{
-						e0: configRec.dl(
+						e0: configRec.dm(
 							updOthersHidden(v)),
 						e7: true,
 						fg: true
@@ -12021,7 +12119,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderToggle = F3(
 		var headerRec = _v0;
 		var _v1 = headerRec.et;
 		var attributes = _v1.bC;
-		var children = _v1.dv;
+		var children = _v1.dw;
 		return A2(
 			$elm$html$Html$button,
 			_Utils_ap(
@@ -12042,7 +12140,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$renderCardHeader = F3(
 		var _v0 = cardRec.eR;
 		var headerRec = _v0;
 		return A2(
-			headerRec.dC,
+			headerRec.dD,
 			_Utils_ap(
 				headerRec.bC,
 				_List_fromArray(
@@ -12095,7 +12193,7 @@ var $EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$withAnimation = function 
 var $author$project$Main$viewLoaded = function (model) {
 	return A2(
 		$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$view,
-		model.aK,
+		model.an,
 		A2(
 			$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$cards,
 			A2(
@@ -12143,14 +12241,14 @@ var $author$project$Main$viewLoaded = function (model) {
 												]),
 											_List_fromArray(
 												[
-													$elm$html$Html$text('[' + (content.U + ('] ' + content.N)))
+													$elm$html$Html$text('[' + (content.U + ('] ' + content.P)))
 												]))
 										]))),
-							eW: content.N,
+							eW: content.C,
 							e6: _List_Nil
 						});
 				},
-				model.aS),
+				model.aR),
 			$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$withAnimation(
 				$EdutainmentLIVE$elm_bootstrap$Bootstrap$Accordion$config($author$project$Main$AccordionMsg))));
 };
@@ -12201,7 +12299,7 @@ var $author$project$Main$view = function (model) {
 							_List_fromArray(
 								[
 									$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$Block$custom(
-									$elm$core$List$isEmpty(model.aB) ? $author$project$Main$viewLoaded(model) : $author$project$Main$viewLoading)
+									$elm$core$List$isEmpty(model.a1) ? $author$project$Main$viewLoaded(model) : $author$project$Main$viewLoading)
 								]),
 							A3(
 								$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$footer,
@@ -12234,13 +12332,13 @@ var $author$project$Main$view = function (model) {
 											$author$project$Main$tc('#eeeeaa'),
 											$author$project$Main$ft($author$project$Main$roboto)
 										]),
-									$author$project$Main$makeTitle(model.a1),
+									$author$project$Main$makeTitle(model.a0),
 									$EdutainmentLIVE$elm_bootstrap$Bootstrap$Card$config(_List_Nil)))))
 					]))
 			]),
-		N: 'lmdexpr.com'
+		P: 'lmdexpr.com'
 	};
 };
-var $author$project$Main$main = $elm$browser$Browser$document(
-	{eZ: $author$project$Main$init, fh: $author$project$Main$subscriptions, fj: $author$project$Main$update, fk: $author$project$Main$view});
+var $author$project$Main$main = $elm$browser$Browser$application(
+	{eZ: $author$project$Main$init, e3: $author$project$Main$UrlChanged, e4: $author$project$Main$LinkClicked, fh: $author$project$Main$subscriptions, fj: $author$project$Main$update, fk: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main($elm$json$Json$Decode$value)(0)}});}(this));
