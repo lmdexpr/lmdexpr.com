@@ -1,35 +1,27 @@
-module Main exposing (..)
+module Main exposing (main)
 
 import Array exposing (Array)
 
 import Browser
 import Browser.Navigation as Nav
 
-import Task
-
 import Url
-import Url.Parser as Parser exposing ((<?>))
+import Url.Parser as Parser
 import Url.Parser.Query as Query
-
-import Http exposing (Error)
 
 import Json.Decode as D
 import Json.Encode exposing (string)
 
-import Html exposing ( Html, Attribute, main_, span, a, p, img ,br, text, strong, option, i, div, h1, h3 )
-import Html.Attributes exposing ( rel, href, class, style, width, property )
-import Html.Events exposing ( onClick, onMouseOver )
+import Http
+
+import Html exposing ( Html, Attribute, span, a, p, text, i, div, h3 )
+import Html.Attributes exposing ( href, class, style )
+import Html.Events exposing ( onMouseOver )
 
 import Bootstrap.CDN as CDN
-import Bootstrap.Grid as Grid
-import Bootstrap.Grid.Row as Row
-import Bootstrap.Grid.Col as Col
 import Bootstrap.Accordion as Accordion
-import Bootstrap.Button as Button
-import Bootstrap.Text as Text
 import Bootstrap.Card as Card
 import Bootstrap.Card.Block as Block
-import Bootstrap.Utilities.Spacing exposing (mb0)
 
 import Markdown
 
@@ -222,8 +214,8 @@ view model =
 
 makeTitle : Array String -> List (Html Msg)
 makeTitle lmdexpr =
-  [ text <| String.fromChar '\u{03bb}' ++ "x. { " ]
-  ++ Array.toList (Array.indexedMap (\ idx s -> span [ onMouseOver (Convert s idx) ] [ text <| s ++ " " ]) lmdexpr)
+  (text <| String.fromChar '\u{03bb}' ++ "x. { ")
+  :: Array.toList (Array.indexedMap (\ idx s -> span [ onMouseOver (Convert s idx) ] [ text <| s ++ " " ]) lmdexpr)
   ++ [ text "}" ]
 
 viewLoaded : Model -> Html Msg
@@ -237,15 +229,15 @@ viewLoaded model = Accordion.config AccordionMsg
           { id = content.url
           , options = []
           , header = Accordion.header [ bg "#444444" ]
-            <| Accordion.toggle [ style "width" "100%", style "text-align" "left", style "padding" "0" ]
-              [ a [ bg "#444444"
-                    , tc "#eeeeee"
-                    , style "overflow" "hidden"
-                    , style "white-space" "nowrap"
-                    , style "width" "auto"
-                    , style "text-overflow" "ellipsis"
-                    , href <| "?content=" ++ content.url ]
-                [ text ("[" ++ content.date ++ "] " ++ content.title) ]
+            <| Accordion.toggle [ style "width" "100%", style "text-align" "left" ]
+              [ a [ href <| "?content=" ++ content.url, style "padding" "0"]
+                [ div [ bg "#444444"
+                      , tc "#eeeeee"
+                      , style "overflow" "hidden"
+                      , style "white-space" "nowrap"
+                      , style "text-overflow" "ellipsis" ]
+                  [ text ("[" ++ content.date ++ "] " ++ content.title) ]
+                ]
               ]
           , blocks = [ Accordion.block [] [ Block.custom <| div [] content.body ] ]
           }
@@ -261,9 +253,18 @@ viewLoading =
 
 -- Utilities
 
+ft : String -> Attribute Msg
 ft = style "font-family"
+
+bg : String -> Attribute Msg
 bg = style "background-color"
+
+tc : String -> Attribute Msg
 tc = style "color"
 
+roboto : String
 roboto = "Roboto Condensed, sans-serif"
+
+noto : String
 noto   = "Noto Sans JP, sans-serif"
+

@@ -11874,12 +11874,10 @@ var $elm$html$Html$Events$onMouseOver = function (msg) {
 };
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Main$makeTitle = function (lmdexpr) {
-	return _Utils_ap(
-		_List_fromArray(
-			[
-				$elm$html$Html$text(
-				$elm$core$String$fromChar('\u03BB') + 'x. { ')
-			]),
+	return A2(
+		$elm$core$List$cons,
+		$elm$html$Html$text(
+			$elm$core$String$fromChar('\u03BB') + 'x. { '),
 		_Utils_ap(
 			$elm$core$Array$toList(
 				A2(
@@ -12405,8 +12403,7 @@ var $author$project$Main$viewLoaded = function (model) {
 									_List_fromArray(
 										[
 											A2($elm$html$Html$Attributes$style, 'width', '100%'),
-											A2($elm$html$Html$Attributes$style, 'text-align', 'left'),
-											A2($elm$html$Html$Attributes$style, 'padding', '0')
+											A2($elm$html$Html$Attributes$style, 'text-align', 'left')
 										]),
 									_List_fromArray(
 										[
@@ -12414,17 +12411,25 @@ var $author$project$Main$viewLoaded = function (model) {
 											$elm$html$Html$a,
 											_List_fromArray(
 												[
-													$author$project$Main$bg('#444444'),
-													$author$project$Main$tc('#eeeeee'),
-													A2($elm$html$Html$Attributes$style, 'overflow', 'hidden'),
-													A2($elm$html$Html$Attributes$style, 'white-space', 'nowrap'),
-													A2($elm$html$Html$Attributes$style, 'width', 'auto'),
-													A2($elm$html$Html$Attributes$style, 'text-overflow', 'ellipsis'),
-													$elm$html$Html$Attributes$href('?content=' + content.v)
+													$elm$html$Html$Attributes$href('?content=' + content.v),
+													A2($elm$html$Html$Attributes$style, 'padding', '0')
 												]),
 											_List_fromArray(
 												[
-													$elm$html$Html$text('[' + (content.U + ('] ' + content.P)))
+													A2(
+													$elm$html$Html$div,
+													_List_fromArray(
+														[
+															$author$project$Main$bg('#444444'),
+															$author$project$Main$tc('#eeeeee'),
+															A2($elm$html$Html$Attributes$style, 'overflow', 'hidden'),
+															A2($elm$html$Html$Attributes$style, 'white-space', 'nowrap'),
+															A2($elm$html$Html$Attributes$style, 'text-overflow', 'ellipsis')
+														]),
+													_List_fromArray(
+														[
+															$elm$html$Html$text('[' + (content.U + ('] ' + content.P)))
+														]))
 												]))
 										]))),
 							eW: content.v,
