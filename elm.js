@@ -5535,7 +5535,7 @@ var $author$project$Main$aboutme = {
 						]),
 					_List_fromArray(
 						[
-							$elm$html$Html$text('Chatwork Inc.')
+							$elm$html$Html$text('Chatwork Co., Ltd.')
 						])),
 					$elm$html$Html$text(' (2020/06/01 ~)')
 				])),
