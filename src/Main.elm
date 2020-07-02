@@ -84,7 +84,7 @@ aboutme =
   , url = "about"
   , body =
     [ h3 [] [ text "LMDEXPR a.k.a. Yuki Tajiri" ]
-    , p [] [ text "I work as server-side engineer @", a [ href "https://corp.chatwork.com/ja/" ] [ text "Chatwork Inc." ], text " (2020/06/01 ~)" ]
+    , p [] [ text "I work as server-side engineer @", a [ href "https://corp.chatwork.com/ja/" ] [ text "Chatwork Co., Ltd." ], text " (2020/06/01 ~)" ]
     , p [] [ text "Droped out Master of Mathematics @", a [ href "https://www.kobe-u.ac.jp/" ] [ text "Kobe University" ], text " (2019/04 ~ 2020/10)" ]
     , p [] [ text "Graduated Bachelor of Mathematics @", a [ href "https://www.kobe-u.ac.jp/" ] [ text "Kobe University" ], text " (2017/04 ~ 2019/03)" ]
     , p [] [ text "Graduated Associate Degree of Engineering @", a [ href "https://kumamoto-nct.ac.jp/" ] [ text "NIT, Kumamoto College" ], text " (2017/04 ~ 2019/03)" ]
