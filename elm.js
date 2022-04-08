@@ -5591,7 +5591,7 @@ var $author$project$Main$aboutme = {
 						[
 							$elm$html$Html$text('NIT, Kumamoto College')
 						])),
-					$elm$html$Html$text(' (2017/04 ~ 2019/03)')
+					$elm$html$Html$text(' (2012/04 ~ 2017/03)')
 				]))
 		]),
 	U: $elm$core$String$fromChar('\u03BB'),
