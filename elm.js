@@ -5544,7 +5544,7 @@ var $author$project$Main$aboutme = {
 			_List_Nil,
 			_List_fromArray(
 				[
-					$elm$html$Html$text('Droped out Master of Mathematics @'),
+					$elm$html$Html$text('Dropped out Master of Mathematics @'),
 					A2(
 					$elm$html$Html$a,
 					_List_fromArray(
