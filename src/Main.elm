@@ -84,7 +84,8 @@ aboutme =
   , url = "about"
   , body =
     [ h3 [] [ text "LMDEXPR a.k.a. Yuki Tajiri" ]
-    , p [] [ text "I work as server-side engineer @", a [ href "https://corp.chatwork.com/ja/" ] [ text "Chatwork Co., Ltd." ], text " (2020/06/01 ~)" ]
+    , p [] [ text "Work at", a [ href "https://aws.amazon.com/jp/" ] [ text "アマゾンウェブサービスジャパン株式会社" ], text " (2023/06/26 ~)" ]
+    , p [] [ text "I worked as server-side engineer @", a [ href "https://corp.chatwork.com/ja/" ] [ text "Chatwork Co., Ltd." ], text " (2020/06/01 ~ 2023/06/25)" ]
     , p [] [ text "Dropped out Master of Mathematics @", a [ href "https://www.kobe-u.ac.jp/" ] [ text "Kobe University" ], text " (2019/04 ~ 2020/10)" ]
     , p [] [ text "Graduated Bachelor of Mathematics @", a [ href "https://www.kobe-u.ac.jp/" ] [ text "Kobe University" ], text " (2017/04 ~ 2019/03)" ]
     , p [] [ text "Graduated Associate Degree of Engineering @", a [ href "https://kumamoto-nct.ac.jp/" ] [ text "NIT, Kumamoto College" ], text " (2012/04 ~ 2017/03)" ]
@@ -97,10 +98,12 @@ contact =
   , date = String.fromChar '\u{03bb}'
   , url = "contact"
   , body =
-    [ p [] [ i [ class "far fa-envelope" ] [], text " tajiri@chatwork.com" ]
+    [ p [] [ i [ class "fab fa-discord" ] [], text " Discord : lmdexpr" ]
+    , p [] [ a [ href "https://bsky.app/profile/lmdexpr.com" ] [ i [ class "fab fa-sun-bright" ] [], text " Bluesky" ] ]
     , p [] [ a [ href "https://twitter.com/lmdexpr" ] [ i [ class "fab fa-twitter" ] [], text " Twitter" ] ]
     , p [] [ a [ href "https://github.com/lmdexpr" ] [ i [ class "fab fa-github" ] [], text " Github" ] ]
     , p [] [ a [ href "https://note.com/lmdexpr" ] [ i [ class "far fa-sticky-note" ] [], text " Note" ] ]
+    , p [] [ a [ href "https://zenn.dev/lmdexpr" ] [ i [ class "far fa-pen" ] [], text " Zenn" ] ]
     , p [] [ a [ href "https://www.amazon.jp/hz/wishlist/ls/2Z7ZETUODB09J?ref_=wl_share" ] [ i [ class "fab fa-amazon" ] [], text " Amazon" ] ]
     , p [] [ a [ href "https://lmdexpr.github.io" ] [ i [ class "fas fa-angle-double-left" ] [], text " Ruin" ] ]
     ]

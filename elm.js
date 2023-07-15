@@ -5526,7 +5526,25 @@ var $author$project$Main$aboutme = {
 			_List_Nil,
 			_List_fromArray(
 				[
-					$elm$html$Html$text('I work as server-side engineer @'),
+					$elm$html$Html$text('Work at'),
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$href('https://aws.amazon.com/jp/')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('アマゾンウェブサービスジャパン株式会社')
+						])),
+					$elm$html$Html$text(' (2023/06/26 ~)')
+				])),
+			A2(
+			$elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('I worked as server-side engineer @'),
 					A2(
 					$elm$html$Html$a,
 					_List_fromArray(
@@ -5537,7 +5555,7 @@ var $author$project$Main$aboutme = {
 						[
 							$elm$html$Html$text('Chatwork Co., Ltd.')
 						])),
-					$elm$html$Html$text(' (2020/06/01 ~)')
+					$elm$html$Html$text(' (2020/06/01 ~ 2023/06/25)')
 				])),
 			A2(
 			$elm$html$Html$p,
@@ -5612,10 +5630,33 @@ var $author$project$Main$contact = {
 					$elm$html$Html$i,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$class('far fa-envelope')
+							$elm$html$Html$Attributes$class('fab fa-discord')
 						]),
 					_List_Nil),
-					$elm$html$Html$text(' tajiri@chatwork.com')
+					$elm$html$Html$text(' Discord : lmdexpr')
+				])),
+			A2(
+			$elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$href('https://bsky.app/profile/lmdexpr.com')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$i,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('fab fa-sun-bright')
+								]),
+							_List_Nil),
+							$elm$html$Html$text(' Bluesky')
+						]))
 				])),
 			A2(
 			$elm$html$Html$p,
@@ -5684,6 +5725,29 @@ var $author$project$Main$contact = {
 								]),
 							_List_Nil),
 							$elm$html$Html$text(' Note')
+						]))
+				])),
+			A2(
+			$elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$href('https://zenn.dev/lmdexpr')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$i,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('far fa-pen')
+								]),
+							_List_Nil),
+							$elm$html$Html$text(' Zenn')
 						]))
 				])),
 			A2(
